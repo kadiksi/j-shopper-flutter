@@ -1,0 +1,21 @@
+abstract class ApiResponse<T> {
+  const ApiResponse();
+}
+
+class SuccessResponse<T> extends ApiResponse<T> {
+  final T data;
+
+  SuccessResponse(this.data);
+}
+
+class ErrorResponse extends ApiResponse<void> {
+  final String errorMessage;
+
+  ErrorResponse(this.errorMessage);
+}
+
+class StatusResponse extends ApiResponse<void> {
+  final String message;
+
+  StatusResponse(this.message);
+}
