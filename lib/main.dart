@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:j_shopper/repositories/login/auth_interceptor.dart';
+import 'package:j_courier/repositories/login/auth_interceptor.dart';
 import 'package:talker_bloc_logger/talker_bloc_logger.dart';
 import 'package:talker_dio_logger/talker_dio_logger.dart';
 import 'package:talker_flutter/talker_flutter.dart';
@@ -17,7 +17,7 @@ import 'repositories/list/list_abstarct_repository.dart';
 import 'repositories/list/list_rpository.dart';
 import 'repositories/login/login_abstarct_repository.dart';
 import 'repositories/login/login_rpository.dart';
-import 'shopper_app.dart';
+import 'courier_app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -65,7 +65,7 @@ void main() async {
   FlutterError.onError =
       (details) => GetIt.I<Talker>().handle(details.exception, details.stack);
 
-  runZonedGuarded(() => runApp(const ShopperApp()), (e, st) {
+  runZonedGuarded(() => runApp(const CourierApp()), (e, st) {
     GetIt.I<Talker>().handle(e, st);
   });
 }

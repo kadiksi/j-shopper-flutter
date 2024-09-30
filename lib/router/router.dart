@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:j_courier/screens/splash_screen.dart';
 
 import '../screens/list_screen.dart';
 import '../screens/login_screen.dart';
@@ -13,7 +14,8 @@ class AppRouter extends RootStackRouter {
 
   @override
   List<AutoRoute> get routes => [
-        AutoRoute(page: LoginRoute.page, path: "/"),
+        AutoRoute(page: SplashRoute.page, path: "/"),
+        AutoRoute(page: LoginRoute.page, path: "/login"),
         AutoRoute(page: ListRoute.page, path: "/tasks"),
         // AutoRoute(
         //   page: CryptoListRoute.page,

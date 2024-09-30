@@ -5,9 +5,9 @@ import '../../../router/router.dart';
 
 class TaskTile extends StatelessWidget {
   const TaskTile({
-    Key? key,
+    super.key,
     required this.task,
-  }) : super(key: key);
+  });
 
   final TaskDataModel task;
 

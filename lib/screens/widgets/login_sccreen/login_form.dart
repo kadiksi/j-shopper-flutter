@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:j_shopper/generated/l10n.dart';
+import 'package:j_courier/generated/l10n.dart';
 
 import '../../../blocks/login/login_bloc.dart';
 

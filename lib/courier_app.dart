@@ -7,21 +7,21 @@ import 'generated/l10n.dart';
 import 'router/router.dart';
 import 'theme/theme.dart';
 
-class ShopperApp extends StatefulWidget {
-  const ShopperApp({super.key});
+class CourierApp extends StatefulWidget {
+  const CourierApp({super.key});
 
   @override
-  State<ShopperApp> createState() => _ShopperAppState();
+  State<CourierApp> createState() => _CourierAppState();
 }
 
-class _ShopperAppState extends State<ShopperApp> {
+class _CourierAppState extends State<CourierApp> {
   final _appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'CryptoCurrenciesList',
-      localizationsDelegates: [
+      title: 'JCaourier',
+      localizationsDelegates: const [
         S.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
