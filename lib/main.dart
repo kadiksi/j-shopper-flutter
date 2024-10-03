@@ -6,9 +6,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:j_courier/repositories/login/auth_interceptor.dart';
+import 'package:provider/provider.dart';
 import 'package:talker_bloc_logger/talker_bloc_logger.dart';
 import 'package:talker_dio_logger/talker_dio_logger.dart';
 import 'package:talker_flutter/talker_flutter.dart';
+import 'locale/locale_provider.dart';
 import 'models/login/login_data_model.dart';
 import 'models/login/tokens/login_token_model.dart';
 import 'models/login/tokens/login_tokens_model.dart';
@@ -65,7 +67,11 @@ void main() async {
   FlutterError.onError =
       (details) => GetIt.I<Talker>().handle(details.exception, details.stack);
 
-  runZonedGuarded(() => runApp(const CourierApp()), (e, st) {
+  runZonedGuarded(
+      () => runApp(ChangeNotifierProvider(
+            create: (_) => LocaleProvider(),
+            child: const CourierApp(),
+          )), (e, st) {
     GetIt.I<Talker>().handle(e, st);
   });
 }

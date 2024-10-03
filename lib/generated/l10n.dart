@@ -50,61 +50,41 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Привет!`
-  String get hello {
+  /// `test`
+  String get test {
     return Intl.message(
-      'Привет!',
-      name: 'hello',
+      'test',
+      name: 'test',
       desc: '',
       args: [],
     );
   }
 
-  /// `Досвидания`
-  String get goodbay {
+  /// `Қазақша`
+  String get kazakh {
     return Intl.message(
-      'Досвидания',
-      name: 'goodbay',
+      'Қазақша',
+      name: 'kazakh',
       desc: '',
       args: [],
     );
   }
 
-  /// `Пришло $bonus`
-  String get receivedNBonus {
+  /// `Русский`
+  String get russian {
     return Intl.message(
-      'Пришло \$bonus',
-      name: 'receivedNBonus',
+      'Русский',
+      name: 'russian',
       desc: '',
       args: [],
     );
   }
 
-  /// `Пришло {bonus}`
-  String recivedNBonus(Object bonus) {
+  /// `English`
+  String get english {
     return Intl.message(
-      'Пришло $bonus',
-      name: 'recivedNBonus',
-      desc: '',
-      args: [bonus],
-    );
-  }
-
-  /// `Оповещение`
-  String get alert {
-    return Intl.message(
-      'Оповещение',
-      name: 'alert',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Иия`
-  String get username {
-    return Intl.message(
-      'Иия',
-      name: 'username',
+      'English',
+      name: 'english',
       desc: '',
       args: [],
     );
@@ -117,6 +97,8 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
+      Locale.fromSubtags(languageCode: 'kk'),
+      Locale.fromSubtags(languageCode: 'ru'),
     ];
   }
 

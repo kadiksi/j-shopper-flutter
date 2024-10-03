@@ -10,6 +10,25 @@
 part of 'router.dart';
 
 /// generated route for
+/// [ChooseLanguageScreen]
+class ChooseLanguageRoute extends PageRouteInfo<void> {
+  const ChooseLanguageRoute({List<PageRouteInfo>? children})
+      : super(
+          ChooseLanguageRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ChooseLanguageRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const ChooseLanguageScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [ListScreen]
 class ListRoute extends PageRouteInfo<void> {
   const ListRoute({List<PageRouteInfo>? children})

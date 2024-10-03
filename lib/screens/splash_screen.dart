@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:j_courier/router/router.dart';
 
+import '../theme/colors.dart';
+
 @RoutePage()
 class SplashScreen extends StatefulWidget {
   const SplashScreen({
@@ -21,14 +23,14 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
 
     Timer(const Duration(seconds: 3), () {
-      AutoRouter.of(context).replace(const LoginRoute());
+      AutoRouter.of(context).replace(const ChooseLanguageRoute());
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFF6700),
+      backgroundColor: AppColors.primaryOrangeColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

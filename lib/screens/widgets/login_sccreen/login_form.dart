@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:j_courier/generated/l10n.dart';
+// import 'package:j_courier/generated/l10n.dart';
 
 import '../../../blocks/login/login_bloc.dart';
 
@@ -30,7 +30,7 @@ class LoginForm extends StatelessWidget {
             controller: _usernameController,
             style: theme.textTheme.labelSmall,
             decoration: InputDecoration(
-              labelText: S.of(context).username,
+              // labelText: S.of(context).username,
               border: const OutlineInputBorder(),
             ),
           ),
