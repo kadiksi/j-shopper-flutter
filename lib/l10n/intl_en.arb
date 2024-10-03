@@ -1,6 +1,9 @@
 {
-  "test":"test",
+  "test": "test",
   "kazakh": "Қазақша",
   "russian": "Русский",
-  "english": "English"
+  "english": "English",
+  "username": "username",
+  "login": "Login",
+  "password": "Password"
 }

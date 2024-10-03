@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:j_courier/generated/l10n.dart';
 // import 'package:j_courier/generated/l10n.dart';
 
 import '../../../blocks/login/login_bloc.dart';
@@ -30,7 +31,7 @@ class LoginForm extends StatelessWidget {
             controller: _usernameController,
             style: theme.textTheme.labelSmall,
             decoration: InputDecoration(
-              // labelText: S.of(context).username,
+              labelText: S.of(context).username,
               border: const OutlineInputBorder(),
             ),
           ),
@@ -38,9 +39,9 @@ class LoginForm extends StatelessWidget {
           TextFormField(
             controller: _passwordController,
             obscureText: true,
-            decoration: const InputDecoration(
-              labelText: 'Password',
-              border: OutlineInputBorder(),
+            decoration: InputDecoration(
+              labelText: S.of(context).password,
+              border: const OutlineInputBorder(),
             ),
           ),
           const SizedBox(height: 24),
@@ -52,7 +53,7 @@ class LoginForm extends StatelessWidget {
               _cryptoListBloc
                   .add(LoadLogin(login: username, password: password));
             },
-            child: const Text('Login'),
+            child: Text(S.of(context).login),
           ),
         ],
       ),

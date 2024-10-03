@@ -6,7 +6,7 @@ class GreyButton extends StatelessWidget {
   final String label;
   final VoidCallback onPressed;
 
-  const GreyButton({required this.label, required this.onPressed});
+  const GreyButton({super.key, required this.label, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
