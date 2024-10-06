@@ -19,10 +19,6 @@ class AppRouter extends RootStackRouter {
         AutoRoute(page: ChooseLanguageRoute.page, path: "/choose_language"),
         AutoRoute(page: LoginRoute.page, path: "/login"),
         AutoRoute(page: ListRoute.page, path: "/tasks"),
-        // AutoRoute(
-        //   page: CryptoListRoute.page,
-        // ),
-        // AutoRoute(page: CryptoCoinRoute.page),
       ];
 
   @override

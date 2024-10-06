@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:j_courier/router/router.dart';
 import 'package:provider/provider.dart';
 
 import '../generated/l10n.dart';
@@ -76,4 +77,9 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
 
 void setLocale(BuildContext context, Locale locale) {
   Provider.of<LocaleProvider>(context, listen: false).setLocale(locale);
+  openLogin(context);
+}
+
+void openLogin(context) {
+  AutoRouter.of(context).push(const LoginRoute());
 }

@@ -5,5 +5,6 @@
   "english": "English",
   "username": "username",
   "login": "Login",
-  "password": "Password"
+  "password": "Password",
+  "enter_phone_number_and_password": "Введите ваш номер телефона и пароль"
 }

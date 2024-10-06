@@ -119,6 +119,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Введите ваш номер телефона и пароль`
+  String get enter_phone_number_and_password {
+    return Intl.message(
+      'Введите ваш номер телефона и пароль',
+      name: 'enter_phone_number_and_password',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
