@@ -44,12 +44,11 @@ class _LoginVerificationScreenState extends State<LoginVerificationScreen> {
     setState(() {
       print("auth 00");
       // _isAuthenticated = authenticated;
-      openLogin(context);
     });
   }
 
   void openLogin(context) {
-    AutoRouter.of(context).replace(const OrdersRoute());
+    AutoRouter.of(context).replace(const TabsRoute());
   }
 
   Widget buildIconButton(String path, VoidCallback onPressed) {

@@ -86,25 +86,6 @@ class LoginVerificationRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [OrdersScreen]
-class OrdersRoute extends PageRouteInfo<void> {
-  const OrdersRoute({List<PageRouteInfo>? children})
-      : super(
-          OrdersRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'OrdersRoute';
-
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const OrdersScreen();
-    },
-  );
-}
-
-/// generated route for
 /// [SplashScreen]
 class SplashRoute extends PageRouteInfo<void> {
   const SplashRoute({List<PageRouteInfo>? children})
@@ -119,6 +100,25 @@ class SplashRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const SplashScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [TabsScreen]
+class TabsRoute extends PageRouteInfo<void> {
+  const TabsRoute({List<PageRouteInfo>? children})
+      : super(
+          TabsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'TabsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const TabsScreen();
     },
   );
 }

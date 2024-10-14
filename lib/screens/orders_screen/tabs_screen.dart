@@ -4,14 +4,14 @@ import 'package:flutter_svg/svg.dart';
 import 'package:j_courier/generated/l10n.dart';
 
 @RoutePage()
-class OrdersScreen extends StatefulWidget {
-  const OrdersScreen({super.key});
+class TabsScreen extends StatefulWidget {
+  const TabsScreen({super.key});
 
   @override
-  _OrdersScreenState createState() => _OrdersScreenState();
+  _TabsScreenState createState() => _TabsScreenState();
 }
 
-class _OrdersScreenState extends State<OrdersScreen> {
+class _TabsScreenState extends State<TabsScreen> {
   int _selectedIndex = 0;
 
   final List<Widget> _pages = [

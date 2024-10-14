@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:j_courier/screens/orders_screen/orders_screen.dart';
+import 'package:j_courier/screens/orders_screen/tabs_screen.dart';
 import 'package:j_courier/screens/splash_screen.dart';
 
 import '../screens/choose_language_screen.dart';
@@ -23,7 +23,7 @@ class AppRouter extends RootStackRouter {
         AutoRoute(
             page: LoginVerificationRoute.page, path: "/login_verification"),
         AutoRoute(page: ListRoute.page, path: "/tasks"),
-        AutoRoute(page: OrdersRoute.page, path: "/orders"),
+        AutoRoute(page: TabsRoute.page, path: "/orders"),
       ];
 
   @override
