@@ -1,11 +1,11 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:j_courier/screens/orders_screen/tabs_screen.dart';
-import 'package:j_courier/screens/splash_screen.dart';
+import 'package:j_courier/screens/tabs_screen.dart';
+import 'package:j_courier/screens/login_screens/splash_screen.dart';
 
-import '../screens/choose_language_screen.dart';
-import '../screens/login_verification_screen.dart';
+import '../screens/login_screens/choose_language_screen.dart';
+import '../screens/login_screens/login_verification_screen.dart';
 import '../screens/list_screen.dart';
-import '../screens/login_screen.dart';
+import '../screens/login_screens/login_screen.dart';
 
 part 'router.gr.dart';
 

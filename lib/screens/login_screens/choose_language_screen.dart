@@ -4,9 +4,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:j_courier/router/router.dart';
 import 'package:provider/provider.dart';
 
-import '../generated/l10n.dart';
-import '../locale/locale_provider.dart';
-import 'widgets/buttons/grey_button.dart';
+import '../../generated/l10n.dart';
+import '../../locale/locale_provider.dart';
+import '../widgets/buttons/grey_button.dart';
 
 @RoutePage()
 class ChooseLanguageScreen extends StatefulWidget {

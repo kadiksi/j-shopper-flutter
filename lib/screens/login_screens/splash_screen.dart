@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:j_courier/router/router.dart';
 
-import '../theme/colors.dart';
+import '../../theme/colors.dart';
 
 @RoutePage()
 class SplashScreen extends StatefulWidget {

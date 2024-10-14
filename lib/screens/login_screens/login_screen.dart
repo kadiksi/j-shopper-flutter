@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:j_courier/generated/l10n.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
-import '../router/router.dart';
+import '../../router/router.dart';
 
 @RoutePage()
 class LoginScreen extends StatelessWidget {
@@ -29,13 +29,6 @@ class LoginScreen extends StatelessWidget {
                   keyboardType: TextInputType.phone,
                   controller: textEditingController,
                   inputFormatters: [maskFormatter],
-                  // decoration: const InputDecoration(
-                  //   hintText: ' ',
-                  //   suffixIcon: SizedBox(
-                  //       width: 2.0,
-                  //       height: 2.0,
-                  //       child: CircularProgressIndicator()),
-                  // ),
                 ),
                 const SizedBox(height: 20.0),
                 SizedBox(
