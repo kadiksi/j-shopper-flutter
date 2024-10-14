@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 
 import '../generated/l10n.dart';
 import '../locale/locale_provider.dart';
-import '../theme/colors.dart';
 import 'widgets/buttons/grey_button.dart';
 
 @RoutePage()
@@ -28,7 +27,6 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.whiteColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

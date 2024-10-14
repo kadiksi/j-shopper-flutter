@@ -67,6 +67,25 @@ class LoginRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [LoginVerificationScreen]
+class LoginVerificationRoute extends PageRouteInfo<void> {
+  const LoginVerificationRoute({List<PageRouteInfo>? children})
+      : super(
+          LoginVerificationRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'LoginVerificationRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return LoginVerificationScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [SplashScreen]
 class SplashRoute extends PageRouteInfo<void> {
   const SplashRoute({List<PageRouteInfo>? children})

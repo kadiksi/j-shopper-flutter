@@ -32,7 +32,7 @@ class _CourierAppState extends State<CourierApp> {
           GlobalCupertinoLocalizations.delegate,
         ],
         supportedLocales: S.delegate.supportedLocales,
-        theme: darkTheme,
+        theme: lightTheme,
         routerConfig: _appRouter.config(
           navigatorObservers: () => [
             TalkerRouteObserver(GetIt.I<Talker>()),

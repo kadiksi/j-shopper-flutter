@@ -129,6 +129,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Продолжить`
+  String get add {
+    return Intl.message(
+      'Продолжить',
+      name: 'add',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Здравствуйте, {name}`
+  String welcome_name(Object name) {
+    return Intl.message(
+      'Здравствуйте, $name',
+      name: 'welcome_name',
+      desc: '',
+      args: [name],
+    );
+  }
+
+  /// `Введите код-пароль для входа`
+  String get enter_code_password {
+    return Intl.message(
+      'Введите код-пароль для входа',
+      name: 'enter_code_password',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

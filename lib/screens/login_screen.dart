@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:j_courier/generated/l10n.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
-import '../theme/colors.dart';
+import '../router/router.dart';
 
 @RoutePage()
 class LoginScreen extends StatelessWidget {
@@ -16,7 +16,6 @@ class LoginScreen extends StatelessWidget {
         mask: '+7(###)###-##-##', filter: {"#": RegExp(r'[0-9]')});
     final theme = Theme.of(context);
     return Scaffold(
-        backgroundColor: AppColors.whiteColor,
         body: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -30,34 +29,29 @@ class LoginScreen extends StatelessWidget {
                   keyboardType: TextInputType.phone,
                   controller: textEditingController,
                   inputFormatters: [maskFormatter],
-                  decoration: InputDecoration(
-                    hintText: ' ',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      borderSide: BorderSide.none,
-                    ),
-                    fillColor: Colors.grey[200],
-                    filled: true,
-                    suffixIcon: const Icon(Icons.refresh),
-                  ),
+                  // decoration: const InputDecoration(
+                  //   hintText: ' ',
+                  //   suffixIcon: SizedBox(
+                  //       width: 2.0,
+                  //       height: 2.0,
+                  //       child: CircularProgressIndicator()),
+                  // ),
                 ),
                 const SizedBox(height: 20.0),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {}, // Add your onPressed logic here
-                    style: ElevatedButton.styleFrom(
-                      overlayColor: Colors.blue,
-                      foregroundColor: Colors.orange, // Disabled text color
-                      padding: const EdgeInsets.symmetric(vertical: 16.0),
-                    ),
-                    child: Text(
-                      'Продолжить',
-                      style: theme.textTheme.labelSmall,
-                    ),
+                    onPressed: () {
+                      openLogin(context);
+                    },
+                    child: Text(S.of(context).add),
                   ),
                 ),
               ],
             )));
   }
+}
+
+void openLogin(context) {
+  AutoRouter.of(context).push(const LoginVerificationRoute());
 }
