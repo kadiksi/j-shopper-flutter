@@ -159,6 +159,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Заказы`
+  String get orders {
+    return Intl.message(
+      'Заказы',
+      name: 'orders',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `История`
+  String get history {
+    return Intl.message(
+      'История',
+      name: 'history',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Скан QR`
+  String get scan_qr {
+    return Intl.message(
+      'Скан QR',
+      name: 'scan_qr',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Уведомления`
+  String get notifications {
+    return Intl.message(
+      'Уведомления',
+      name: 'notifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Профиль`
+  String get profile {
+    return Intl.message(
+      'Профиль',
+      name: 'profile',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

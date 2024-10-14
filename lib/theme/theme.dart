@@ -3,34 +3,42 @@ import 'package:j_courier/theme/colors.dart';
 import 'package:j_courier/theme/text_theme.dart';
 
 final lightTheme = ThemeData(
-  useMaterial3: true,
-  colorScheme: lightColorScheme,
-  textTheme: lightTextStyles,
-  inputDecorationTheme: InputDecorationTheme(
-    border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(10.0),
-      borderSide: BorderSide.none,
+    useMaterial3: true,
+    colorScheme: lightColorScheme,
+    textTheme: lightTextStyles,
+    inputDecorationTheme: InputDecorationTheme(
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10.0),
+        borderSide: BorderSide.none,
+      ),
+      fillColor: Colors.grey[200],
+      filled: true,
     ),
-    fillColor: Colors.grey[200],
-    filled: true,
-  ),
-  textButtonTheme: TextButtonThemeData(
-      style: TextButton.styleFrom(
-    elevation: 8.0,
-    backgroundColor: lightColorScheme.tertiary,
-    foregroundColor: lightColorScheme.onTertiary,
-    padding: const EdgeInsets.symmetric(vertical: 26.0),
-    textStyle: lightTextStyles.headlineSmall,
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-  )),
-  elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-    elevation: 8.0,
-    backgroundColor: lightColorScheme.secondary,
-    foregroundColor: lightColorScheme.onSecondary,
-    minimumSize: const Size(200.0, 50.0),
-    padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 16.0),
-    textStyle: lightTextStyles.displayLarge,
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-  )),
-);
+    textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+      elevation: 8.0,
+      backgroundColor: lightColorScheme.tertiary,
+      foregroundColor: lightColorScheme.onTertiary,
+      padding: const EdgeInsets.symmetric(vertical: 26.0),
+      textStyle: lightTextStyles.headlineSmall,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+    )),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+      elevation: 8.0,
+      backgroundColor: lightColorScheme.secondary,
+      foregroundColor: lightColorScheme.onSecondary,
+      minimumSize: const Size(200.0, 50.0),
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 16.0),
+      textStyle: lightTextStyles.displayLarge,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+    )),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        selectedItemColor: lightColorScheme.secondary,
+        unselectedItemColor: lightColorScheme.onSurface,
+        selectedLabelStyle: const TextStyle(
+          fontSize: 14,
+        ),
+        unselectedLabelStyle: const TextStyle(
+          fontSize: 14, // Keep the same font size
+        )));

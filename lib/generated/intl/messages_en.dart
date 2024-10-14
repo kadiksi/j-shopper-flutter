@@ -30,10 +30,15 @@ class MessageLookup extends MessageLookupByLibrary {
             "Введите код-пароль для входа"),
         "enter_phone_number_and_password": MessageLookupByLibrary.simpleMessage(
             "Введите ваш номер телефона и пароль"),
+        "history": MessageLookupByLibrary.simpleMessage("История"),
         "kazakh": MessageLookupByLibrary.simpleMessage("Қазақша"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
+        "notifications": MessageLookupByLibrary.simpleMessage("Уведомления"),
+        "orders": MessageLookupByLibrary.simpleMessage("Заказы"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "profile": MessageLookupByLibrary.simpleMessage("Профиль"),
         "russian": MessageLookupByLibrary.simpleMessage("Русский"),
+        "scan_qr": MessageLookupByLibrary.simpleMessage("Скан QR"),
         "test": MessageLookupByLibrary.simpleMessage("test"),
         "username": MessageLookupByLibrary.simpleMessage("username"),
         "welcome_name": m0

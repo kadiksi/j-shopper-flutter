@@ -2,19 +2,23 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:j_courier/generated/l10n.dart';
+import 'package:j_courier/router/router.dart';
 import 'package:local_auth/local_auth.dart';
 
 // https://pub.dev/packages/local_auth
 @RoutePage()
 class LoginVerificationScreen extends StatefulWidget {
+  const LoginVerificationScreen({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _LoginVerificationScreenState createState() =>
       _LoginVerificationScreenState();
 }
 
 class _LoginVerificationScreenState extends State<LoginVerificationScreen> {
   final LocalAuthentication auth = LocalAuthentication();
-  bool _isAuthenticated = false;
+  // bool _isAuthenticated = false;
 
   @override
   void initState() {
@@ -23,9 +27,10 @@ class _LoginVerificationScreenState extends State<LoginVerificationScreen> {
   }
 
   Future<void> _authenticate() async {
-    bool authenticated = false;
+    // bool authenticated = false;
     try {
-      authenticated = await auth.authenticate(
+      // authenticated =
+      await auth.authenticate(
         localizedReason: 'Authenticate to access your account',
         options: const AuthenticationOptions(
           useErrorDialogs: true,
@@ -37,8 +42,14 @@ class _LoginVerificationScreenState extends State<LoginVerificationScreen> {
     }
 
     setState(() {
-      _isAuthenticated = authenticated;
+      print("auth 00");
+      // _isAuthenticated = authenticated;
+      openLogin(context);
     });
+  }
+
+  void openLogin(context) {
+    AutoRouter.of(context).replace(const OrdersRoute());
   }
 
   Widget buildIconButton(String path, VoidCallback onPressed) {
@@ -118,55 +129,19 @@ class _LoginVerificationScreenState extends State<LoginVerificationScreen> {
                 children: List.generate(12, (index) {
                   if (index == 9) {
                     return buildIconButton('assets/svg/face_id.svg', () {
-                      _authenticate;
+                      _authenticate();
                     });
-                    // return Container(
-                    //   margin: const EdgeInsets.all(8.0),
-                    //   child: IconButton(
-                    //     style: ElevatedButton.styleFrom(
-                    //         shape: RoundedRectangleBorder(
-                    //           borderRadius: BorderRadius.circular(19),
-                    //         ),
-                    //         elevation: 0,
-                    //         backgroundColor: theme.colorScheme.inversePrimary),
-                    //     icon: SvgPicture.asset(
-                    //       'assets/svg/face_id.svg',
-                    //       width: 46,
-                    //       height: 46,
-                    //     ),
-                    //     onPressed: _authenticate,
-                    //   ),
-                    // );
                   } else if (index == 10) {
                     return buildKeypadButton("0", () {
-                      print("0 pressed");
+                      openLogin(context);
                     });
                   } else if (index == 11) {
                     return buildIconButton('assets/svg/arrow_left.svg', () {
                       print("arrow pressed");
                     });
-                    // return Container(
-                    //   margin: const EdgeInsets.all(8.0),
-                    //   child: IconButton(
-                    //     style: ElevatedButton.styleFrom(
-                    //         shape: RoundedRectangleBorder(
-                    //           borderRadius: BorderRadius.circular(19),
-                    //         ),
-                    //         elevation: 0,
-                    //         backgroundColor: theme.colorScheme.inversePrimary),
-                    //     icon: SvgPicture.asset(
-                    //       'assets/svg/arrow_left.svg',
-                    //       width: 32,
-                    //       height: 32,
-                    //     ), // Smaller backspace icon
-                    //     onPressed: () {
-                    //       print("Backspace pressed");
-                    //     },
-                    //   ),
-                    // );
                   } else {
                     return buildKeypadButton((index + 1).toString(), () {
-                      print("${index + 1} pressed");
+                      openLogin(context);
                     });
                   }
                 }),

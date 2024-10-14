@@ -9,5 +9,10 @@
   "enter_phone_number_and_password": "Введите ваш номер телефона и пароль",
   "add": "Продолжить",
   "welcome_name": "Здравствуйте, {name}",
-  "enter_code_password": "Введите код-пароль для входа"
+  "enter_code_password": "Введите код-пароль для входа",
+  "orders": "Заказы",
+  "history": "История",
+  "scan_qr": "Скан QR",
+  "notifications": "Уведомления",
+  "profile": "Профиль"
 }
