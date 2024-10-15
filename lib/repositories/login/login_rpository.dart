@@ -18,7 +18,7 @@ class LoginRepository implements LoginAbstractRepository {
       final response = await dio.post(
           'https://test5.jmart.kz/gw/user/v1/auth/sign-in',
           data: const LoginModel(
-                  login: '+7(707)217-69-641',
+                  login: '+7(707)217-69-64',
                   password: 'Adilet29187',
                   userType: "K")
               .toJson());

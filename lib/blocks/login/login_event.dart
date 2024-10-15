@@ -12,3 +12,13 @@ class LoadLogin extends LoginEvent {
   @override
   List<Object?> get props => [completer, login, password];
 }
+
+class ErrorLogin extends LoginEvent {
+  ErrorLogin({this.completer, required this.message});
+
+  final Completer? completer;
+  final String message;
+
+  @override
+  List<Object?> get props => [completer, message];
+}

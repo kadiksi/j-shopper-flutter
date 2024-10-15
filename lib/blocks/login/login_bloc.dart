@@ -17,6 +17,7 @@ part 'login_state.dart';
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc(this.loginRepository) : super(LoginInitial()) {
     on<LoadLogin>(_load);
+    on<ErrorLogin>(_error);
   }
 
   final LoginAbstractRepository loginRepository;
@@ -39,9 +40,17 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     }
   }
 
+  Future<void> _error(
+    ErrorLogin event,
+    Emitter<LoginState> emit,
+  ) async {
+    emit(LoginFailure(exception: event.message));
+  }
+
   @override
   void onError(Object error, StackTrace stackTrace) {
     super.onError(error, stackTrace);
+    add(ErrorLogin(message: "error.toString()"));
     GetIt.I<Talker>().handle(error, stackTrace);
   }
 }
