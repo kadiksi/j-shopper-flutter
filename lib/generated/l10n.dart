@@ -209,6 +209,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Принять все заказы`
+  String get commit_all_orders {
+    return Intl.message(
+      'Принять все заказы',
+      name: 'commit_all_orders',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

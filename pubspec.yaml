@@ -45,7 +45,7 @@ flutter:
   generate: true
   assets:
     - assets/svg/
-  
+    - assets/svg/tabs/
 
 flutter_intl:
   enabled: true

@@ -14,5 +14,6 @@
   "history": "История",
   "scan_qr": "Скан QR",
   "notifications": "Уведомления",
-  "profile": "Профиль"
+  "profile": "Профиль",
+  "commit_all_orders": "Принять все заказы"
 }

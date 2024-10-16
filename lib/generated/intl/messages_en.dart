@@ -25,6 +25,8 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "add": MessageLookupByLibrary.simpleMessage("Продолжить"),
+        "commit_all_orders":
+            MessageLookupByLibrary.simpleMessage("Принять все заказы"),
         "english": MessageLookupByLibrary.simpleMessage("English"),
         "enter_code_password": MessageLookupByLibrary.simpleMessage(
             "Введите код-пароль для входа"),
