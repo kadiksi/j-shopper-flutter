@@ -219,6 +219,26 @@ class S {
       args: [],
     );
   }
+
+  /// `{orderSource} позиции`
+  String positions(Object orderSource) {
+    return Intl.message(
+      '$orderSource позиции',
+      name: 'positions',
+      desc: '',
+      args: [orderSource],
+    );
+  }
+
+  /// `Плановая дата  {createdDate}`
+  String createddate(Object createdDate) {
+    return Intl.message(
+      'Плановая дата  $createdDate',
+      name: 'createddate',
+      desc: '',
+      args: [createdDate],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -49,7 +49,9 @@ class _ListScreenState extends State<ListScreen> {
                 ListView.separated(
                   padding: const EdgeInsets.only(top: 16),
                   itemCount: state.tasks.length,
-                  separatorBuilder: (context, index) => const Divider(),
+                  separatorBuilder: (context, index) => const Divider(
+                    color: Colors.transparent,
+                  ),
                   itemBuilder: (context, i) {
                     final task = state.tasks[i];
                     return TaskTile(task: task);

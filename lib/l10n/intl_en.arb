@@ -15,5 +15,7 @@
   "scan_qr": "Скан QR",
   "notifications": "Уведомления",
   "profile": "Профиль",
-  "commit_all_orders": "Принять все заказы"
+  "commit_all_orders": "Принять все заказы",
+  "positions": "{orderSource} позиции",
+  "createddate": "Плановая дата  {createdDate}"
 }

@@ -20,13 +20,18 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'kk';
 
-  static String m0(name) => "Здравствуйте, ${name}";
+  static String m0(createdDate) => "Плановая дата  ${createdDate}";
+
+  static String m1(orderSource) => "${orderSource} позиции";
+
+  static String m2(name) => "Здравствуйте, ${name}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "add": MessageLookupByLibrary.simpleMessage("Продолжить"),
         "commit_all_orders":
             MessageLookupByLibrary.simpleMessage("Принять все заказы"),
+        "createddate": m0,
         "english": MessageLookupByLibrary.simpleMessage("English"),
         "enter_code_password": MessageLookupByLibrary.simpleMessage(
             "Введите код-пароль для входа"),
@@ -38,11 +43,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "notifications": MessageLookupByLibrary.simpleMessage("Уведомления"),
         "orders": MessageLookupByLibrary.simpleMessage("Заказы"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "positions": m1,
         "profile": MessageLookupByLibrary.simpleMessage("Профиль"),
         "russian": MessageLookupByLibrary.simpleMessage("Русский"),
         "scan_qr": MessageLookupByLibrary.simpleMessage("Скан QR"),
         "test": MessageLookupByLibrary.simpleMessage("Тест Қ"),
         "username": MessageLookupByLibrary.simpleMessage("username"),
-        "welcome_name": m0
+        "welcome_name": m2
       };
 }

@@ -19,6 +19,24 @@ final lightTextStyles = TextTheme(
       fontSize: 16,
       fontWeight: FontWeight.w600,
       color: lightColorScheme.onTertiary),
+  bodyLarge: GoogleFonts.dmSans(
+    fontSize: 17,
+    fontWeight: FontWeight.w600,
+    height: 24 / 17,
+    letterSpacing: -0.408,
+  ),
+  bodyMedium: GoogleFonts.dmSans(
+      fontSize: 15,
+      fontWeight: FontWeight.w400,
+      height: 20 / 15,
+      letterSpacing: -0.408,
+      color: lightColorScheme.outline),
+  bodySmall: GoogleFonts.dmSans(
+    fontSize: 13,
+    fontWeight: FontWeight.w400,
+    height: 18 / 13,
+    letterSpacing: -0.408,
+  ),
 );
 
 final darkTextStyles = TextTheme(

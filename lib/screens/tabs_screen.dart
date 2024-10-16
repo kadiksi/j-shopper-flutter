@@ -113,13 +113,9 @@ class _TabsScreenState extends State<TabsScreen> {
     return BottomNavigationBarItem(
       icon: SvgPicture.asset(
         path,
-        // colorFilter:
-        //     ColorFilter.mode(theme.colorScheme.onSurface, BlendMode.srcIn),
       ),
       activeIcon: SvgPicture.asset(
         activePath,
-        // colorFilter:
-        //     ColorFilter.mode(theme.colorScheme.secondary, BlendMode.srcIn),
       ),
       label: name,
     );
