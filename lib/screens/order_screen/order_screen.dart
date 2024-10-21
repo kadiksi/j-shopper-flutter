@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get_it/get_it.dart';
 import 'package:j_courier/blocks/order/order_bloc.dart';
 import 'package:j_courier/generated/l10n.dart';
@@ -42,13 +41,13 @@ class _OrderScreenState extends State<OrderScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {},
         ),
         title: Text(S.of(context).order_number('${widget.task.id}')),
         actions: [
           IconButton(
-            icon: Icon(Icons.more_vert),
+            icon: const Icon(Icons.more_vert),
             onPressed: () {},
           ),
         ],
@@ -174,14 +173,14 @@ Widget _buildMultipleExpandableProductLists(
     'Завершено 6 из 8'
   ];
   List<Widget> views = [];
-  for (var item in categoryProducts) {
+  for (var element in categoryProducts) {
     List<Product> products = task.product ?? List.empty();
 
     views.add(ExpansionTile(
       childrenPadding: EdgeInsets.zero, // Set padding to zero to reduce space
 
       initiallyExpanded: false,
-      title: Text("'Завершено 6 из 8'", style: theme.textTheme.bodyMedium),
+      title: Text(element, style: theme.textTheme.bodyMedium),
       subtitle:
           Text('Завершено 6 из 8 Subtitle', style: theme.textTheme.bodySmall),
       children: products.map((product) {
@@ -230,7 +229,7 @@ Widget _buildMultipleExpandableProductLists(
                             '${product.name}',
                             style: theme.textTheme.bodyMedium,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 8,
                           ),
                           Text(
@@ -241,7 +240,7 @@ Widget _buildMultipleExpandableProductLists(
                       )
                     ],
                   ),
-                  Row(
+                  const Row(
                     children: [
                       Text('1534₸ x 4 ш  т'),
                     ],
