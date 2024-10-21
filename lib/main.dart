@@ -43,7 +43,7 @@ void main() async {
     TalkerDioLogger(
       talker: talker,
       settings: const TalkerDioLoggerSettings(
-          printResponseData: true, printRequestHeaders: true),
+          printResponseData: false, printRequestHeaders: true),
     ),
   );
   dio.interceptors.add(AuthInterceptor());

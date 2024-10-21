@@ -1,4 +1,7 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/widgets.dart';
+import 'package:j_courier/models/tasks/task.dart';
+import 'package:j_courier/screens/order_screen/order_screen.dart';
 import 'package:j_courier/screens/tabs_screen.dart';
 import 'package:j_courier/screens/login_screens/splash_screen.dart';
 
@@ -24,6 +27,7 @@ class AppRouter extends RootStackRouter {
             page: LoginVerificationRoute.page, path: "/login_verification"),
         AutoRoute(page: ListRoute.page, path: "/tasks"),
         AutoRoute(page: TabsRoute.page, path: "/orders"),
+        AutoRoute(page: OrderRoute.page, path: "/order"),
       ];
 
   @override

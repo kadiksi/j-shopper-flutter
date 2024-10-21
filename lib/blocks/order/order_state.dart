@@ -1,30 +1,30 @@
-part of 'list_bloc.dart';
+part of 'order_bloc.dart';
 
-abstract class ListState extends Equatable {}
+abstract class OrderState extends Equatable {}
 
-class ListInitial extends ListState {
+class OrderInitial extends OrderState {
   @override
   List<Object?> get props => [];
 }
 
-class ListLoading extends ListState {
+class OrderLoading extends OrderState {
   @override
   List<Object?> get props => [];
 }
 
-class ListSuccess extends ListState {
-  ListSuccess({
+class OrderSuccess extends OrderState {
+  OrderSuccess({
     required this.tasks,
   });
 
-  final List<Task> tasks;
+  final Task tasks;
 
   @override
   List<Object?> get props => [tasks];
 }
 
-class ListFailure extends ListState {
-  ListFailure({
+class OrderFailure extends OrderState {
+  OrderFailure({
     this.exception,
   });
 

@@ -22,13 +22,17 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(createdDate) => "Плановая дата  ${createdDate}";
 
-  static String m1(orderSource) => "${orderSource} позиции";
+  static String m1(id) => "Заявка № ${id}";
 
-  static String m2(name) => "Здравствуйте, ${name}";
+  static String m2(orderSource) => "${orderSource} позиции";
+
+  static String m3(name) => "Здравствуйте, ${name}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "accept_orders": MessageLookupByLibrary.simpleMessage("Принять заказ"),
         "add": MessageLookupByLibrary.simpleMessage("Продолжить"),
+        "call": MessageLookupByLibrary.simpleMessage("Позвонить"),
         "commit_all_orders":
             MessageLookupByLibrary.simpleMessage("Принять все заказы"),
         "createddate": m0,
@@ -40,15 +44,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "history": MessageLookupByLibrary.simpleMessage("История"),
         "kazakh": MessageLookupByLibrary.simpleMessage("Қазақша"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
+        "not_exist": MessageLookupByLibrary.simpleMessage("Отсутсвует"),
         "notifications": MessageLookupByLibrary.simpleMessage("Уведомления"),
+        "order_number": m1,
         "orders": MessageLookupByLibrary.simpleMessage("Заказы"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
-        "positions": m1,
+        "positions": m2,
         "profile": MessageLookupByLibrary.simpleMessage("Профиль"),
         "russian": MessageLookupByLibrary.simpleMessage("Русский"),
         "scan_qr": MessageLookupByLibrary.simpleMessage("Скан QR"),
         "test": MessageLookupByLibrary.simpleMessage("test"),
         "username": MessageLookupByLibrary.simpleMessage("username"),
-        "welcome_name": m2
+        "welcome_name": m3
       };
 }

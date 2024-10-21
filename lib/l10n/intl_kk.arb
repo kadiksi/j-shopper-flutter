@@ -17,5 +17,9 @@
   "profile": "Профиль",
   "commit_all_orders": "Принять все заказы",
   "positions": "{orderSource} позиции",
-  "createddate": "Плановая дата  {createdDate}"
+  "createddate": "Плановая дата  {createdDate}",
+  "order_number": "Заявка № {id}",
+  "accept_orders": "Принять заказ",
+  "call": "Позвонить",
+  "not_exist": "Отсутсвует"
 }

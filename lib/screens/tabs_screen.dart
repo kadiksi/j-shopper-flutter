@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get_it/get_it.dart';
 import 'package:j_courier/generated/l10n.dart';
-import 'package:j_courier/screens/orders_screen/orders_view.dart';
+import 'package:j_courier/screens/order_screen/orders_view.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
 @RoutePage()

@@ -1,6 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
-
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -11,7 +8,7 @@ part 'task_data_model.g.dart';
 @JsonSerializable()
 class TaskDataModel extends Equatable {
   @JsonKey(name: 'id')
-  final int id;
+  final String id;
 
   @JsonKey(name: 'userId')
   final int userId;
@@ -44,7 +41,7 @@ class TaskDataModel extends Equatable {
 
   factory TaskDataModel.fromMap(Map<String, dynamic> map) {
     return TaskDataModel(
-      id: map['id'] as int,
+      id: map['id'] as String,
       userId: map['userId'] as int,
       orderSource: map['orderSource'] as String,
       createdDate:
@@ -58,7 +55,7 @@ class TaskDataModel extends Equatable {
   Map<String, dynamic> toJson() => _$TaskDataModelToJson(this);
 
   TaskDataModel copyWith({
-    int? id,
+    String? id,
     int? userId,
     String? orderSource,
     DateTime? createdDate,

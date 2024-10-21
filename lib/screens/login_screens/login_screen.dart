@@ -22,7 +22,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginState extends State<LoginScreen> {
-  final _cryptoListBloc = LoginBloc(
+  final _loginBloc = LoginBloc(
     GetIt.I<LoginAbstractRepository>(),
   );
 
@@ -37,10 +37,10 @@ class _LoginState extends State<LoginScreen> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: const Text('CryptoCurrenciesList'),
+        title: const Text('Login'),
       ),
       body: BlocBuilder<LoginBloc, LoginState>(
-        bloc: _cryptoListBloc,
+        bloc: _loginBloc,
         builder: (context, state) {
           if (state is LoginSuccess) {
             openLogin(context);
@@ -70,7 +70,7 @@ class _LoginState extends State<LoginScreen> {
                       onPressed: () {
                         final username = _usernameController.text;
                         final password = _passwordController.text;
-                        _cryptoListBloc.add(
+                        _loginBloc.add(
                             LoadLogin(login: username, password: password));
                       },
                       child: Text(S.of(context).add),

@@ -2,7 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:j_courier/generated/l10n.dart';
-import '../../../models/tasks/task_data_model.dart';
+import 'package:j_courier/models/tasks/task.dart';
+import 'package:j_courier/utils/date_utils.dart';
 import '../../../router/router.dart';
 
 class TaskTile extends StatelessWidget {
@@ -10,7 +11,7 @@ class TaskTile extends StatelessWidget {
     super.key,
     required this.task,
   });
-  final TaskDataModel task;
+  final Task task;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +46,7 @@ class TaskTile extends StatelessWidget {
                     ),
                     const SizedBox(width: 4),
                     Text(
-                      '${task.createdDate.day}',
+                      '${task.createdDate?.day}',
                       style: theme.textTheme.bodySmall,
                     ),
                   ],
@@ -62,7 +63,7 @@ class TaskTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      S.of(context).positions(task.orderSource),
+                      S.of(context).positions(task.orderSource as String),
                       style: theme.textTheme.headlineMedium
                           ?.copyWith(color: theme.colorScheme.surfaceTint),
                     ),
@@ -79,7 +80,9 @@ class TaskTile extends StatelessWidget {
                           ?.copyWith(color: theme.colorScheme.surfaceTint),
                     ),
                     const SizedBox(height: 8),
-                    Text(S.of(context).createddate(task.getcreatedDate()),
+                    Text(
+                        S.of(context).createddate(
+                            formatFromDateToddMMyyyy(task.createdDate!)),
                         style: theme.textTheme.headlineMedium),
                   ],
                 ),
@@ -87,7 +90,7 @@ class TaskTile extends StatelessWidget {
             ),
           ),
           onTap: () {
-            AutoRouter.of(context).push(const ListRoute());
+            AutoRouter.of(context).push(OrderRoute(task: task));
           },
         ));
   }

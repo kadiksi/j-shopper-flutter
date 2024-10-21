@@ -8,7 +8,7 @@ part of 'task_data_model.dart';
 
 TaskDataModel _$TaskDataModelFromJson(Map<String, dynamic> json) =>
     TaskDataModel(
-      id: (json['id'] as num).toInt(),
+      id: json['id'] as String,
       userId: (json['userId'] as num).toInt(),
       orderSource: json['orderSource'] as String,
       createdDate: DateTime.parse(json['createdDate'] as String),

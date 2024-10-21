@@ -239,6 +239,46 @@ class S {
       args: [createdDate],
     );
   }
+
+  /// `Заявка № {id}`
+  String order_number(Object id) {
+    return Intl.message(
+      'Заявка № $id',
+      name: 'order_number',
+      desc: '',
+      args: [id],
+    );
+  }
+
+  /// `Принять заказ`
+  String get accept_orders {
+    return Intl.message(
+      'Принять заказ',
+      name: 'accept_orders',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Позвонить`
+  String get call {
+    return Intl.message(
+      'Позвонить',
+      name: 'call',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Отсутсвует`
+  String get not_exist {
+    return Intl.message(
+      'Отсутсвует',
+      name: 'not_exist',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -8,29 +8,29 @@ import 'package:talker_flutter/talker_flutter.dart';
 import '../../models/ApiResponse';
 import '../../repositories/list/list_abstarct_repository.dart';
 
-part 'list_event.dart';
-part 'list_state.dart';
+part 'order_event.dart';
+part 'order_state.dart';
 
-class ListBloc extends Bloc<ListEvent, ListState> {
-  ListBloc(this.loginRepository) : super(ListInitial()) {
-    on<LoadList>(_load);
+class OrderBloc extends Bloc<OrderEvent, OrderState> {
+  OrderBloc(this.loginRepository) : super(OrderInitial()) {
+    on<LoadOrder>(_load);
   }
 
   final ListAbstractRepository loginRepository;
 
   Future<void> _load(
-    LoadList event,
-    Emitter<ListState> emit,
+    LoadOrder event,
+    Emitter<OrderState> emit,
   ) async {
-    if (state is! ListSuccess) {
-      emit(ListLoading());
+    if (state is! OrderSuccess) {
+      emit(OrderLoading());
     }
-    final response = await loginRepository.getList();
+    final response = await loginRepository.getOrder(event.id);
 
-    if (response is SuccessResponse<List<Task>>) {
-      emit(ListSuccess(tasks: response.data));
+    if (response is SuccessResponse<Task>) {
+      emit(OrderSuccess(tasks: response.data));
     } else if (response is ErrorResponse) {
-      emit(ListFailure(exception: response.errorMessage));
+      emit(OrderFailure(exception: response.errorMessage));
     }
   }
 
