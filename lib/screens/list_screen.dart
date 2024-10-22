@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:j_courier/generated/l10n.dart';
+import 'package:j_courier/screens/confirm_order_dialog.dart';
 
 import '../blocks/list/list_bloc.dart';
 import '../repositories/list/list_abstarct_repository.dart';
@@ -25,6 +26,7 @@ class _ListScreenState extends State<ListScreen> {
     GetIt.I<ListAbstractRepository>(),
   );
 
+  List<int> selectedItems = [];
   @override
   void initState() {
     _listBloc.add(LoadList());
@@ -54,7 +56,10 @@ class _ListScreenState extends State<ListScreen> {
                   ),
                   itemBuilder: (context, i) {
                     final task = state.tasks[i];
-                    return TaskTile(task: task);
+                    return TaskTile(
+                        task: task,
+                        selectedItems: selectedItems,
+                        setState: setState);
                   },
                 ),
                 Positioned(
@@ -63,7 +68,7 @@ class _ListScreenState extends State<ListScreen> {
                   right: 16,
                   child: ElevatedButton(
                     onPressed: () {
-                      print('Принять все заказы');
+                      showModalSheet();
                     },
                     child: Text(
                       S.of(context).commit_all_orders,
@@ -102,6 +107,20 @@ class _ListScreenState extends State<ListScreen> {
           },
         ),
       ),
+    );
+  }
+
+  void showModalSheet() {
+    showModalBottomSheet(
+      context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(25.0),
+        ),
+      ),
+      builder: (BuildContext context) {
+        return ConfirmOrderDialog();
+      },
     );
   }
 }

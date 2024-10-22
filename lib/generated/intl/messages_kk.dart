@@ -31,8 +31,11 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "accept_orders": MessageLookupByLibrary.simpleMessage("Принять заказ"),
+        "accept_selected":
+            MessageLookupByLibrary.simpleMessage("Принять отмеченные"),
         "add": MessageLookupByLibrary.simpleMessage("Продолжить"),
         "call": MessageLookupByLibrary.simpleMessage("Позвонить"),
+        "cancel": MessageLookupByLibrary.simpleMessage("Отмена"),
         "commit_all_orders":
             MessageLookupByLibrary.simpleMessage("Принять все заказы"),
         "createddate": m0,

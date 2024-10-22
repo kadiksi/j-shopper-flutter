@@ -21,5 +21,7 @@
   "order_number": "Заявка № {id}",
   "accept_orders": "Принять заказ",
   "call": "Позвонить",
-  "not_exist": "Отсутсвует"
+  "not_exist": "Отсутсвует",
+  "accept_selected": "Принять отмеченные",
+  "cancel": "Отмена"
 }

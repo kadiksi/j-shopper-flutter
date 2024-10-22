@@ -279,6 +279,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Принять отмеченные`
+  String get accept_selected {
+    return Intl.message(
+      'Принять отмеченные',
+      name: 'accept_selected',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Отмена`
+  String get cancel {
+    return Intl.message(
+      'Отмена',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

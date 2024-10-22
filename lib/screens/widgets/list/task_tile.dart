@@ -7,18 +7,43 @@ import 'package:j_courier/utils/date_utils.dart';
 import '../../../router/router.dart';
 
 class TaskTile extends StatelessWidget {
-  const TaskTile({
-    super.key,
-    required this.task,
-  });
+  const TaskTile(
+      {super.key,
+      required this.task,
+      required this.selectedItems,
+      required this.setState});
+
   final Task task;
+  final List<int> selectedItems;
+  final void Function(VoidCallback fn) setState;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Container(
-        margin: const EdgeInsets.only(
-            left: 16, right: 16, bottom: 0), // Adding margin around the tile
+    final isSelected = selectedItems.contains(task.id);
+    return GestureDetector(
+        onLongPress: () {
+          if (selectedItems.length == 0) {
+            setState(() {
+              selectedItems.add(task.id);
+            });
+          }
+        },
+        onTap: () {
+          if (selectedItems.length != 0) {
+            setState(() {
+              if (isSelected) {
+                selectedItems.remove(task.id);
+              } else {
+                selectedItems.add(task.id);
+              }
+            });
+          } else {
+            AutoRouter.of(context).push(OrderRoute(task: task));
+          }
+        },
+        // margin: const EdgeInsets.only(
+        //     left: 16, right: 16, bottom: 0),
         child: ListTile(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
@@ -26,6 +51,10 @@ class TaskTile extends StatelessWidget {
           tileColor: Colors.grey.shade200,
           contentPadding:
               const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
+          leading: Icon(
+            Icons.check_circle,
+            color: isSelected ? Colors.lightGreenAccent : null,
+          ),
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -89,9 +118,6 @@ class TaskTile extends StatelessWidget {
               ],
             ),
           ),
-          onTap: () {
-            AutoRouter.of(context).push(OrderRoute(task: task));
-          },
         ));
   }
 }

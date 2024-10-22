@@ -40,10 +40,6 @@ class _OrderScreenState extends State<OrderScreen> {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {},
-        ),
         title: Text(S.of(context).order_number('${widget.task.id}')),
         actions: [
           IconButton(
@@ -177,8 +173,7 @@ Widget _buildMultipleExpandableProductLists(
     List<Product> products = task.product ?? List.empty();
 
     views.add(ExpansionTile(
-      childrenPadding: EdgeInsets.zero, // Set padding to zero to reduce space
-
+      childrenPadding: EdgeInsets.zero,
       initiallyExpanded: false,
       title: Text(element, style: theme.textTheme.bodyMedium),
       subtitle:
@@ -187,7 +182,6 @@ Widget _buildMultipleExpandableProductLists(
         final isSelected = selectedItems.contains(product.id);
         return GestureDetector(
             onLongPress: () {
-              // First item can only be selected via long press
               if (selectedItems.length == 0) {
                 setState(() {
                   selectedItems.add(product.id!);
@@ -195,7 +189,6 @@ Widget _buildMultipleExpandableProductLists(
               }
             },
             onTap: () {
-              // Other items can be selected by a tap, but the first item must be selected first
               if (selectedItems.length != 0) {
                 setState(() {
                   if (isSelected) {
@@ -210,8 +203,7 @@ Widget _buildMultipleExpandableProductLists(
               contentPadding: EdgeInsets.all(8.0),
               leading: Icon(
                 Icons.check_circle,
-                color:
-                    isSelected ? Colors.lightGreenAccent : null, // Status icon
+                color: isSelected ? Colors.lightGreenAccent : null,
               ),
               title: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
