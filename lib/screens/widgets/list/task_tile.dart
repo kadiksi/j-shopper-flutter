@@ -23,14 +23,14 @@ class TaskTile extends StatelessWidget {
     final isSelected = selectedItems.contains(task.id);
     return GestureDetector(
         onLongPress: () {
-          if (selectedItems.length == 0) {
+          if (selectedItems.isEmpty) {
             setState(() {
               selectedItems.add(task.id);
             });
           }
         },
         onTap: () {
-          if (selectedItems.length != 0) {
+          if (selectedItems.isNotEmpty) {
             setState(() {
               if (isSelected) {
                 selectedItems.remove(task.id);

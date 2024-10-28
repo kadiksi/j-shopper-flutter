@@ -23,5 +23,10 @@
   "call": "Позвонить",
   "not_exist": "Отсутсвует",
   "accept_selected": "Принять отмеченные",
-  "cancel": "Отмена"
+  "cancel": "Отмена",
+  "replace_product": "Заменить товар",
+  "collected": "Собрано",
+  "total": "Итого:",
+  "quantity": "Количество",
+  "product_id": "Товар №${id}"
 }

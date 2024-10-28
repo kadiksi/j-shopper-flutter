@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:j_courier/generated/l10n.dart';
 
 class ConfirmOrderDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Container(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       height: 340,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -56,7 +57,7 @@ class ConfirmOrderDialog extends StatelessWidget {
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text('Принять отмеченные'),
+                    child: Text(S.of(context).accept_selected),
                   )),
               const SizedBox(height: 10),
               SizedBox(
@@ -68,7 +69,7 @@ class ConfirmOrderDialog extends StatelessWidget {
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text('Отмена'),
+                    child: Text(S.of(context).cancel),
                   )),
             ],
           ),

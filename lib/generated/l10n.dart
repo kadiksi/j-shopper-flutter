@@ -299,6 +299,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Заменить товар`
+  String get replace_product {
+    return Intl.message(
+      'Заменить товар',
+      name: 'replace_product',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Собрано`
+  String get collected {
+    return Intl.message(
+      'Собрано',
+      name: 'collected',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Итого:`
+  String get total {
+    return Intl.message(
+      'Итого:',
+      name: 'total',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Количество`
+  String get quantity {
+    return Intl.message(
+      'Количество',
+      name: 'quantity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Товар №${id}`
+  String product_id(Object id) {
+    return Intl.message(
+      'Товар №\$$id',
+      name: 'product_id',
+      desc: '',
+      args: [id],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

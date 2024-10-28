@@ -9,6 +9,7 @@ import 'package:j_courier/generated/l10n.dart';
 import 'package:j_courier/models/tasks/product.dart';
 import 'package:j_courier/models/tasks/task.dart';
 import 'package:j_courier/repositories/list/list_abstarct_repository.dart';
+import 'package:j_courier/router/router.dart';
 
 @RoutePage()
 class OrderScreen extends StatefulWidget {
@@ -182,14 +183,14 @@ Widget _buildMultipleExpandableProductLists(
         final isSelected = selectedItems.contains(product.id);
         return GestureDetector(
             onLongPress: () {
-              if (selectedItems.length == 0) {
+              if (selectedItems.isEmpty) {
                 setState(() {
                   selectedItems.add(product.id!);
                 });
               }
             },
             onTap: () {
-              if (selectedItems.length != 0) {
+              if (selectedItems.isNotEmpty) {
                 setState(() {
                   if (isSelected) {
                     selectedItems.remove(product.id!);
@@ -197,10 +198,12 @@ Widget _buildMultipleExpandableProductLists(
                     selectedItems.add(product.id!);
                   }
                 });
+              } else {
+                AutoRouter.of(context).push(ProductRoute(product: product));
               }
             },
             child: ListTile(
-              contentPadding: EdgeInsets.all(8.0),
+              contentPadding: const EdgeInsets.all(8.0),
               leading: Icon(
                 Icons.check_circle,
                 color: isSelected ? Colors.lightGreenAccent : null,
@@ -266,16 +269,16 @@ Widget _buildAcceptOrderButton(BuildContext context) {
 
 Widget _buildCollectedButton(BuildContext context, List<int> selectedItems) {
   final theme = Theme.of(context);
-  if (selectedItems.length > 0) {
+  if (selectedItems.isNotEmpty) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         SizedBox(
           child: ElevatedButton(
               onPressed: () {},
-              child: Text(S.of(context).not_exist),
               style: theme.elevatedButtonTheme.style!.copyWith(
-                  backgroundColor: WidgetStateProperty.all(Colors.black12))),
+                  backgroundColor: WidgetStateProperty.all(Colors.black12)),
+              child: Text(S.of(context).not_exist)),
         ),
         SizedBox(
           child: ElevatedButton(

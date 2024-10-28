@@ -132,6 +132,52 @@ class OrderRouteArgs {
 }
 
 /// generated route for
+/// [ProductScreen]
+class ProductRoute extends PageRouteInfo<ProductRouteArgs> {
+  ProductRoute({
+    Key? key,
+    required Product product,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ProductRoute.name,
+          args: ProductRouteArgs(
+            key: key,
+            product: product,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'ProductRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<ProductRouteArgs>();
+      return ProductScreen(
+        key: args.key,
+        product: args.product,
+      );
+    },
+  );
+}
+
+class ProductRouteArgs {
+  const ProductRouteArgs({
+    this.key,
+    required this.product,
+  });
+
+  final Key? key;
+
+  final Product product;
+
+  @override
+  String toString() {
+    return 'ProductRouteArgs{key: $key, product: $product}';
+  }
+}
+
+/// generated route for
 /// [SplashScreen]
 class SplashRoute extends PageRouteInfo<void> {
   const SplashRoute({List<PageRouteInfo>? children})

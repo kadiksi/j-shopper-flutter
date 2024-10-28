@@ -113,7 +113,7 @@ class _ListScreenState extends State<ListScreen> {
   void showModalSheet() {
     showModalBottomSheet(
       context: context,
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(25.0),
         ),

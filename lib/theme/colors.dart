@@ -18,6 +18,8 @@ const lightColorScheme = ColorScheme(
   tertiary: Color(0xFFF3F4F5),
   onTertiary: Color(0xFF1D1D1B),
   //
+  secondaryContainer: Color(0xFFFFE9D4),
+  //
   inversePrimary: Color(0xFFF5F4F4),
   surfaceTint: Color(0x3C3C4399),
   //

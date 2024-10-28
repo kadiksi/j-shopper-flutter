@@ -26,7 +26,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m2(orderSource) => "${orderSource} позиции";
 
-  static String m3(name) => "Здравствуйте, ${name}";
+  static String m3(id) => "Товар №\$${id}";
+
+  static String m4(name) => "Здравствуйте, ${name}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -36,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "add": MessageLookupByLibrary.simpleMessage("Продолжить"),
         "call": MessageLookupByLibrary.simpleMessage("Позвонить"),
         "cancel": MessageLookupByLibrary.simpleMessage("Отмена"),
+        "collected": MessageLookupByLibrary.simpleMessage("Собрано"),
         "commit_all_orders":
             MessageLookupByLibrary.simpleMessage("Принять все заказы"),
         "createddate": m0,
@@ -53,11 +56,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "orders": MessageLookupByLibrary.simpleMessage("Заказы"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "positions": m2,
+        "product_id": m3,
         "profile": MessageLookupByLibrary.simpleMessage("Профиль"),
+        "quantity": MessageLookupByLibrary.simpleMessage("Количество"),
+        "replace_product":
+            MessageLookupByLibrary.simpleMessage("Заменить товар"),
         "russian": MessageLookupByLibrary.simpleMessage("Русский"),
         "scan_qr": MessageLookupByLibrary.simpleMessage("Скан QR"),
         "test": MessageLookupByLibrary.simpleMessage("Тест Қ"),
+        "total": MessageLookupByLibrary.simpleMessage("Итого:"),
         "username": MessageLookupByLibrary.simpleMessage("username"),
-        "welcome_name": m3
+        "welcome_name": m4
       };
 }
