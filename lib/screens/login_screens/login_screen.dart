@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:j_courier/generated/l10n.dart';
 import 'package:j_courier/repositories/login/login_abstarct_repository.dart';
+import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 import '../../blocks/login/login_bloc.dart';
@@ -58,12 +59,12 @@ class _LoginState extends State<LoginScreen> {
                   keyboardType: TextInputType.phone,
                   inputFormatters: [maskFormatter],
                 ),
-                const SizedBox(height: 16),
+                divider16,
                 TextFormField(
                   controller: _passwordController,
                   obscureText: true,
                 ),
-                const SizedBox(height: 24),
+                divider24,
                 SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
@@ -102,7 +103,7 @@ class Error extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            'Something went wrong + ${msg}',
+            'Something went wrong + $msg',
             style: theme.textTheme.headlineMedium,
           ),
           Text(

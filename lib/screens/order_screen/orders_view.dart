@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:j_courier/screens/list_screen.dart';
+import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
 
 class OrdersScreen extends StatefulWidget {
   const OrdersScreen({super.key});
@@ -85,7 +86,7 @@ class _OrdersScreenState extends State<OrdersScreen>
               fontSize: 16,
             ),
           ),
-          const SizedBox(width: 6),
+          divider8,
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(

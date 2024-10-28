@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:j_courier/router/router.dart';
+import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
 import 'package:provider/provider.dart';
 
 import '../../generated/l10n.dart';
@@ -48,14 +49,14 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
                       setLocale(context, const Locale('kk'));
                     },
                   ),
-                  const SizedBox(height: 10),
+                  divider10,
                   GreyButton(
                     label: S.of(context).russian,
                     onPressed: () {
                       setLocale(context, const Locale('ru'));
                     },
                   ),
-                  const SizedBox(height: 10),
+                  divider10,
                   GreyButton(
                     label: S.of(context).english,
                     onPressed: () {
@@ -65,7 +66,7 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
                 ],
               ),
             ),
-            const SizedBox(height: 40),
+            divider40,
           ],
         ),
       ),

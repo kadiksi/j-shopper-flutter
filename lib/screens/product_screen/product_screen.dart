@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:j_courier/generated/l10n.dart';
 import 'package:j_courier/models/tasks/product.dart';
+import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
 
 @RoutePage()
 class ProductScreen extends StatefulWidget {
@@ -53,7 +54,7 @@ class _ProductDetailScreenState extends State<ProductScreen> {
                   height: 262,
                 ),
               ),
-              const SizedBox(height: 20),
+              divider20,
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
@@ -63,7 +64,7 @@ class _ProductDetailScreenState extends State<ProductScreen> {
                       '${widget.product.name}',
                       style: theme.textTheme.bodyLarge,
                     ),
-                    const SizedBox(height: 20),
+                    divider20,
                     Container(
                       decoration: BoxDecoration(
                         color: Colors.grey[200],
@@ -73,7 +74,7 @@ class _ProductDetailScreenState extends State<ProductScreen> {
                           horizontal: 12, vertical: 12),
                       child: Text('${widget.product.price}'),
                     ),
-                    const SizedBox(height: 20),
+                    divider20,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -136,7 +137,7 @@ class _ProductDetailScreenState extends State<ProductScreen> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 20),
+                    divider20,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -172,7 +173,7 @@ class _ProductDetailScreenState extends State<ProductScreen> {
                           style: theme.textTheme.bodyLarge!
                               .copyWith(color: theme.colorScheme.secondary)),
                     )),
-                const SizedBox(height: 10),
+                divider10,
                 SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(

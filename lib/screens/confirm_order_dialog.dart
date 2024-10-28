@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:j_courier/generated/l10n.dart';
 
+import 'widgets/box_decorations/dividers.dart';
+
 class ConfirmOrderDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -24,14 +26,14 @@ class ConfirmOrderDialog extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
+              divider20,
 
               const Icon(
                 Icons.qr_code_rounded,
                 color: Colors.orange,
                 size: 60,
               ),
-              const SizedBox(height: 10),
+              divider10,
 
               const Text(
                 'Принять отмеченные заказы?',
@@ -40,7 +42,7 @@ class ConfirmOrderDialog extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 10),
+              divider10,
               // Subtitle
               const Text(
                 'Отмеченные заказы перейдут в статус «принятые»',
@@ -59,7 +61,7 @@ class ConfirmOrderDialog extends StatelessWidget {
                     },
                     child: Text(S.of(context).accept_selected),
                   )),
-              const SizedBox(height: 10),
+              divider10,
               SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(

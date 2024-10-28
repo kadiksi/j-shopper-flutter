@@ -10,6 +10,7 @@ import 'package:j_courier/models/tasks/product.dart';
 import 'package:j_courier/models/tasks/task.dart';
 import 'package:j_courier/repositories/list/list_abstarct_repository.dart';
 import 'package:j_courier/router/router.dart';
+import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
 
 @RoutePage()
 class OrderScreen extends StatefulWidget {
@@ -64,7 +65,7 @@ class _OrderScreenState extends State<OrderScreen> {
                 child: Column(
                   children: [
                     _buildOrderInfo(context, theme),
-                    const SizedBox(height: 16),
+                    divider16,
                     Expanded(
                         child: _buildMultipleExpandableProductLists(state.tasks,
                             theme, context, selectedItems, setState)),
@@ -90,7 +91,7 @@ class _OrderScreenState extends State<OrderScreen> {
                       'Please try againg later',
                       style: theme.textTheme.labelSmall?.copyWith(fontSize: 16),
                     ),
-                    const SizedBox(height: 30),
+                    divider30,
                     TextButton(
                       onPressed: () {
                         _listBloc.add(LoadOrder(id: widget.task.id));
@@ -140,10 +141,10 @@ Widget _buildOrderInfo(BuildContext context, ThemeData theme) {
             ),
           ],
         ),
-        const SizedBox(height: 4),
+        divider4,
         Text('Плановая дата 24.09.24',
             style: TextStyle(color: Colors.grey[600])),
-        const SizedBox(height: 8),
+        divider8,
         GestureDetector(
           onTap: () {},
           child: Text(
@@ -224,9 +225,7 @@ Widget _buildMultipleExpandableProductLists(
                             '${product.name}',
                             style: theme.textTheme.bodyMedium,
                           ),
-                          const SizedBox(
-                            height: 8,
-                          ),
+                          divider8,
                           Text(
                             '${product.price}',
                             style: theme.textTheme.bodyMedium,
@@ -289,6 +288,6 @@ Widget _buildCollectedButton(BuildContext context, List<int> selectedItems) {
       ],
     );
   } else {
-    return const SizedBox();
+    return divider;
   }
 }

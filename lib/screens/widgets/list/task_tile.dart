@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:j_courier/generated/l10n.dart';
 import 'package:j_courier/models/tasks/task.dart';
+import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
 import 'package:j_courier/utils/date_utils.dart';
 import '../../../router/router.dart';
 
@@ -65,7 +66,7 @@ class TaskTile extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFFFE9D4),
+                  color: theme.colorScheme.secondaryContainer,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(
@@ -73,7 +74,7 @@ class TaskTile extends StatelessWidget {
                     SvgPicture.asset(
                       "assets/svg/tabs/clock_active.svg",
                     ),
-                    const SizedBox(width: 4),
+                    divider4,
                     Text(
                       '${task.createdDate?.day}',
                       style: theme.textTheme.bodySmall,
@@ -96,7 +97,7 @@ class TaskTile extends StatelessWidget {
                       style: theme.textTheme.headlineMedium
                           ?.copyWith(color: theme.colorScheme.surfaceTint),
                     ),
-                    const SizedBox(height: 8),
+                    divider8,
                     Text(' 100 тг', style: theme.textTheme.headlineMedium),
                   ],
                 ),
@@ -108,7 +109,7 @@ class TaskTile extends StatelessWidget {
                       style: theme.textTheme.headlineMedium
                           ?.copyWith(color: theme.colorScheme.surfaceTint),
                     ),
-                    const SizedBox(height: 8),
+                    divider8,
                     Text(
                         S.of(context).createddate(
                             formatFromDateToddMMyyyy(task.createdDate!)),

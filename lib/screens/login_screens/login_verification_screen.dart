@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:j_courier/generated/l10n.dart';
 import 'package:j_courier/router/router.dart';
+import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
 import 'package:local_auth/local_auth.dart';
 
 // https://pub.dev/packages/local_auth
@@ -107,10 +108,10 @@ class _LoginVerificationScreenState extends State<LoginVerificationScreen> {
                 width: 64,
                 height: 64,
               ),
-              const SizedBox(height: 20),
+              divider20,
               Text(S.of(context).welcome_name('Nurlano'), // Greeting message
                   style: theme.textTheme.headlineLarge),
-              const SizedBox(height: 10),
+              divider10,
               Text(
                 S.of(context).enter_code_password, // Prompt to enter passcode
                 style: theme.textTheme.headlineMedium?.copyWith(
@@ -118,7 +119,7 @@ class _LoginVerificationScreenState extends State<LoginVerificationScreen> {
                     fontWeight: FontWeight.w500,
                     fontSize: 17),
               ),
-              const SizedBox(height: 40),
+              divider40,
               // Keypad for entering passcode
               GridView.count(
                 shrinkWrap: true,

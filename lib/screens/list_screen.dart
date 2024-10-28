@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:j_courier/generated/l10n.dart';
 import 'package:j_courier/screens/confirm_order_dialog.dart';
+import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
 
 import '../blocks/list/list_bloc.dart';
 import '../repositories/list/list_abstarct_repository.dart';
@@ -92,7 +93,7 @@ class _ListScreenState extends State<ListScreen> {
                       'Please try againg later',
                       style: theme.textTheme.labelSmall?.copyWith(fontSize: 16),
                     ),
-                    const SizedBox(height: 30),
+                    divider30,
                     TextButton(
                       onPressed: () {
                         _listBloc.add(LoadList());
