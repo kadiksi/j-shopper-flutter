@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-// var t = Theme.of(context);
-// var decoration = BoxDecoration(
-//     color: Theme.of().colorScheme.secondaryContainer,
-//     borderRadius: BorderRadius.circular(12));
 var divider = const SizedBox();
 var divider4 = const SizedBox(height: 4);
 var divider8 = const SizedBox(height: 8);
