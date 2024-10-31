@@ -32,12 +32,15 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "Replacement_of_good_will_result": MessageLookupByLibrary.simpleMessage(
+            "Замена товара приведет к доплате со стороны покупателя"),
         "accept_orders": MessageLookupByLibrary.simpleMessage("Принять заказ"),
         "accept_selected":
             MessageLookupByLibrary.simpleMessage("Принять отмеченные"),
         "add": MessageLookupByLibrary.simpleMessage("Продолжить"),
         "call": MessageLookupByLibrary.simpleMessage("Позвонить"),
         "cancel": MessageLookupByLibrary.simpleMessage("Отмена"),
+        "change_product": MessageLookupByLibrary.simpleMessage("Замена товара"),
         "collected": MessageLookupByLibrary.simpleMessage("Собрано"),
         "commit_all_orders":
             MessageLookupByLibrary.simpleMessage("Принять все заказы"),
@@ -47,6 +50,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Введите код-пароль для входа"),
         "enter_phone_number_and_password": MessageLookupByLibrary.simpleMessage(
             "Введите ваш номер телефона и пароль"),
+        "enter_product_name":
+            MessageLookupByLibrary.simpleMessage("Введите название товара"),
         "history": MessageLookupByLibrary.simpleMessage("История"),
         "kazakh": MessageLookupByLibrary.simpleMessage("Қазақша"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
@@ -61,6 +66,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "quantity": MessageLookupByLibrary.simpleMessage("Количество"),
         "replace_product":
             MessageLookupByLibrary.simpleMessage("Заменить товар"),
+        "replace_product_confirmation_question":
+            MessageLookupByLibrary.simpleMessage(
+                "Вы действительно хотите заменить товар?"),
         "russian": MessageLookupByLibrary.simpleMessage("Русский"),
         "scan_qr": MessageLookupByLibrary.simpleMessage("Скан QR"),
         "test": MessageLookupByLibrary.simpleMessage("Тест"),

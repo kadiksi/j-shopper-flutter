@@ -28,5 +28,9 @@
   "collected": "Собрано",
   "total": "Итого:",
   "quantity": "Количество",
-  "product_id": "Товар №${id}"
+  "product_id": "Товар №${id}",
+  "change_product": "Замена товара",
+  "enter_product_name": "Введите название товара",
+  "replace_product_confirmation_question": "Вы действительно хотите заменить товар?",
+  "Replacement_of_good_will_result": "Замена товара приведет к доплате со стороны покупателя"
 }

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:j_courier/generated/l10n.dart';
-import 'package:j_courier/screens/confirm_order_dialog.dart';
+import 'package:j_courier/screens/widgets/bottom_sheet/confirm_order_dialog.dart';
 import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
 
 import '../blocks/list/list_bloc.dart';

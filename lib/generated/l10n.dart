@@ -349,6 +349,46 @@ class S {
       args: [id],
     );
   }
+
+  /// `Замена товара`
+  String get change_product {
+    return Intl.message(
+      'Замена товара',
+      name: 'change_product',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Введите название товара`
+  String get enter_product_name {
+    return Intl.message(
+      'Введите название товара',
+      name: 'enter_product_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Вы действительно хотите заменить товар?`
+  String get replace_product_confirmation_question {
+    return Intl.message(
+      'Вы действительно хотите заменить товар?',
+      name: 'replace_product_confirmation_question',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Замена товара приведет к доплате со стороны покупателя`
+  String get Replacement_of_good_will_result {
+    return Intl.message(
+      'Замена товара приведет к доплате со стороны покупателя',
+      name: 'Replacement_of_good_will_result',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

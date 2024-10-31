@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:j_courier/generated/l10n.dart';
 
-import 'widgets/box_decorations/dividers.dart';
+import '../box_decorations/dividers.dart';
 
-class ConfirmOrderDialog extends StatelessWidget {
+class SwapConfirmationDialog extends StatelessWidget {
+  SwapConfirmationDialog({super.key, required this.callback});
+
+  final void Function(String) callback;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -35,18 +39,15 @@ class ConfirmOrderDialog extends StatelessWidget {
               ),
               divider10,
 
-              const Text(
-                'Принять отмеченные заказы?',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+              Text(
+                S.of(context).replace_product_confirmation_question,
+                style: theme.textTheme.bodyLarge,
               ),
               divider10,
               // Subtitle
-              const Text(
-                'Отмеченные заказы перейдут в статус «принятые»',
-                style: TextStyle(color: Colors.grey),
+              Text(
+                S.of(context).Replacement_of_good_will_result,
+                style: theme.textTheme.bodyMedium,
                 textAlign: TextAlign.center,
               ),
             ],
@@ -57,21 +58,10 @@ class ConfirmOrderDialog extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
+                      callback('This is message from bottom sheet');
                       Navigator.of(context).pop();
                     },
-                    child: Text(S.of(context).accept_selected),
-                  )),
-              divider10,
-              SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    style: theme.elevatedButtonTheme.style!.copyWith(
-                        backgroundColor:
-                            WidgetStateProperty.all(Colors.black12)),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Text(S.of(context).cancel),
+                    child: Text(S.of(context).replace_product),
                   )),
             ],
           ),

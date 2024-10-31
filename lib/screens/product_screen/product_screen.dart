@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:j_courier/generated/l10n.dart';
 import 'package:j_courier/models/tasks/product.dart';
+import 'package:j_courier/screens/product_screen/product_replacement_screen.dart';
 import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
 
 @RoutePage()
@@ -30,16 +31,19 @@ class _ProductDetailScreenState extends State<ProductScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    priceController.text = '${widget.product.price}';
+    Product product = widget.product;
+    priceController.text = '${product.price}';
+    List<Product> products = [product];
+
     if (quantity == 0) {
-      quantity = widget.product.quantity!;
+      quantity = product.quantity!;
     }
     if (total == 0) {
-      total = (widget.product.price! * quantity);
+      total = (product.price! * quantity);
     }
     return Scaffold(
       appBar: AppBar(
-        title: Text(S.of(context).product_id('${widget.product.id}')),
+        title: Text(S.of(context).product_id('${product.id}')),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,7 +65,7 @@ class _ProductDetailScreenState extends State<ProductScreen> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      '${widget.product.name}',
+                      '${product.name}',
                       style: theme.textTheme.bodyLarge,
                     ),
                     divider20,
@@ -181,6 +185,25 @@ class _ProductDetailScreenState extends State<ProductScreen> {
                         Navigator.of(context).pop();
                       },
                       child: Text(S.of(context).accept_selected,
+                          style: theme.textTheme.bodyLarge!
+                              .copyWith(color: theme.colorScheme.surface)),
+                    )),
+                SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.vertical(top: Radius.circular(20)),
+                          ),
+                          builder: (context) =>
+                              ProductReplacementSheet(products: products),
+                        );
+                      },
+                      child: Text(S.of(context).replace_product,
                           style: theme.textTheme.bodyLarge!
                               .copyWith(color: theme.colorScheme.surface)),
                     )),
