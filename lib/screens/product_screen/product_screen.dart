@@ -192,16 +192,7 @@ class _ProductDetailScreenState extends State<ProductScreen> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        showModalBottomSheet(
-                          context: context,
-                          isScrollControlled: true,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.vertical(top: Radius.circular(20)),
-                          ),
-                          builder: (context) =>
-                              ProductReplacementSheet(products: products),
-                        );
+                        showModelReplaceProduct(context, products);
                       },
                       child: Text(S.of(context).replace_product,
                           style: theme.textTheme.bodyLarge!
@@ -213,5 +204,24 @@ class _ProductDetailScreenState extends State<ProductScreen> {
         ],
       ),
     );
+  }
+
+  void showModelReplaceProduct(BuildContext context, List<Product> products) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) => ProductReplacementSheet(
+          products: products,
+          isReplace: true,
+          action: replaceProduct,
+          title: S.of(context).replace_product),
+    );
+  }
+
+  void replaceProduct() {
+    print('Replace product');
   }
 }

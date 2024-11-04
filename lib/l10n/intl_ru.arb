@@ -32,5 +32,15 @@
   "change_product": "Замена товара",
   "enter_product_name": "Введите название товара",
   "replace_product_confirmation_question": "Вы действительно хотите заменить товар?",
-  "Replacement_of_good_will_result": "Замена товара приведет к доплате со стороны покупателя"
+  "Replacement_of_good_will_result": "Замена товара приведет к доплате со стороны покупателя",
+  "add_product": "Добавить товар",
+  "cancel_order": "Отменить заказ",
+  "return_order": "Вернуть заказ в новые",
+  "send_to_delivery": "Передать на доставку",
+  "choose": "Выбрать",
+  "select_cancelation_reason": "Выберите причину отмены",
+  "return_order_question": "Вернуть заказ в новые?",
+  "return_order_tip": "Заказ сможет обработать другой магазин из вашей сети",
+  "cant_cancel_action": "Отменить действие будет невозможно",
+  "add_product_question": "Вы действительно хотите добавить товар?"
 }

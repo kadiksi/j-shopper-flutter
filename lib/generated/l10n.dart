@@ -389,6 +389,106 @@ class S {
       args: [],
     );
   }
+
+  /// `Добавить товар`
+  String get add_product {
+    return Intl.message(
+      'Добавить товар',
+      name: 'add_product',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Отменить заказ`
+  String get cancel_order {
+    return Intl.message(
+      'Отменить заказ',
+      name: 'cancel_order',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Вернуть заказ в новые`
+  String get return_order {
+    return Intl.message(
+      'Вернуть заказ в новые',
+      name: 'return_order',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Передать на доставку`
+  String get send_to_delivery {
+    return Intl.message(
+      'Передать на доставку',
+      name: 'send_to_delivery',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Выбрать`
+  String get choose {
+    return Intl.message(
+      'Выбрать',
+      name: 'choose',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Выберите причину отмены`
+  String get select_cancelation_reason {
+    return Intl.message(
+      'Выберите причину отмены',
+      name: 'select_cancelation_reason',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Вернуть заказ в новые?`
+  String get return_order_question {
+    return Intl.message(
+      'Вернуть заказ в новые?',
+      name: 'return_order_question',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Заказ сможет обработать другой магазин из вашей сети`
+  String get return_order_tip {
+    return Intl.message(
+      'Заказ сможет обработать другой магазин из вашей сети',
+      name: 'return_order_tip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Отменить действие будет невозможно`
+  String get cant_cancel_action {
+    return Intl.message(
+      'Отменить действие будет невозможно',
+      name: 'cant_cancel_action',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Вы действительно хотите добавить товар?`
+  String get add_product_question {
+    return Intl.message(
+      'Вы действительно хотите добавить товар?',
+      name: 'add_product_question',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

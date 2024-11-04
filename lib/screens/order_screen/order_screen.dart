@@ -10,6 +10,10 @@ import 'package:j_courier/models/tasks/product.dart';
 import 'package:j_courier/models/tasks/task.dart';
 import 'package:j_courier/repositories/list/list_abstarct_repository.dart';
 import 'package:j_courier/router/router.dart';
+import 'package:j_courier/screens/product_screen/product_replacement_screen.dart';
+import 'package:j_courier/screens/widgets/bottom_sheet/cancel_order.dart';
+import 'package:j_courier/screens/widgets/bottom_sheet/order_options.dart';
+import 'package:j_courier/screens/widgets/bottom_sheet/return_order.dart';
 import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
 
 @RoutePage()
@@ -46,7 +50,21 @@ class _OrderScreenState extends State<OrderScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.more_vert),
-            onPressed: () {},
+            onPressed: () {
+              final List<String> reasons = [
+                'Reason 1',
+                'Reason 2',
+                'Reason 3',
+                // Add more reasons if needed
+              ];
+              showOrderOptions(
+                  context,
+                  showModelAddProduct,
+                  widget.task.product!,
+                  showModelCancelOrder,
+                  reasons,
+                  showModelReturnOrder);
+            },
           ),
         ],
       ),
@@ -290,4 +308,49 @@ Widget _buildCollectedButton(BuildContext context, List<int> selectedItems) {
   } else {
     return divider;
   }
+}
+
+void showModelAddProduct(BuildContext context, List<Product> products) {
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+    ),
+    builder: (context) => ProductReplacementSheet(
+        products: products,
+        isReplace: false,
+        action: addProduct,
+        title: S.of(context).add_product),
+  );
+}
+
+void showModelCancelOrder(BuildContext context, List<String> reasons) {
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+    ),
+    builder: (context) => ReasonSelectionSheet(reasons: reasons),
+  );
+}
+
+void showModelReturnOrder(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+    ),
+    builder: (context) => const OrderReturnSheet(returnOrder),
+  );
+}
+
+void addProduct() {
+  print("Add Product");
+}
+
+void returnOrder() {
+  print("return order");
 }

@@ -38,9 +38,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "accept_selected":
             MessageLookupByLibrary.simpleMessage("Принять отмеченные"),
         "add": MessageLookupByLibrary.simpleMessage("Продолжить"),
+        "add_product": MessageLookupByLibrary.simpleMessage("Добавить товар"),
+        "add_product_question": MessageLookupByLibrary.simpleMessage(
+            "Вы действительно хотите добавить товар?"),
         "call": MessageLookupByLibrary.simpleMessage("Позвонить"),
         "cancel": MessageLookupByLibrary.simpleMessage("Отмена"),
+        "cancel_order": MessageLookupByLibrary.simpleMessage("Отменить заказ"),
+        "cant_cancel_action": MessageLookupByLibrary.simpleMessage(
+            "Отменить действие будет невозможно"),
         "change_product": MessageLookupByLibrary.simpleMessage("Замена товара"),
+        "choose": MessageLookupByLibrary.simpleMessage("Выбрать"),
         "collected": MessageLookupByLibrary.simpleMessage("Собрано"),
         "commit_all_orders":
             MessageLookupByLibrary.simpleMessage("Принять все заказы"),
@@ -69,8 +76,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "replace_product_confirmation_question":
             MessageLookupByLibrary.simpleMessage(
                 "Вы действительно хотите заменить товар?"),
+        "return_order":
+            MessageLookupByLibrary.simpleMessage("Вернуть заказ в новые"),
+        "return_order_question":
+            MessageLookupByLibrary.simpleMessage("Вернуть заказ в новые?"),
+        "return_order_tip": MessageLookupByLibrary.simpleMessage(
+            "Заказ сможет обработать другой магазин из вашей сети"),
         "russian": MessageLookupByLibrary.simpleMessage("Русский"),
         "scan_qr": MessageLookupByLibrary.simpleMessage("Скан QR"),
+        "select_cancelation_reason":
+            MessageLookupByLibrary.simpleMessage("Выберите причину отмены"),
+        "send_to_delivery":
+            MessageLookupByLibrary.simpleMessage("Передать на доставку"),
         "test": MessageLookupByLibrary.simpleMessage("Тест"),
         "total": MessageLookupByLibrary.simpleMessage("Итого:"),
         "username": MessageLookupByLibrary.simpleMessage("username"),

@@ -6,9 +6,17 @@ import 'package:j_courier/screens/widgets/bottom_sheet/swap_confirmation_dialog.
 import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
 
 class ProductReplacementSheet extends StatefulWidget {
-  const ProductReplacementSheet({super.key, required this.products});
+  const ProductReplacementSheet(
+      {super.key,
+      required this.products,
+      required this.isReplace,
+      required this.action,
+      required this.title});
 
   final List<Product> products;
+  final bool isReplace;
+  final VoidCallback action;
+  final String title;
 
   @override
   _ProductReplacementSheetState createState() =>
@@ -69,7 +77,7 @@ class _ProductReplacementSheetState extends State<ProductReplacementSheet> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    S.of(context).change_product,
+                    widget.title,
                     style: theme.textTheme.headlineLarge,
                   ),
                   IconButton(
@@ -159,7 +167,25 @@ class _ProductReplacementSheetState extends State<ProductReplacementSheet> {
                                     height: 20,
                                   ),
                                   onPressed: () {
-                                    showSwapConfirmationModalSheet();
+                                    if (widget.isReplace) {
+                                      showReplaceConfirmationModalSheet(
+                                          S
+                                              .of(context)
+                                              .replace_product_confirmation_question,
+                                          S
+                                              .of(context)
+                                              .Replacement_of_good_will_result,
+                                          S.of(context).replace_product,
+                                          'assets/svg/three_dots_replace_product.svg',
+                                          widget.action);
+                                    } else {
+                                      showReplaceConfirmationModalSheet(
+                                          S.of(context).add_product_question,
+                                          S.of(context).cant_cancel_action,
+                                          S.of(context).add_product,
+                                          'assets/svg/qr_add_order.svg',
+                                          widget.action);
+                                    }
                                   },
                                 )),
                           ],
@@ -177,12 +203,8 @@ class _ProductReplacementSheetState extends State<ProductReplacementSheet> {
     return sheet;
   }
 
-  void printText(String text) {
-    print(text);
-    Navigator.pop(context);
-  }
-
-  void showSwapConfirmationModalSheet() {
+  void showReplaceConfirmationModalSheet(String title, String tip,
+      String buttonText, String icon, VoidCallback action) {
     showModalBottomSheet(
       context: context,
       shape: const RoundedRectangleBorder(
@@ -191,7 +213,12 @@ class _ProductReplacementSheetState extends State<ProductReplacementSheet> {
         ),
       ),
       builder: (BuildContext context) {
-        return SwapConfirmationDialog(callback: printText);
+        return SwapConfirmationDialog(
+            action: action,
+            title: title,
+            tip: tip,
+            buttonText: buttonText,
+            icon: icon);
       },
     );
   }

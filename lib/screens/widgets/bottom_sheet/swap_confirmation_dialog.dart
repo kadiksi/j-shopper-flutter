@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:j_courier/generated/l10n.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../box_decorations/dividers.dart';
 
 class SwapConfirmationDialog extends StatelessWidget {
-  SwapConfirmationDialog({super.key, required this.callback});
+  SwapConfirmationDialog(
+      {super.key,
+      required this.title,
+      required this.tip,
+      required this.action,
+      required this.buttonText,
+      required this.icon});
 
-  final void Function(String) callback;
+  final String title;
+  final String tip;
+  final String buttonText;
+  final String icon;
+  final VoidCallback action;
 
   @override
   Widget build(BuildContext context) {
@@ -31,22 +41,21 @@ class SwapConfirmationDialog extends StatelessWidget {
                 ),
               ),
               divider20,
-
-              const Icon(
-                Icons.qr_code_rounded,
-                color: Colors.orange,
-                size: 60,
+              SvgPicture.asset(
+                icon,
+                width: 80,
+                height: 80,
               ),
               divider10,
 
               Text(
-                S.of(context).replace_product_confirmation_question,
+                title,
                 style: theme.textTheme.bodyLarge,
               ),
               divider10,
               // Subtitle
               Text(
-                S.of(context).Replacement_of_good_will_result,
+                tip,
                 style: theme.textTheme.bodyMedium,
                 textAlign: TextAlign.center,
               ),
@@ -58,10 +67,10 @@ class SwapConfirmationDialog extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      callback('This is message from bottom sheet');
+                      action();
                       Navigator.of(context).pop();
                     },
-                    child: Text(S.of(context).replace_product),
+                    child: Text(buttonText),
                   )),
             ],
           ),
