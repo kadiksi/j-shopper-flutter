@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:j_courier/screens/list_screen.dart';
+import 'package:j_courier/generated/l10n.dart';
+import 'package:j_courier/screens/order_screen/tabs/accepted_orders.dart';
+import 'package:j_courier/screens/order_screen/tabs/new_orders.dart';
 import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
 
 class OrdersScreen extends StatefulWidget {
@@ -53,8 +55,10 @@ class _OrdersScreenState extends State<OrdersScreen>
               labelColor: Colors.black,
               unselectedLabelColor: Colors.grey,
               tabs: [
-                _buildTabWithBadge('Новые', 12, _tabController.index == 0),
-                _buildTabWithBadge('Принятые', 24, _tabController.index == 1),
+                _buildTabWithBadge(
+                    S.of(context).new_orders, 12, _tabController.index == 0),
+                _buildTabWithBadge(
+                    S.of(context).accepted, 24, _tabController.index == 1),
               ],
             ),
           ),
@@ -62,8 +66,8 @@ class _OrdersScreenState extends State<OrdersScreen>
             child: TabBarView(
               controller: _tabController,
               children: const [
-                ListScreen(),
-                Center(child: Text('Принятые Orders')),
+                NewOrders(),
+                AcceptedOrders(),
               ],
             ),
           ),

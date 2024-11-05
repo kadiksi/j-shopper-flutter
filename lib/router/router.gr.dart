@@ -29,7 +29,7 @@ class ChooseLanguageRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [ListScreen]
+/// [NewOrders]
 class ListRoute extends PageRouteInfo<void> {
   const ListRoute({List<PageRouteInfo>? children})
       : super(
@@ -42,7 +42,7 @@ class ListRoute extends PageRouteInfo<void> {
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const ListScreen();
+      return const NewOrders();
     },
   );
 }

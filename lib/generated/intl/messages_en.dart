@@ -37,6 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "accept_orders": MessageLookupByLibrary.simpleMessage("Принять заказ"),
         "accept_selected":
             MessageLookupByLibrary.simpleMessage("Принять отмеченные"),
+        "accepted": MessageLookupByLibrary.simpleMessage("Принятые"),
         "add": MessageLookupByLibrary.simpleMessage("Продолжить"),
         "add_product": MessageLookupByLibrary.simpleMessage("Добавить товар"),
         "add_product_question": MessageLookupByLibrary.simpleMessage(
@@ -62,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "history": MessageLookupByLibrary.simpleMessage("История"),
         "kazakh": MessageLookupByLibrary.simpleMessage("Қазақша"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
+        "new_orders": MessageLookupByLibrary.simpleMessage("Новые"),
         "not_exist": MessageLookupByLibrary.simpleMessage("Отсутсвует"),
         "notifications": MessageLookupByLibrary.simpleMessage("Уведомления"),
         "order_number": m1,

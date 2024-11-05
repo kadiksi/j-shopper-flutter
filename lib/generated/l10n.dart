@@ -489,6 +489,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Принятые`
+  String get accepted {
+    return Intl.message(
+      'Принятые',
+      name: 'accepted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Новые`
+  String get new_orders {
+    return Intl.message(
+      'Новые',
+      name: 'new_orders',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

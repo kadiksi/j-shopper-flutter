@@ -4,12 +4,12 @@ import 'package:j_courier/models/tasks/product.dart';
 import 'package:j_courier/models/tasks/task.dart';
 import 'package:j_courier/screens/order_screen/order_screen.dart';
 import 'package:j_courier/screens/product_screen/product_screen.dart';
-import 'package:j_courier/screens/tabs_screen.dart';
+import 'package:j_courier/screens/order_screen/tabs/tabs_screen.dart';
 import 'package:j_courier/screens/login_screens/splash_screen.dart';
 
 import '../screens/login_screens/choose_language_screen.dart';
 import '../screens/login_screens/login_verification_screen.dart';
-import '../screens/list_screen.dart';
+import '../screens/order_screen/tabs/new_orders.dart';
 import '../screens/login_screens/login_screen.dart';
 
 part 'router.gr.dart';

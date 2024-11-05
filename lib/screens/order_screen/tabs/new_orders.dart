@@ -8,21 +8,21 @@ import 'package:j_courier/generated/l10n.dart';
 import 'package:j_courier/screens/widgets/bottom_sheet/confirm_order_dialog.dart';
 import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
 
-import '../blocks/list/list_bloc.dart';
-import '../repositories/list/list_abstarct_repository.dart';
-import 'widgets/list/task_tile.dart';
+import '../../../blocks/list/list_bloc.dart';
+import '../../../repositories/list/list_abstarct_repository.dart';
+import '../../widgets/list/task_tile.dart';
 
 @RoutePage()
-class ListScreen extends StatefulWidget {
-  const ListScreen({
+class NewOrders extends StatefulWidget {
+  const NewOrders({
     super.key,
   });
 
   @override
-  State<ListScreen> createState() => _ListScreenState();
+  State<NewOrders> createState() => _NewOrdersState();
 }
 
-class _ListScreenState extends State<ListScreen> {
+class _NewOrdersState extends State<NewOrders> {
   final _listBloc = ListBloc(
     GetIt.I<ListAbstractRepository>(),
   );
