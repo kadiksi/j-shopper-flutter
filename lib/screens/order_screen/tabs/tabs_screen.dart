@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get_it/get_it.dart';
 import 'package:j_courier/generated/l10n.dart';
+import 'package:j_courier/screens/history_screens/history_view.dart';
 import 'package:j_courier/screens/order_screen/orders_view.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
@@ -25,9 +26,7 @@ class _TabsScreenState extends State<TabsScreen> {
     ),
     const Column(
       children: [
-        Expanded(
-          child: Center(child: Text("История Page")), // History
-        ),
+        Expanded(child: HistoryScreen()),
       ],
     ),
     const Column(
