@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:j_courier/generated/l10n.dart';
 import 'package:j_courier/screens/history_screens/tabs/active_orders.dart';
-import 'package:j_courier/screens/order_screen/tabs/accepted_orders.dart';
-import 'package:j_courier/screens/order_screen/tabs/new_orders.dart';
 import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
 
 class HistoryScreen extends StatefulWidget {
@@ -57,8 +54,10 @@ class _HistoryScreenState extends State<HistoryScreen>
               labelColor: Colors.black,
               unselectedLabelColor: Colors.grey,
               tabs: [
-                _buildTabWithBadge('Активные', 12, _tabController.index == 0),
-                _buildTabWithBadge('Завершонные', 0, _tabController.index == 1),
+                _buildTabWithBadge(
+                    S.of(context).active, 12, _tabController.index == 0),
+                _buildTabWithBadge(
+                    S.of(context).completed, 0, _tabController.index == 1),
               ],
             ),
           ),

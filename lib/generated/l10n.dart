@@ -509,6 +509,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Активные`
+  String get active {
+    return Intl.message(
+      'Активные',
+      name: 'active',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Завершонные`
+  String get completed {
+    return Intl.message(
+      'Завершонные',
+      name: 'completed',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

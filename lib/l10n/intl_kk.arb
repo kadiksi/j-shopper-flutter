@@ -44,5 +44,7 @@
   "cant_cancel_action": "Отменить действие будет невозможно",
   "add_product_question": "Вы действительно хотите добавить товар?",
   "accepted": "Принятые",
-  "new_orders": "Новые"
+  "new_orders": "Новые",
+  "active": "Активные",
+  "completed": "Завершонные"
 }

@@ -4,7 +4,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:j_courier/generated/l10n.dart';
 import 'package:j_courier/models/tasks/task.dart';
 import 'package:j_courier/router/router.dart';
 import 'package:j_courier/screens/widgets/bottom_sheet/confirm_order_dialog.dart';
