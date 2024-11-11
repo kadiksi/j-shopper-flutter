@@ -10,6 +10,52 @@
 part of 'router.dart';
 
 /// generated route for
+/// [AcceptedOrderScreen]
+class AcceptedOrderRoute extends PageRouteInfo<AcceptedOrderRouteArgs> {
+  AcceptedOrderRoute({
+    Key? key,
+    required Task task,
+    List<PageRouteInfo>? children,
+  }) : super(
+          AcceptedOrderRoute.name,
+          args: AcceptedOrderRouteArgs(
+            key: key,
+            task: task,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'AcceptedOrderRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<AcceptedOrderRouteArgs>();
+      return AcceptedOrderScreen(
+        key: args.key,
+        task: args.task,
+      );
+    },
+  );
+}
+
+class AcceptedOrderRouteArgs {
+  const AcceptedOrderRouteArgs({
+    this.key,
+    required this.task,
+  });
+
+  final Key? key;
+
+  final Task task;
+
+  @override
+  String toString() {
+    return 'AcceptedOrderRouteArgs{key: $key, task: $task}';
+  }
+}
+
+/// generated route for
 /// [ChooseLanguageScreen]
 class ChooseLanguageRoute extends PageRouteInfo<void> {
   const ChooseLanguageRoute({List<PageRouteInfo>? children})
@@ -24,25 +70,6 @@ class ChooseLanguageRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const ChooseLanguageScreen();
-    },
-  );
-}
-
-/// generated route for
-/// [NewOrders]
-class ListRoute extends PageRouteInfo<void> {
-  const ListRoute({List<PageRouteInfo>? children})
-      : super(
-          ListRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'ListRoute';
-
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const NewOrders();
     },
   );
 }

@@ -45,7 +45,7 @@ class _ReasonSelectionSheetState extends State<ReasonSelectionSheet> {
             onPressed: () {
               Navigator.pop(context);
             },
-            child: Text(S.of(context).send_to_delivery),
+            child: Text(S.of(context).cancel_order),
           ),
         ],
       ),

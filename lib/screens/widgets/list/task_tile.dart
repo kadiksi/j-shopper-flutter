@@ -1,22 +1,24 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:j_courier/generated/l10n.dart';
 import 'package:j_courier/models/tasks/task.dart';
 import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
 import 'package:j_courier/utils/date_utils.dart';
-import '../../../router/router.dart';
 
 class TaskTile extends StatelessWidget {
-  const TaskTile(
-      {super.key,
-      required this.task,
-      required this.selectedItems,
-      required this.setState});
+  const TaskTile({
+    super.key,
+    required this.task,
+    required this.selectedItems,
+    required this.setState,
+    required this.goTo,
+  });
 
   final Task task;
   final List<int> selectedItems;
   final void Function(VoidCallback fn) setState;
+
+  final Function(Task) goTo;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +42,8 @@ class TaskTile extends StatelessWidget {
               }
             });
           } else {
-            AutoRouter.of(context).push(OrderRoute(task: task));
+            // AutoRouter.of(context).push(OrderRoute(task: task));
+            goTo(task);
           }
         },
         // margin: const EdgeInsets.only(

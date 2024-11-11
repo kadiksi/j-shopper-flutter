@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:j_courier/generated/l10n.dart';
+import 'package:j_courier/models/tasks/task.dart';
+import 'package:j_courier/router/router.dart';
 import 'package:j_courier/screens/widgets/bottom_sheet/confirm_order_dialog.dart';
 import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
 
@@ -34,6 +36,10 @@ class _AcceptedOrdersState extends State<AcceptedOrders> {
     super.initState();
   }
 
+  void goTo(Task task) {
+    AutoRouter.of(context).push(AcceptedOrderRoute(task: task));
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -60,7 +66,8 @@ class _AcceptedOrdersState extends State<AcceptedOrders> {
                     return TaskTile(
                         task: task,
                         selectedItems: selectedItems,
-                        setState: setState);
+                        setState: setState,
+                        goTo: goTo);
                   },
                 ),
                 Positioned(

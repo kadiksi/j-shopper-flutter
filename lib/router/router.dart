@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/widgets.dart';
 import 'package:j_courier/models/tasks/product.dart';
 import 'package:j_courier/models/tasks/task.dart';
+import 'package:j_courier/screens/order_screen/accepted_order_screen.dart';
 import 'package:j_courier/screens/order_screen/order_screen.dart';
 import 'package:j_courier/screens/product_screen/product_screen.dart';
 import 'package:j_courier/screens/order_screen/tabs/tabs_screen.dart';
@@ -9,7 +10,6 @@ import 'package:j_courier/screens/login_screens/splash_screen.dart';
 
 import '../screens/login_screens/choose_language_screen.dart';
 import '../screens/login_screens/login_verification_screen.dart';
-import '../screens/order_screen/tabs/new_orders.dart';
 import '../screens/login_screens/login_screen.dart';
 
 part 'router.gr.dart';
@@ -27,9 +27,10 @@ class AppRouter extends RootStackRouter {
         AutoRoute(page: LoginRoute.page, path: "/login"),
         AutoRoute(
             page: LoginVerificationRoute.page, path: "/login_verification"),
-        AutoRoute(page: ListRoute.page, path: "/tasks"),
+        // AutoRoute(page: ListRoute.page, path: "/tasks"),
         AutoRoute(page: TabsRoute.page, path: "/orders"),
         AutoRoute(page: OrderRoute.page, path: "/order"),
+        AutoRoute(page: AcceptedOrderRoute.page, path: "/order"),
         AutoRoute(page: ProductRoute.page, path: "/product"),
       ];
 
