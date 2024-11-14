@@ -4,7 +4,7 @@ import 'package:j_courier/models/tasks/product.dart';
 import 'package:j_courier/models/tasks/task.dart';
 import 'package:j_courier/screens/order_screen/accepted_order_screen.dart';
 import 'package:j_courier/screens/order_screen/order_screen.dart';
-import 'package:j_courier/screens/order_screen/tabs/tabs_screen.dart';
+import 'package:j_courier/screens/tabs_screen.dart';
 import 'package:j_courier/screens/product_screen/product_screen.dart';
 import 'package:j_courier/screens/login_screens/splash_screen.dart';
 
@@ -30,7 +30,7 @@ class AppRouter extends RootStackRouter {
         // AutoRoute(page: ListRoute.page, path: "/tasks"),
         AutoRoute(page: TabsRoute.page, path: "/orders"),
         AutoRoute(page: OrderRoute.page, path: "/order"),
-        AutoRoute(page: AcceptedOrderRoute.page, path: "/order"),
+        AutoRoute(page: AcceptedOrderRoute.page, path: "/accepted_order"),
         AutoRoute(page: ProductRoute.page, path: "/product"),
       ];
 

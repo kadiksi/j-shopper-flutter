@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get_it/get_it.dart';
 import 'package:j_courier/generated/l10n.dart';
 import 'package:j_courier/screens/history_screens/history_view.dart';
+import 'package:j_courier/screens/notifications_screens/notification_screen.dart';
 import 'package:j_courier/screens/order_screen/orders_view.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
@@ -16,8 +17,9 @@ class TabsScreen extends StatefulWidget {
 }
 
 class _TabsScreenState extends State<TabsScreen> {
-  int _selectedIndex = 0;
-
+  int _selectedIndex = 2;
+  String _tabName = '';
+  List<String> tabNames = [];
   final List<Widget> _pages = [
     const Column(
       children: [
@@ -29,17 +31,17 @@ class _TabsScreenState extends State<TabsScreen> {
         Expanded(child: HistoryScreen()),
       ],
     ),
-    const Column(
+    // const Column(
+    //   children: [
+    //     Expanded(
+    //       child: Center(child: Text("Скан QR Page")), // QR Scan
+    //     ),
+    //   ],
+    // ),
+    Column(
       children: [
         Expanded(
-          child: Center(child: Text("Скан QR Page")), // QR Scan
-        ),
-      ],
-    ),
-    const Column(
-      children: [
-        Expanded(
-          child: Center(child: Text("Уведомления Page")), // Notifications
+          child: Notifications(), // Notifications
         ),
       ],
     ),
@@ -55,17 +57,26 @@ class _TabsScreenState extends State<TabsScreen> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+      _tabName = tabNames[index];
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    if (tabNames.isEmpty) {
+      tabNames.add(S.of(context).orders);
+      tabNames.add(S.of(context).history);
+      // tabNames.add(S.of(context).scan_qr);
+      tabNames.add(S.of(context).notifications);
+      tabNames.add(S.of(context).profile);
+    }
+    _tabName = tabNames[_selectedIndex];
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Align(
           alignment: Alignment.centerLeft,
-          child: Text('Заявки', style: theme.textTheme.headlineLarge),
+          child: Text(_tabName, style: theme.textTheme.headlineLarge),
         ),
         actions: [
           IconButton(
@@ -93,8 +104,8 @@ class _TabsScreenState extends State<TabsScreen> {
               'assets/svg/tabs/orders_active.svg', theme),
           _bottomItem(S.of(context).history, 'assets/svg/tabs/clock.svg',
               'assets/svg/tabs/clock_active.svg', theme),
-          _bottomItem(S.of(context).scan_qr, 'assets/svg/tabs/qr.svg',
-              'assets/svg/tabs/qr_active.svg', theme),
+          // _bottomItem(S.of(context).scan_qr, 'assets/svg/tabs/qr.svg',
+          //     'assets/svg/tabs/qr_active.svg', theme),
           _bottomItem(
               S.of(context).notifications,
               'assets/svg/tabs/notification.svg',
