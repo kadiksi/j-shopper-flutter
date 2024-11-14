@@ -15,6 +15,7 @@ import 'package:j_courier/screens/widgets/bottom_sheet/cancel_order.dart';
 import 'package:j_courier/screens/widgets/bottom_sheet/order_options.dart';
 import 'package:j_courier/screens/widgets/bottom_sheet/return_order.dart';
 import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
+import 'package:j_courier/screens/widgets/errors/failed_request.dart';
 
 @RoutePage()
 class OrderScreen extends StatefulWidget {
@@ -96,35 +97,17 @@ class _OrderScreenState extends State<OrderScreen> {
               );
             }
             if (state is OrderFailure) {
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Something went wrong',
-                      style: theme.textTheme.headlineMedium,
-                    ),
-                    Text(
-                      'Please try againg later',
-                      style: theme.textTheme.labelSmall?.copyWith(fontSize: 16),
-                    ),
-                    divider30,
-                    TextButton(
-                      onPressed: () {
-                        _listBloc.add(LoadOrder(id: widget.task.id));
-                      },
-                      child: const Text('Try againg'),
-                    ),
-                  ],
-                ),
-              );
+              return FailedRequest(callback: callback);
             }
             return const Center(child: CircularProgressIndicator());
           },
         ),
       ),
     );
+  }
+
+  void callback() {
+    _listBloc.add(LoadOrder(id: widget.task.id));
   }
 }
 

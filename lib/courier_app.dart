@@ -23,6 +23,7 @@ class _CourierAppState extends State<CourierApp> {
   Widget build(BuildContext context) {
     return Consumer<LocaleProvider>(builder: (context, localeProvider, child) {
       return MaterialApp.router(
+        debugShowCheckedModeBanner: false,
         locale: localeProvider.locale,
         title: 'JCaourier',
         localizationsDelegates: const [

@@ -8,7 +8,7 @@ import 'package:j_courier/generated/l10n.dart';
 import 'package:j_courier/models/tasks/task.dart';
 import 'package:j_courier/router/router.dart';
 import 'package:j_courier/screens/widgets/bottom_sheet/confirm_order_dialog.dart';
-import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
+import 'package:j_courier/screens/widgets/errors/failed_request.dart';
 
 import '../../../blocks/list/list_bloc.dart';
 import '../../../repositories/list/list_abstarct_repository.dart';
@@ -42,7 +42,6 @@ class _AcceptedOrdersState extends State<AcceptedOrders> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: () async {
@@ -87,35 +86,17 @@ class _AcceptedOrdersState extends State<AcceptedOrders> {
               ]);
             }
             if (state is ListFailure) {
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Something went wrong',
-                      style: theme.textTheme.headlineMedium,
-                    ),
-                    Text(
-                      'Please try againg later',
-                      style: theme.textTheme.labelSmall?.copyWith(fontSize: 16),
-                    ),
-                    divider30,
-                    TextButton(
-                      onPressed: () {
-                        _listBloc.add(LoadList());
-                      },
-                      child: const Text('Try againg'),
-                    ),
-                  ],
-                ),
-              );
+              return FailedRequest(callback: callback);
             }
             return const Center(child: CircularProgressIndicator());
           },
         ),
       ),
     );
+  }
+
+  void callback() {
+    _listBloc.add(LoadList());
   }
 
   void showModalSheet() {
