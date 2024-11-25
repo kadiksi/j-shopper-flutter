@@ -46,5 +46,14 @@
   "accepted": "Принятые",
   "new_orders": "Новые",
   "active": "Активные",
-  "completed": "Завершонные"
+  "completed": "Завершонные",
+  "support": "Поддержка",
+  "calll": "Позвонить",
+  "general": "Общие",
+  "application_name": "Язык приложения",
+  "push_notificaton": "Push-уведомления",
+  "fone_work": "Работа в фоне",
+  "enegy_efficiency_work": "Работа при энергосбережении",
+  "code_pass": "Код пароль",
+  "face_id_enter": "Вход по Face ID"
 }

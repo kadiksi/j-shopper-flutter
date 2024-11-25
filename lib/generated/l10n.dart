@@ -529,6 +529,96 @@ class S {
       args: [],
     );
   }
+
+  /// `Поддержка`
+  String get support {
+    return Intl.message(
+      'Поддержка',
+      name: 'support',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Позвонить`
+  String get calll {
+    return Intl.message(
+      'Позвонить',
+      name: 'calll',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Общие`
+  String get general {
+    return Intl.message(
+      'Общие',
+      name: 'general',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Язык приложения`
+  String get application_language {
+    return Intl.message(
+      'Язык приложения',
+      name: 'application_language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Push-уведомления`
+  String get push_notificaton {
+    return Intl.message(
+      'Push-уведомления',
+      name: 'push_notificaton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Работа в фоне`
+  String get fone_work {
+    return Intl.message(
+      'Работа в фоне',
+      name: 'fone_work',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Работа при энергосбережении`
+  String get enegy_efficiency_work {
+    return Intl.message(
+      'Работа при энергосбережении',
+      name: 'enegy_efficiency_work',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Код пароль`
+  String get code_pass {
+    return Intl.message(
+      'Код пароль',
+      name: 'code_pass',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Вход по Face ID`
+  String get face_id_enter {
+    return Intl.message(
+      'Вход по Face ID',
+      name: 'face_id_enter',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

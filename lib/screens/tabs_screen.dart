@@ -6,6 +6,7 @@ import 'package:j_courier/generated/l10n.dart';
 import 'package:j_courier/screens/history_screens/history_view.dart';
 import 'package:j_courier/screens/notifications_screens/notification_screen.dart';
 import 'package:j_courier/screens/order_screen/orders_view.dart';
+import 'package:j_courier/screens/profile_screens/profile_screen.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
 @RoutePage()
@@ -17,7 +18,7 @@ class TabsScreen extends StatefulWidget {
 }
 
 class _TabsScreenState extends State<TabsScreen> {
-  int _selectedIndex = 2;
+  int _selectedIndex = 3;
   String _tabName = '';
   List<String> tabNames = [];
   final List<Widget> _pages = [
@@ -45,10 +46,10 @@ class _TabsScreenState extends State<TabsScreen> {
         ),
       ],
     ),
-    const Column(
+    Column(
       children: [
         Expanded(
-          child: Center(child: Text("Профиль Page")), // Profile
+          child: ProfileScreen(), // Profile
         ),
       ],
     ),

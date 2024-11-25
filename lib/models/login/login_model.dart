@@ -11,7 +11,7 @@ class LoginModel extends Equatable {
   const LoginModel({
     required this.login,
     required this.password,
-    required this.userType,
+    // required this.userType,
   });
 
   @JsonKey(name: 'login')
@@ -20,17 +20,20 @@ class LoginModel extends Equatable {
   @JsonKey(name: 'password')
   final String password;
 
-  @JsonKey(name: 'user_type')
-  final String userType;
+  // @JsonKey(name: 'user_type')
+  // final String userType;
 
   @override
-  List<Object> get props => [login, password, userType];
+  List<Object> get props => [
+        login,
+        password,
+      ];
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'login': login,
       'password': password,
-      'userType': userType,
+      // 'userType': userType,
     };
   }
 
@@ -38,7 +41,7 @@ class LoginModel extends Equatable {
     return LoginModel(
       login: map['login'] as String,
       password: map['password'] as String,
-      userType: map['userType'] as String,
+      // userType: map['userType'] as String,
     );
   }
 

@@ -40,5 +40,24 @@ final lightTheme = ThemeData(
           fontSize: 14,
         ),
         unselectedLabelStyle: const TextStyle(
-          fontSize: 14, // Keep the same font size
-        )));
+          fontSize: 14,
+        )),
+    switchTheme: SwitchThemeData(
+      trackColor: MaterialStateProperty.resolveWith((states) {
+        return states.contains(MaterialState.selected)
+            ? Colors.green
+            : Colors.grey;
+      }),
+      thumbColor: MaterialStateProperty.resolveWith((states) {
+        return states.contains(MaterialState.selected)
+            ? Colors.white
+            : Colors.grey[300];
+      }),
+      overlayColor: MaterialStateProperty.resolveWith((states) {
+        if (states.contains(MaterialState.pressed)) {
+          return Colors.green.withOpacity(0.3);
+        }
+        return null;
+      }),
+      splashRadius: 24.0,
+    ));

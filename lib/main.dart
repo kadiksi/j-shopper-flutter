@@ -6,6 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:j_courier/repositories/login/auth_interceptor.dart';
+import 'package:j_courier/repositories/profile/profile_abstarct_repository.dart';
+import 'package:j_courier/repositories/profile/profile_rpository.dart';
 import 'package:provider/provider.dart';
 import 'package:talker_bloc_logger/talker_bloc_logger.dart';
 import 'package:talker_dio_logger/talker_dio_logger.dart';
@@ -43,7 +45,7 @@ void main() async {
     TalkerDioLogger(
       talker: talker,
       settings: const TalkerDioLoggerSettings(
-          printResponseData: false, printRequestHeaders: true),
+          printResponseData: true, printRequestHeaders: true),
     ),
   );
   dio.interceptors.add(AuthInterceptor());
@@ -54,6 +56,10 @@ void main() async {
         // printStateFullData: false,
         // printEventFullData: false,
         ),
+  );
+
+  GetIt.I.registerLazySingleton<ProfileAbstractRepository>(
+    () => ProfileRepository(dio: dio),
   );
 
   GetIt.I.registerLazySingleton<LoginAbstractRepository>(

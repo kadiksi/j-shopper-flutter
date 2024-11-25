@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:j_courier/repositories/urls.dart';
 
 import '../../models/ApiResponse';
 import '../../models/login/login_data_model.dart';
@@ -15,13 +16,11 @@ class LoginRepository implements LoginAbstractRepository {
   @override
   Future<ApiResponse> login(String login, String password) async {
     try {
-      final response = await dio.post(
-          'https://test5.jmart.kz/gw/user/v1/auth/sign-in',
+      final response = await dio.post('$test_url/user/v1/auth/sign-in',
           data: const LoginModel(
-                  login: '+7(707)217-69-64',
-                  password: 'Adilet29187',
-                  userType: "K")
-              .toJson());
+            login: '+7(345)678-90-00',
+            password: '9Kl8bHEe7',
+          ).toJson());
 
       final data = response.data as Map<String, dynamic>;
       final dataRaw = data['data'] as Map<String, dynamic>;

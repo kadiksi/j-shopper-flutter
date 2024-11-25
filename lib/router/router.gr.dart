@@ -56,6 +56,44 @@ class AcceptedOrderRouteArgs {
 }
 
 /// generated route for
+/// [AcceptedOrders]
+// class AcceptedOrders extends PageRouteInfo<void> {
+//   const AcceptedOrders({List<PageRouteInfo>? children})
+//       : super(
+//           AcceptedOrders.name,
+//           initialChildren: children,
+//         );
+
+//   static const String name = 'AcceptedOrders';
+
+//   static PageInfo page = PageInfo(
+//     name,
+//     builder: (data) {
+//       return const AcceptedOrders();
+//     },
+//   );
+// }
+
+// /// generated route for
+// /// [ActiveOrders]
+// class ActiveOrders extends PageRouteInfo<void> {
+//   const ActiveOrders({List<PageRouteInfo>? children})
+//       : super(
+//           ActiveOrders.name,
+//           initialChildren: children,
+//         );
+
+//   static const String name = 'ActiveOrders';
+
+//   static PageInfo page = PageInfo(
+//     name,
+//     builder: (data) {
+//       return const ActiveOrders();
+//     },
+//   );
+// }
+
+/// generated route for
 /// [ChooseLanguageScreen]
 class ChooseLanguageRoute extends PageRouteInfo<void> {
   const ChooseLanguageRoute({List<PageRouteInfo>? children})
@@ -111,6 +149,25 @@ class LoginVerificationRoute extends PageRouteInfo<void> {
     },
   );
 }
+
+/// generated route for
+/// [NewOrders]
+// class NewOrders extends PageRouteInfo<void> {
+//   const NewOrders({List<PageRouteInfo>? children})
+//       : super(
+//           NewOrders.name,
+//           initialChildren: children,
+//         );
+
+//   static const String name = 'NewOrders';
+
+//   static PageInfo page = PageInfo(
+//     name,
+//     builder: (data) {
+//       return const NewOrders();
+//     },
+//   );
+// }
 
 /// generated route for
 /// [OrderScreen]

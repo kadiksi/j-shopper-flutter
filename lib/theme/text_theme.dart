@@ -15,6 +15,11 @@ final lightTextStyles = TextTheme(
       fontSize: 12,
       fontWeight: FontWeight.w600,
       color: lightColorScheme.outline),
+  labelMedium: GoogleFonts.dmSans(
+      fontSize: 19,
+      fontWeight: FontWeight.w600,
+      height: 24 / 17,
+      color: lightColorScheme.onTertiary),
   labelSmall: GoogleFonts.dmSans(
       fontSize: 16,
       fontWeight: FontWeight.w600,

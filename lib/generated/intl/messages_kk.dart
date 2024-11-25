@@ -43,18 +43,24 @@ class MessageLookup extends MessageLookupByLibrary {
         "add_product": MessageLookupByLibrary.simpleMessage("Добавить товар"),
         "add_product_question": MessageLookupByLibrary.simpleMessage(
             "Вы действительно хотите добавить товар?"),
+        "application_language":
+            MessageLookupByLibrary.simpleMessage("Язык приложения"),
         "call": MessageLookupByLibrary.simpleMessage("Позвонить"),
+        "calll": MessageLookupByLibrary.simpleMessage("Позвонить"),
         "cancel": MessageLookupByLibrary.simpleMessage("Отмена"),
         "cancel_order": MessageLookupByLibrary.simpleMessage("Отменить заказ"),
         "cant_cancel_action": MessageLookupByLibrary.simpleMessage(
             "Отменить действие будет невозможно"),
         "change_product": MessageLookupByLibrary.simpleMessage("Замена товара"),
         "choose": MessageLookupByLibrary.simpleMessage("Выбрать"),
+        "code_pass": MessageLookupByLibrary.simpleMessage("Код пароль"),
         "collected": MessageLookupByLibrary.simpleMessage("Собрано"),
         "commit_all_orders":
             MessageLookupByLibrary.simpleMessage("Принять все заказы"),
         "completed": MessageLookupByLibrary.simpleMessage("Завершонные"),
         "createddate": m0,
+        "enegy_efficiency_work":
+            MessageLookupByLibrary.simpleMessage("Работа при энергосбережении"),
         "english": MessageLookupByLibrary.simpleMessage("English"),
         "enter_code_password": MessageLookupByLibrary.simpleMessage(
             "Введите код-пароль для входа"),
@@ -62,6 +68,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Введите ваш номер телефона и пароль"),
         "enter_product_name":
             MessageLookupByLibrary.simpleMessage("Введите название товара"),
+        "face_id_enter":
+            MessageLookupByLibrary.simpleMessage("Вход по Face ID"),
+        "fone_work": MessageLookupByLibrary.simpleMessage("Работа в фоне"),
+        "general": MessageLookupByLibrary.simpleMessage("Общие"),
         "history": MessageLookupByLibrary.simpleMessage("История"),
         "kazakh": MessageLookupByLibrary.simpleMessage("Қазақша"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
@@ -74,6 +84,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "positions": m2,
         "product_id": m3,
         "profile": MessageLookupByLibrary.simpleMessage("Профиль"),
+        "push_notificaton":
+            MessageLookupByLibrary.simpleMessage("Push-уведомления"),
         "quantity": MessageLookupByLibrary.simpleMessage("Количество"),
         "replace_product":
             MessageLookupByLibrary.simpleMessage("Заменить товар"),
@@ -92,6 +104,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Выберите причину отмены"),
         "send_to_delivery":
             MessageLookupByLibrary.simpleMessage("Передать на доставку"),
+        "support": MessageLookupByLibrary.simpleMessage("Поддержка"),
         "test": MessageLookupByLibrary.simpleMessage("Тест Қ"),
         "total": MessageLookupByLibrary.simpleMessage("Итого:"),
         "username": MessageLookupByLibrary.simpleMessage("username"),
