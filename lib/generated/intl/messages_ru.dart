@@ -43,7 +43,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "add_product": MessageLookupByLibrary.simpleMessage("Добавить товар"),
         "add_product_question": MessageLookupByLibrary.simpleMessage(
             "Вы действительно хотите добавить товар?"),
-        "application_language":
+        "app_language": MessageLookupByLibrary.simpleMessage("Язык приложения"),
+        "application_name":
             MessageLookupByLibrary.simpleMessage("Язык приложения"),
         "call": MessageLookupByLibrary.simpleMessage("Позвонить"),
         "calll": MessageLookupByLibrary.simpleMessage("Позвонить"),

@@ -561,10 +561,10 @@ class S {
   }
 
   /// `Язык приложения`
-  String get application_language {
+  String get application_name {
     return Intl.message(
       'Язык приложения',
-      name: 'application_language',
+      name: 'application_name',
       desc: '',
       args: [],
     );
@@ -615,6 +615,16 @@ class S {
     return Intl.message(
       'Вход по Face ID',
       name: 'face_id_enter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Язык приложения`
+  String get app_language {
+    return Intl.message(
+      'Язык приложения',
+      name: 'app_language',
       desc: '',
       args: [],
     );

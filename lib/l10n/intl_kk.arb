@@ -55,5 +55,6 @@
   "fone_work": "Работа в фоне",
   "enegy_efficiency_work": "Работа при энергосбережении",
   "code_pass": "Код пароль",
-  "face_id_enter": "Вход по Face ID"
+  "face_id_enter": "Вход по Face ID",
+  "app_language": "Язык приложения"
 }

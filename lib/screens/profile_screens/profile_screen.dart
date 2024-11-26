@@ -11,6 +11,7 @@ import 'package:j_courier/screens/profile_screens/wingets/common_widget.dart';
 import 'package:j_courier/screens/profile_screens/wingets/support_button.dart';
 import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
 import 'package:j_courier/screens/widgets/errors/failed_request.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -98,8 +99,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 child: SupportButton(
                                   icon: "assets/svg/settings/whatsup.svg",
                                   label: 'WhatsApp',
-                                  onTap: () {
-                                    // Add your WhatsApp action here
+                                  onTap: () async {
+                                    final url = Uri.parse(
+                                        '${state.profile.supportInfo?.whatsApp}');
+                                    if (await canLaunchUrl(url)) {
+                                      await launchUrl(url,
+                                          mode: LaunchMode.externalApplication);
+                                    } else {
+                                      print('Could not launch WhatsApp');
+                                    }
                                   },
                                 ),
                               ),
@@ -128,7 +136,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             children: [
                               SettingsWidget(
                                 icon: 'assets/svg/settings/language.svg',
-                                label: S.of(context).application_language,
+                                label: S.of(context).app_language,
                                 trailingWdget: ActionLabelWidget(
                                     label: S.of(context).russian),
                                 onTap: callback,
