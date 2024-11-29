@@ -39,8 +39,8 @@ class ProfileRepository implements ProfileAbstractRepository {
   @override
   Future<ApiResponse> getCallSupport() async {
     try {
-      final response =
-          await dio.get('$test_url/jpost-shopper/call?addressee=SUPPORT');
+      final response = await dio
+          .get('$test_url/jpost-shopper/api/v1/call?addressee=SUPPORT');
 
       final data = response.data as Map<String, dynamic>;
 
