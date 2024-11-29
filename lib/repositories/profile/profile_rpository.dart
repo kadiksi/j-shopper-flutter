@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:j_courier/models/profile/profile.dart';
-import 'package:j_courier/models/tasks/task.dart';
 import 'package:j_courier/repositories/urls.dart';
 
 import '../../models/ApiResponse';
@@ -20,7 +19,6 @@ class ProfileRepository implements ProfileAbstractRepository {
           await dio.get('$test_url/jpost-shopper/api/v1/profile/info');
 
       final data = response.data as Map<String, dynamic>;
-      // final dataRaw = data['data'] as Map<String, dynamic>;
 
       Profile dataLogin = Profile.fromMap(data);
       SuccessResponse<Profile> su = SuccessResponse(dataLogin);
@@ -39,15 +37,15 @@ class ProfileRepository implements ProfileAbstractRepository {
   }
 
   @override
-  Future<ApiResponse> getOrder(int id) async {
+  Future<ApiResponse> getCallSupport() async {
     try {
       final response =
-          await dio.get('$test_url/jpost-courier/api/public/v1/task/${id}');
+          await dio.get('$test_url/jpost-shopper/call?addressee=SUPPORT');
 
-      final data = response.data as dynamic;
-      final details = Task.fromJson(data);
+      final data = response.data as Map<String, dynamic>;
 
-      SuccessResponse<Task> su = SuccessResponse(details);
+      Profile dataLogin = Profile.fromMap(data);
+      SuccessResponse<Profile> su = SuccessResponse(dataLogin);
       return su;
     } catch (e) {
       if (e is DioException) {

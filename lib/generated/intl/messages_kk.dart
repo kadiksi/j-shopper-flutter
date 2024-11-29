@@ -58,7 +58,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "collected": MessageLookupByLibrary.simpleMessage("Собрано"),
         "commit_all_orders":
             MessageLookupByLibrary.simpleMessage("Принять все заказы"),
-        "completed": MessageLookupByLibrary.simpleMessage("Завершонные"),
+        "completed": MessageLookupByLibrary.simpleMessage("Завершенные"),
         "createddate": m0,
         "enegy_efficiency_work":
             MessageLookupByLibrary.simpleMessage("Работа при энергосбережении"),

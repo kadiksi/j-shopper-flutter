@@ -22,6 +22,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final _profileBloc = ProfileBloc(
     GetIt.I<ProfileAbstractRepository>(),
   );
+  //   final _supportBloc = SupportCallBloc(
+  //   GetIt.I<ProfileAbstractRepository>(),
+  // );
   List<int> selectedItems = [];
   bool isSwitched = true;
 
@@ -41,7 +44,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           _profileBloc.add(LoadProfile());
           return completer.future;
         },
-        child: BlocBuilder<ProfileBloc, ProfileState>(
+        child: BlocConsumer<ProfileBloc, ProfileState>(
           bloc: _profileBloc,
           builder: (context, state) {
             if (state is ProfileSuccess) {
@@ -119,7 +122,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   icon: 'assets/svg/settings/call_phone.svg',
                                   label: S.of(context).call,
                                   onTap: () {
-                                    // Add your Call action here
+                                    _profileBloc.add(LoadCallSupport());
+                                    // getCallSupport
                                   },
                                 ),
                               ),
@@ -232,6 +236,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
               return FailedRequest(callback: callback);
             }
             return const Center(child: CircularProgressIndicator());
+          },
+          listener: (BuildContext context, ProfileState state) {
+            if (state is ProfileSuccess) {
+              print("From Listener");
+            }
           },
         ),
       ),

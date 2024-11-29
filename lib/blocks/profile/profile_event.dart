@@ -10,3 +10,12 @@ class LoadProfile extends ProfileEvent {
   @override
   List<Object?> get props => [completer];
 }
+
+class LoadCallSupport extends ProfileEvent {
+  LoadCallSupport({this.completer});
+
+  final Completer? completer;
+
+  @override
+  List<Object?> get props => [completer];
+}

@@ -520,10 +520,10 @@ class S {
     );
   }
 
-  /// `Завершонные`
+  /// `Завершенные`
   String get completed {
     return Intl.message(
-      'Завершонные',
+      'Завершенные',
       name: 'completed',
       desc: '',
       args: [],

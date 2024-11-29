@@ -16,6 +16,8 @@ class LoginRepository implements LoginAbstractRepository {
   @override
   Future<ApiResponse> login(String login, String password) async {
     try {
+      // login: '+7(707)217-69-64',
+      //       password: 'Adilet29187',
       final response = await dio.post('$test_url/user/v1/auth/sign-in',
           data: const LoginModel(
             login: '+7(345)678-90-00',
