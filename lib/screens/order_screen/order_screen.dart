@@ -38,7 +38,7 @@ class _OrderScreenState extends State<OrderScreen> {
 
   @override
   void initState() {
-    _listBloc.add(LoadOrder(id: widget.task.id));
+    _listBloc.add(LoadOrder(id: int.parse(widget.task.externalOrderId!)));
     super.initState();
   }
 
@@ -47,7 +47,8 @@ class _OrderScreenState extends State<OrderScreen> {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(S.of(context).order_number('${widget.task.id}')),
+        title:
+            Text(S.of(context).order_number('${widget.task.externalOrderId}')),
         actions: [
           IconButton(
             icon: const Icon(Icons.more_vert),
@@ -61,7 +62,7 @@ class _OrderScreenState extends State<OrderScreen> {
               showOrderOptions(
                   context,
                   showModelAddProduct,
-                  widget.task.product!,
+                  widget.task.productList!,
                   showModelCancelOrder,
                   reasons,
                   showModelReturnOrder);
@@ -72,7 +73,7 @@ class _OrderScreenState extends State<OrderScreen> {
       body: RefreshIndicator(
         onRefresh: () async {
           final completer = Completer();
-          _listBloc.add(LoadOrder(id: widget.task.id));
+          _listBloc.add(LoadOrder(id: int.parse(widget.task.externalOrderId!)));
           return completer.future;
         },
         child: BlocBuilder<OrderBloc, OrderState>(
@@ -107,7 +108,7 @@ class _OrderScreenState extends State<OrderScreen> {
   }
 
   void callback() {
-    _listBloc.add(LoadOrder(id: widget.task.id));
+    _listBloc.add(LoadOrder(id: int.parse(widget.task.externalOrderId!)));
   }
 }
 
@@ -137,7 +138,7 @@ Widget _buildOrderInfo(BuildContext context, ThemeData theme) {
               children: [
                 Icon(Icons.access_time, color: Colors.orange),
                 SizedBox(width: 4),
-                Text('13:00 - 15:00', style: TextStyle(fontSize: 16)),
+                Text('13:00 - 18:00', style: TextStyle(fontSize: 16)),
               ],
             ),
           ],
@@ -173,7 +174,7 @@ Widget _buildMultipleExpandableProductLists(
   ];
   List<Widget> views = [];
   for (var element in categoryProducts) {
-    List<Product> products = task.product ?? List.empty();
+    List<Product> products = List.empty();
 
     views.add(ExpansionTile(
       childrenPadding: EdgeInsets.zero,
@@ -182,12 +183,12 @@ Widget _buildMultipleExpandableProductLists(
       subtitle:
           Text('Завершено 6 из 8 Subtitle', style: theme.textTheme.bodySmall),
       children: products.map((product) {
-        final isSelected = selectedItems.contains(product.id);
+        final isSelected = selectedItems.contains(product.jmartProductId);
         return GestureDetector(
             onLongPress: () {
               if (selectedItems.isEmpty) {
                 setState(() {
-                  selectedItems.add(product.id!);
+                  selectedItems.add(product.jmartProductId!);
                 });
               }
             },
@@ -195,9 +196,9 @@ Widget _buildMultipleExpandableProductLists(
               if (selectedItems.isNotEmpty) {
                 setState(() {
                   if (isSelected) {
-                    selectedItems.remove(product.id!);
+                    selectedItems.remove(product.jmartProductId!);
                   } else {
-                    selectedItems.add(product.id!);
+                    selectedItems.add(product.jmartProductId!);
                   }
                 });
               } else {
@@ -219,11 +220,11 @@ Widget _buildMultipleExpandableProductLists(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            ('№ ${product.id}'),
+                            ('№ ${product.jmartProductId}'),
                             style: theme.textTheme.bodyLarge,
                           ),
                           Text(
-                            '${product.name}',
+                            '${product.productName}',
                             style: theme.textTheme.bodyMedium,
                           ),
                           divider8,

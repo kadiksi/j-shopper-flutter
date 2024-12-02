@@ -31,7 +31,7 @@ class _AcceptedOrderScreenState extends State<AcceptedOrderScreen> {
 
   @override
   void initState() {
-    _listBloc.add(LoadOrder(id: widget.task.id));
+    _listBloc.add(LoadOrder(id: widget.task.externalOrderId! as int));
     super.initState();
   }
 
@@ -40,7 +40,8 @@ class _AcceptedOrderScreenState extends State<AcceptedOrderScreen> {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(S.of(context).order_number('${widget.task.id}')),
+        title:
+            Text(S.of(context).order_number('${widget.task.externalOrderId}')),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

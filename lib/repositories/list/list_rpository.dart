@@ -14,10 +14,10 @@ class ListRepository implements ListAbstractRepository {
   @override
   Future<ApiResponse> getList() async {
     try {
-      final response = await dio
-          .get('https://test5.jmart.kz/gw/jpost-courier/api/public/v1/task');
+      final response = await dio.get(
+          'https://test5.jmart.kz/gw/jpost-shopper/api/v1/order/accepted/list');
 
-      final data = response.data as List<dynamic>;
+      final data = response.data['data'] as List<dynamic>;
 
       final taskList = data.map((e) {
         final details = Task.fromJson(e);
@@ -43,9 +43,9 @@ class ListRepository implements ListAbstractRepository {
   Future<ApiResponse> getOrder(int id) async {
     try {
       final response = await dio.get(
-          'https://test5.jmart.kz/gw/jpost-courier/api/public/v1/task/${id}');
+          'https://test5.jmart.kz/gw/jpost-shopper/api/v1/order/accepted/${id}');
 
-      final data = response.data as dynamic;
+      final data = response.data['data'] as dynamic;
       final details = Task.fromJson(data);
 
       SuccessResponse<Task> su = SuccessResponse(details);

@@ -40,12 +40,11 @@ class ProfileRepository implements ProfileAbstractRepository {
   Future<ApiResponse> getCallSupport() async {
     try {
       final response = await dio
-          .get('$test_url/jpost-shopper/api/v1/call?addressee=SUPPORT');
+          .post('$test_url/jpost-shopper/api/v1/call?addressee=SUPPORT');
 
-      final data = response.data as Map<String, dynamic>;
+      final data = response.data as String;
+      SuccessResponse<String> su = SuccessResponse(data);
 
-      Profile dataLogin = Profile.fromMap(data);
-      SuccessResponse<Profile> su = SuccessResponse(dataLogin);
       return su;
     } catch (e) {
       if (e is DioException) {

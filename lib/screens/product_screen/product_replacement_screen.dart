@@ -50,7 +50,8 @@ class _ProductReplacementSheetState extends State<ProductReplacementSheet> {
     final query = searchController.text.toLowerCase();
     setState(() {
       filteredProducts = products
-          .where((product) => product.name!.toLowerCase().contains(query))
+          .where(
+              (product) => product.productName!.toLowerCase().contains(query))
           .toList();
     });
   }
@@ -142,12 +143,12 @@ class _ProductReplacementSheetState extends State<ProductReplacementSheet> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    '${product.name}',
+                                    '${product.productName}',
                                     style: theme.textTheme.headlineMedium,
                                   ),
                                   divider4,
                                   Text(
-                                    '${product.comment}',
+                                    '${product.productCode}',
                                     style: theme.textTheme.headlineSmall,
                                   ),
                                 ],

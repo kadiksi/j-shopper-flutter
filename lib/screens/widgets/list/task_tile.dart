@@ -3,7 +3,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:j_courier/generated/l10n.dart';
 import 'package:j_courier/models/tasks/task.dart';
 import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
-import 'package:j_courier/utils/date_utils.dart';
 
 class TaskTile extends StatelessWidget {
   const TaskTile({
@@ -23,12 +22,12 @@ class TaskTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final isSelected = selectedItems.contains(task.id);
+    final isSelected = selectedItems.contains(task.externalOrderId);
     return GestureDetector(
         onLongPress: () {
           if (selectedItems.isEmpty) {
             setState(() {
-              selectedItems.add(task.id);
+              selectedItems.add(task.externalOrderId! as int);
             });
           }
         },
@@ -36,18 +35,15 @@ class TaskTile extends StatelessWidget {
           if (selectedItems.isNotEmpty) {
             setState(() {
               if (isSelected) {
-                selectedItems.remove(task.id);
+                selectedItems.remove(task.externalOrderId);
               } else {
-                selectedItems.add(task.id);
+                selectedItems.add(task.externalOrderId! as int);
               }
             });
           } else {
-            // AutoRouter.of(context).push(OrderRoute(task: task));
             goTo(task);
           }
         },
-        // margin: const EdgeInsets.only(
-        //     left: 16, right: 16, bottom: 0),
         child: ListTile(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
@@ -63,7 +59,7 @@ class TaskTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '№ ${task.id}',
+                '№ ${task.externalOrderId}',
                 style: theme.textTheme.bodyLarge,
               ),
               Container(
@@ -79,7 +75,7 @@ class TaskTile extends StatelessWidget {
                     ),
                     divider4,
                     Text(
-                      '${task.createdDate?.day}',
+                      '${task.plannedDate}',
                       style: theme.textTheme.bodySmall,
                     ),
                   ],
@@ -113,9 +109,7 @@ class TaskTile extends StatelessWidget {
                           ?.copyWith(color: theme.colorScheme.surfaceTint),
                     ),
                     divider8,
-                    Text(
-                        S.of(context).createddate(
-                            formatFromDateToddMMyyyy(task.createdDate!)),
+                    Text(S.of(context).createddate((task.plannedDate!)),
                         style: theme.textTheme.headlineMedium),
                   ],
                 ),

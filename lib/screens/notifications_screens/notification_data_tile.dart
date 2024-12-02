@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:j_courier/models/tasks/task.dart';
 import 'package:j_courier/screens/notifications_screens/notification_tile.dart';
-import 'package:j_courier/utils/date_utils.dart';
 
 class NotificationDataTile extends StatelessWidget {
   const NotificationDataTile({super.key, required this.task});
@@ -11,13 +10,7 @@ class NotificationDataTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    // task.product.forEachIndexed(i,element) {
-
-    // };
-    String date = '';
-    if (task.createdDate != null) {
-      date = formatFromDateToddMMyyyy(task.createdDate!);
-    }
+    String date = task.plannedDate!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -39,7 +32,7 @@ class NotificationDataTile extends StatelessWidget {
                 ))
           ]),
         ),
-        ...task.product!.map((notification) => Padding(
+        ...task.productList!.map((notification) => Padding(
               padding: const EdgeInsets.only(left: 24.0, right: 24.0),
               child: NotificationTile(task: task),
             )),

@@ -43,7 +43,7 @@ class _ProductDetailScreenState extends State<ProductScreen> {
     }
     return Scaffold(
       appBar: AppBar(
-        title: Text(S.of(context).product_id('${product.id}')),
+        title: Text(S.of(context).product_id('${product.jmartProductId}')),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,7 +65,7 @@ class _ProductDetailScreenState extends State<ProductScreen> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      '${product.name}',
+                      '${product.productName}',
                       style: theme.textTheme.bodyLarge,
                     ),
                     divider20,

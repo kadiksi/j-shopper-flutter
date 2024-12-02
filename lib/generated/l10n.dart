@@ -629,6 +629,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Собрать`
+  String get collect {
+    return Intl.message(
+      'Собрать',
+      name: 'collect',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Отсутствует`
+  String get absent {
+    return Intl.message(
+      'Отсутствует',
+      name: 'absent',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:j_courier/models/tasks/task.dart';
 import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
-import 'package:j_courier/utils/date_utils.dart';
 
 class NotificationTile extends StatelessWidget {
   const NotificationTile({super.key, required this.task});
@@ -50,12 +49,12 @@ class NotificationTile extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        '${task.contactFrom?.name}',
+                        '${task.customerName}',
                         style: theme.textTheme.bodyMedium,
                       ),
                       divider4,
                       Text(
-                        "№${task.id}",
+                        "№${task.externalOrderId}",
                         style: theme.textTheme.bodyMedium
                             ?.copyWith(fontWeight: FontWeight.bold),
                       ),
@@ -64,14 +63,14 @@ class NotificationTile extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Курьер: ${task.contactFrom?.name} ",
+                            "Курьер: ${task.customerName} ",
                             style: TextStyle(
                               fontSize: 14,
                               color: Colors.grey[600],
                             ),
                           ),
                           Text(
-                            formatFromDateTommss(task.createdDate!),
+                            (task.plannedDate!),
                             style: TextStyle(
                               fontSize: 14,
                               color: Colors.grey[600],

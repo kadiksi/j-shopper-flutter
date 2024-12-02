@@ -34,6 +34,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "Replacement_of_good_will_result": MessageLookupByLibrary.simpleMessage(
             "Замена товара приведет к доплате со стороны покупателя"),
+        "absent": MessageLookupByLibrary.simpleMessage("Отсутствует"),
         "accept_orders": MessageLookupByLibrary.simpleMessage("Принять заказ"),
         "accept_selected":
             MessageLookupByLibrary.simpleMessage("Принять отмеченные"),
@@ -55,6 +56,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "change_product": MessageLookupByLibrary.simpleMessage("Замена товара"),
         "choose": MessageLookupByLibrary.simpleMessage("Выбрать"),
         "code_pass": MessageLookupByLibrary.simpleMessage("Код пароль"),
+        "collect": MessageLookupByLibrary.simpleMessage("Собрать"),
         "collected": MessageLookupByLibrary.simpleMessage("Собрано"),
         "commit_all_orders":
             MessageLookupByLibrary.simpleMessage("Принять все заказы"),

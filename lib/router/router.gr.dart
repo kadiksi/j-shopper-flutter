@@ -151,7 +151,7 @@ class LoginVerificationRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-// /// [NewOrders]
+/// [NewOrders]
 // class NewOrders extends PageRouteInfo<void> {
 //   const NewOrders({List<PageRouteInfo>? children})
 //       : super(

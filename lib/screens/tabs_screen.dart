@@ -18,7 +18,7 @@ class TabsScreen extends StatefulWidget {
 }
 
 class _TabsScreenState extends State<TabsScreen> {
-  int _selectedIndex = 3;
+  int _selectedIndex = 0;
   String _tabName = '';
   List<String> tabNames = [];
   final List<Widget> _pages = [
