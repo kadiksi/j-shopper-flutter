@@ -13,7 +13,7 @@ class Product extends Equatable {
   final int? price;
   final int? quantity;
   final String? status; //NEW"
-  // final List<int>? categoryIds;
+  final List<int>? categoryIds;
   Product({
     required this.jmartProductId,
     required this.productCode,
@@ -21,7 +21,7 @@ class Product extends Equatable {
     required this.price,
     required this.quantity,
     required this.status,
-    // required this.categoryIds,
+    required this.categoryIds,
   });
 
   Map<String, dynamic> toMap() {
@@ -32,7 +32,7 @@ class Product extends Equatable {
       'price': price,
       'quantity': quantity,
       'status': status,
-      // 'categoryIds': categoryIds,
+      'categoryIds': categoryIds,
     };
   }
 
@@ -47,10 +47,9 @@ class Product extends Equatable {
       price: map['price'] != null ? map['price'] as int : null,
       quantity: map['quantity'] != null ? map['quantity'] as int : null,
       status: map['status'] != null ? map['status'] as String : null,
-      // categoryIds: map['categoryIds'] != null
-      //     ? List<int>.from((map['categoryIds'])
-      // )
-      // : null,
+      categoryIds: map['categoryIds'] != null
+          ? List<int>.from((map['categoryIds']))
+          : null,
     );
   }
 

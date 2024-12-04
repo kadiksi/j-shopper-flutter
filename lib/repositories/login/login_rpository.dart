@@ -20,7 +20,7 @@ class LoginRepository implements LoginAbstractRepository {
       //       password: 'Adilet29187',
       final response = await dio.post('$test_url/user/v1/auth/sign-in',
           data: const LoginModel(
-            login: '+7(345)678-90-00',
+            login: '+7(770)900-00-89',
             password: '9Kl8bHEe7',
           ).toJson());
 

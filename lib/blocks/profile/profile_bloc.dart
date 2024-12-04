@@ -39,9 +39,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     LoadCallSupport event,
     Emitter<ProfileState> emit,
   ) async {
-    // if (state is! ProfileSuccess) {
-    //   emit(ProfileLoading());
-    // }
+    if (state is! ProfileSuccess) {
+      emit(ProfileLoading());
+    }
     final response = await profileRepository.getCallSupport();
 
     if (response is SuccessResponse<Profile>) {

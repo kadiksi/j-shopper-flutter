@@ -1,11 +1,15 @@
 import 'dart:async';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:j_courier/blocks/profile/profile_bloc.dart';
 import 'package:j_courier/generated/l10n.dart';
+import 'package:j_courier/models/login/login_data_model.dart';
 import 'package:j_courier/repositories/profile/profile_abstarct_repository.dart';
+import 'package:j_courier/router/router.dart';
 import 'package:j_courier/screens/profile_screens/wingets/action_label.dart';
 import 'package:j_courier/screens/profile_screens/wingets/common_widget.dart';
 import 'package:j_courier/screens/profile_screens/wingets/support_button.dart';
@@ -86,7 +90,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ],
                               ),
                               const Spacer(),
-                              const Icon(Icons.logout, color: Colors.grey),
+                              GestureDetector(
+                                onTap: () {
+                                  exit();
+                                },
+                                child: Icon(Icons.logout, color: Colors.grey),
+                              ),
                             ],
                           ),
                           divider24,
@@ -101,16 +110,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               Expanded(
                                 child: SupportButton(
                                   icon: "assets/svg/settings/whatsup.svg",
-                                  label: 'WhatsApp',
-                                  onTap: () async {
-                                    final url = Uri.parse(
-                                        '${state.profile.supportInfo?.whatsApp}');
-                                    if (await canLaunchUrl(url)) {
-                                      await launchUrl(url,
-                                          mode: LaunchMode.externalApplication);
-                                    } else {
-                                      print('Could not launch WhatsApp');
-                                    }
+                                  label: 'WhatsUp',
+                                  onTap: () {
+                                    openWhatsUp(
+                                        state.profile.supportInfo!.whatsApp);
                                   },
                                 ),
                               ),
@@ -249,5 +252,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   void callback() {
     _profileBloc.add(LoadProfile());
+  }
+
+  openWhatsUp(String? number) async {
+    final url = Uri.parse('$number');
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url, mode: LaunchMode.externalApplication);
+    } else {
+      print('Could not launch WhatsApp');
+    }
+  }
+
+  exit() {
+    final tokenBox = GetIt.instance<Box<LoginDataModel>>();
+    tokenBox.clear();
+    AutoRouter.of(context).replaceAll([const LoginRoute()]);
   }
 }

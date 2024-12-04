@@ -8,6 +8,7 @@ import 'package:j_courier/models/tasks/product.dart';
 part 'task.g.dart';
 
 @JsonSerializable()
+// ignore: must_be_immutable
 class Task extends Equatable {
   String? externalOrderId;
   String? orderSource;
