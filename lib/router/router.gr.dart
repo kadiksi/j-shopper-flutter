@@ -170,7 +170,7 @@ class LoginVerificationRoute extends PageRouteInfo<void> {
 // }
 
 /// generated route for
-/// [OrderScreen]
+/// [NewOrderScreen]
 class OrderRoute extends PageRouteInfo<OrderRouteArgs> {
   OrderRoute({
     Key? key,
@@ -191,7 +191,7 @@ class OrderRoute extends PageRouteInfo<OrderRouteArgs> {
     name,
     builder: (data) {
       final args = data.argsAs<OrderRouteArgs>();
-      return OrderScreen(
+      return NewOrderScreen(
         key: args.key,
         task: args.task,
       );

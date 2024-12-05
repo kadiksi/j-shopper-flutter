@@ -6,7 +6,7 @@ import 'package:j_courier/models/login/login_data_model.dart';
 import 'package:j_courier/models/tasks/product.dart';
 import 'package:j_courier/models/tasks/task.dart';
 import 'package:j_courier/screens/order_screen/active_order_screen.dart';
-import 'package:j_courier/screens/order_screen/order_screen.dart';
+import 'package:j_courier/screens/order_screen/new_order_screen.dart';
 import 'package:j_courier/screens/tabs_screen.dart';
 import 'package:j_courier/screens/product_screen/product_screen.dart';
 import 'package:j_courier/screens/login_screens/splash_screen.dart';

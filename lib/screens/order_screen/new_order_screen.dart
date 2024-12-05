@@ -18,8 +18,8 @@ import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
 import 'package:j_courier/screens/widgets/errors/failed_request.dart';
 
 @RoutePage()
-class OrderScreen extends StatefulWidget {
-  const OrderScreen({
+class NewOrderScreen extends StatefulWidget {
+  const NewOrderScreen({
     super.key,
     required this.task,
   });
@@ -27,10 +27,10 @@ class OrderScreen extends StatefulWidget {
   final Task task;
 
   @override
-  State<OrderScreen> createState() => _OrderScreenState();
+  State<NewOrderScreen> createState() => _NewOrderScreenState();
 }
 
-class _OrderScreenState extends State<OrderScreen> {
+class _NewOrderScreenState extends State<NewOrderScreen> {
   final _listBloc = OrderBloc(
     GetIt.I<ListAbstractRepository>(),
   );
