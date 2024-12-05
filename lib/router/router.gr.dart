@@ -10,7 +10,7 @@
 part of 'router.dart';
 
 /// generated route for
-/// [AcceptedOrderScreen]
+/// [ActiveOrderScreen]
 class AcceptedOrderRoute extends PageRouteInfo<AcceptedOrderRouteArgs> {
   AcceptedOrderRoute({
     Key? key,
@@ -31,7 +31,7 @@ class AcceptedOrderRoute extends PageRouteInfo<AcceptedOrderRouteArgs> {
     name,
     builder: (data) {
       final args = data.argsAs<AcceptedOrderRouteArgs>();
-      return AcceptedOrderScreen(
+      return ActiveOrderScreen(
         key: args.key,
         task: args.task,
       );

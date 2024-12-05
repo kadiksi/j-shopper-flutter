@@ -11,8 +11,8 @@ import 'package:j_courier/screens/widgets/bottom_sheet/cancel_order.dart';
 import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
 
 @RoutePage()
-class AcceptedOrderScreen extends StatefulWidget {
-  const AcceptedOrderScreen({
+class ActiveOrderScreen extends StatefulWidget {
+  const ActiveOrderScreen({
     super.key,
     required this.task,
   });
@@ -20,10 +20,10 @@ class AcceptedOrderScreen extends StatefulWidget {
   final Task task;
 
   @override
-  State<AcceptedOrderScreen> createState() => _AcceptedOrderScreenState();
+  State<ActiveOrderScreen> createState() => _ActiveOrderScreenState();
 }
 
-class _AcceptedOrderScreenState extends State<AcceptedOrderScreen> {
+class _ActiveOrderScreenState extends State<ActiveOrderScreen> {
   final _listBloc = OrderBloc(
     GetIt.I<ListAbstractRepository>(),
   );
@@ -31,7 +31,7 @@ class _AcceptedOrderScreenState extends State<AcceptedOrderScreen> {
 
   @override
   void initState() {
-    _listBloc.add(LoadOrder(id: widget.task.externalOrderId! as int));
+    _listBloc.add(LoadOrder(id: int.parse(widget.task.externalOrderId!)));
     super.initState();
   }
 

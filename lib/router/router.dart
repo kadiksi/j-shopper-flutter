@@ -5,7 +5,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:j_courier/models/login/login_data_model.dart';
 import 'package:j_courier/models/tasks/product.dart';
 import 'package:j_courier/models/tasks/task.dart';
-import 'package:j_courier/screens/order_screen/accepted_order_screen.dart';
+import 'package:j_courier/screens/order_screen/active_order_screen.dart';
 import 'package:j_courier/screens/order_screen/order_screen.dart';
 import 'package:j_courier/screens/tabs_screen.dart';
 import 'package:j_courier/screens/product_screen/product_screen.dart';
@@ -20,10 +20,6 @@ part 'router.gr.dart';
 @AutoRouterConfig(replaceInRouteName: 'Screen|Page,Route')
 class AppRouter extends RootStackRouter {
   final tokenBox = GetIt.instance<Box<LoginDataModel>>();
-
-  // final AuthNotifier authNotifier;
-
-  // AppRouter(this.authNotifier);
 
   @override
   RouteType get defaultRouteType =>
@@ -44,39 +40,5 @@ class AppRouter extends RootStackRouter {
       ];
 
   @override
-  List<AutoRouteGuard> get guards => [
-        // AuthGuard(authNotifier)
-      ];
+  List<AutoRouteGuard> get guards => [];
 }
-
-// class AuthNotifier extends ChangeNotifier {
-//   // final tokenBox = GetIt.instance<Box<LoginDataModel>>();
-//   bool _isLoggedIn = true;
-
-//   bool get isLoggedIn => _isLoggedIn;
-
-//   void login() {
-//     _isLoggedIn = true;
-//     notifyListeners();
-//   }
-
-//   void logout() {
-//     _isLoggedIn = false;
-//     notifyListeners();
-//   }
-// }
-
-// class AuthGuard extends AutoRouteGuard {
-//   final AuthNotifier authNotifier;
-
-//   AuthGuard(this.authNotifier);
-
-//   @override
-//   void onNavigation(NavigationResolver resolver, StackRouter router) {
-//     if (authNotifier.isLoggedIn) {
-//       resolver.next(); // User is authenticated, allow navigation
-//     } else {
-//       router.push(LoginRoute()); // Redirect to login
-//     }
-//   }
-// }
