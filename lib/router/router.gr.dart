@@ -10,28 +10,29 @@
 part of 'router.dart';
 
 /// generated route for
-/// [ActiveOrderScreen]
-class AcceptedOrderRoute extends PageRouteInfo<AcceptedOrderRouteArgs> {
-  AcceptedOrderRoute({
+/// [AcceptedOrderTabedScreen]
+class AcceptedOrderTabedRoute
+    extends PageRouteInfo<AcceptedOrderTabedRouteArgs> {
+  AcceptedOrderTabedRoute({
     Key? key,
     required Task task,
     List<PageRouteInfo>? children,
   }) : super(
-          AcceptedOrderRoute.name,
-          args: AcceptedOrderRouteArgs(
+          AcceptedOrderTabedRoute.name,
+          args: AcceptedOrderTabedRouteArgs(
             key: key,
             task: task,
           ),
           initialChildren: children,
         );
 
-  static const String name = 'AcceptedOrderRoute';
+  static const String name = 'AcceptedOrderTabedRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      final args = data.argsAs<AcceptedOrderRouteArgs>();
-      return ActiveOrderScreen(
+      final args = data.argsAs<AcceptedOrderTabedRouteArgs>();
+      return AcceptedOrderTabedScreen(
         key: args.key,
         task: args.task,
       );
@@ -39,8 +40,8 @@ class AcceptedOrderRoute extends PageRouteInfo<AcceptedOrderRouteArgs> {
   );
 }
 
-class AcceptedOrderRouteArgs {
-  const AcceptedOrderRouteArgs({
+class AcceptedOrderTabedRouteArgs {
+  const AcceptedOrderTabedRouteArgs({
     this.key,
     required this.task,
   });
@@ -51,7 +52,7 @@ class AcceptedOrderRouteArgs {
 
   @override
   String toString() {
-    return 'AcceptedOrderRouteArgs{key: $key, task: $task}';
+    return 'AcceptedOrderTabedRouteArgs{key: $key, task: $task}';
   }
 }
 
@@ -74,8 +75,54 @@ class AcceptedOrderRouteArgs {
 //   );
 // }
 
-// /// generated route for
-// /// [ActiveOrders]
+/// generated route for
+/// [ActiveOrderScreen]
+class ActiveOrderRoute extends PageRouteInfo<ActiveOrderRouteArgs> {
+  ActiveOrderRoute({
+    Key? key,
+    required Task task,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ActiveOrderRoute.name,
+          args: ActiveOrderRouteArgs(
+            key: key,
+            task: task,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'ActiveOrderRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<ActiveOrderRouteArgs>();
+      return ActiveOrderScreen(
+        key: args.key,
+        task: args.task,
+      );
+    },
+  );
+}
+
+class ActiveOrderRouteArgs {
+  const ActiveOrderRouteArgs({
+    this.key,
+    required this.task,
+  });
+
+  final Key? key;
+
+  final Task task;
+
+  @override
+  String toString() {
+    return 'ActiveOrderRouteArgs{key: $key, task: $task}';
+  }
+}
+
+/// generated route for
+/// [ActiveOrders]
 // class ActiveOrders extends PageRouteInfo<void> {
 //   const ActiveOrders({List<PageRouteInfo>? children})
 //       : super(
@@ -151,6 +198,52 @@ class LoginVerificationRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [NewOrderScreen]
+class NewOrderRoute extends PageRouteInfo<NewOrderRouteArgs> {
+  NewOrderRoute({
+    Key? key,
+    required Task task,
+    List<PageRouteInfo>? children,
+  }) : super(
+          NewOrderRoute.name,
+          args: NewOrderRouteArgs(
+            key: key,
+            task: task,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'NewOrderRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<NewOrderRouteArgs>();
+      return NewOrderScreen(
+        key: args.key,
+        task: args.task,
+      );
+    },
+  );
+}
+
+class NewOrderRouteArgs {
+  const NewOrderRouteArgs({
+    this.key,
+    required this.task,
+  });
+
+  final Key? key;
+
+  final Task task;
+
+  @override
+  String toString() {
+    return 'NewOrderRouteArgs{key: $key, task: $task}';
+  }
+}
+
+/// generated route for
 /// [NewOrders]
 // class NewOrders extends PageRouteInfo<void> {
 //   const NewOrders({List<PageRouteInfo>? children})
@@ -168,52 +261,6 @@ class LoginVerificationRoute extends PageRouteInfo<void> {
 //     },
 //   );
 // }
-
-/// generated route for
-/// [NewOrderScreen]
-class OrderRoute extends PageRouteInfo<OrderRouteArgs> {
-  OrderRoute({
-    Key? key,
-    required Task task,
-    List<PageRouteInfo>? children,
-  }) : super(
-          OrderRoute.name,
-          args: OrderRouteArgs(
-            key: key,
-            task: task,
-          ),
-          initialChildren: children,
-        );
-
-  static const String name = 'OrderRoute';
-
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      final args = data.argsAs<OrderRouteArgs>();
-      return NewOrderScreen(
-        key: args.key,
-        task: args.task,
-      );
-    },
-  );
-}
-
-class OrderRouteArgs {
-  const OrderRouteArgs({
-    this.key,
-    required this.task,
-  });
-
-  final Key? key;
-
-  final Task task;
-
-  @override
-  String toString() {
-    return 'OrderRouteArgs{key: $key, task: $task}';
-  }
-}
 
 /// generated route for
 /// [ProductScreen]

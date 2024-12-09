@@ -36,7 +36,7 @@ class _ActiveOrdersState extends State<ActiveOrders> {
   }
 
   void goTo(Task task) {
-    AutoRouter.of(context).push(AcceptedOrderRoute(task: task));
+    AutoRouter.of(context).push(ActiveOrderRoute(task: task));
   }
 
   @override

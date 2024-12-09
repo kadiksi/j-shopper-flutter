@@ -31,7 +31,7 @@ class _NotificationsState extends State<Notifications> {
   }
 
   void goTo(Task task) {
-    AutoRouter.of(context).push(AcceptedOrderRoute(task: task));
+    AutoRouter.of(context).push(AcceptedOrderTabedRoute(task: task));
   }
 
   @override
