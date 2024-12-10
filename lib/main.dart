@@ -1,13 +1,13 @@
 import 'dart:async';
 
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:j_courier/repositories/login/auth_interceptor.dart';
+import 'package:j_courier/repositories/dio_client.dart';
 import 'package:j_courier/repositories/profile/profile_abstarct_repository.dart';
 import 'package:j_courier/repositories/profile/profile_rpository.dart';
+import 'package:j_courier/repositories/urls.dart';
 import 'package:provider/provider.dart';
 import 'package:talker_bloc_logger/talker_bloc_logger.dart';
 import 'package:talker_dio_logger/talker_dio_logger.dart';
@@ -40,15 +40,15 @@ void main() async {
   GetIt.instance.registerLazySingleton<Box<LoginDataModel>>(
       () => Hive.box<LoginDataModel>(tokenBoxName));
 
-  final dio = Dio();
-  dio.interceptors.add(
+  final dio = DioClient('$test_url');
+  dio.dio.interceptors.add(
     TalkerDioLogger(
       talker: talker,
       settings: const TalkerDioLoggerSettings(
           printResponseData: true, printRequestHeaders: true),
     ),
   );
-  dio.interceptors.add(AuthInterceptor());
+  // dio.dio.interceptors.add(AuthInterceptor());
 
   Bloc.observer = TalkerBlocObserver(
     talker: talker,
@@ -59,15 +59,15 @@ void main() async {
   );
 
   GetIt.I.registerLazySingleton<ProfileAbstractRepository>(
-    () => ProfileRepository(dio: dio),
+    () => ProfileRepository(dio: dio.dio),
   );
 
   GetIt.I.registerLazySingleton<LoginAbstractRepository>(
-    () => LoginRepository(dio: dio),
+    () => LoginRepository(dio: dio.dio),
   );
 
   GetIt.I.registerLazySingleton<ListAbstractRepository>(
-    () => ListRepository(dio: dio),
+    () => ListRepository(dio: dio.dio),
   );
 
   FlutterError.onError =
