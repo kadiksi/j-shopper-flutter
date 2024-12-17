@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:j_courier/models/tasks/shelf/shelf.dart';
 import 'package:j_courier/models/tasks/task.dart';
 
 import '../../models/ApiResponse';
@@ -49,6 +50,34 @@ class ListRepository implements ListAbstractRepository {
       final details = Task.fromJson(data);
 
       SuccessResponse<Task> su = SuccessResponse(details);
+      return su;
+    } catch (e) {
+      if (e is DioException) {
+        print("type: ${e.response?.data.runtimeType} ///${e.response?.data}");
+        if (e.response?.data['data'] == null) {
+          return ErrorResponse(e.response?.data['message']);
+        } else {
+          return ErrorResponse(e.response?.data['data']['message']);
+        }
+      }
+      return ErrorResponse(e.toString());
+    }
+  }
+
+  @override
+  Future<ApiResponse> getOrderShelf() async {
+    try {
+      final response = await dio
+          .get('https://test5.jmart.kz/gw/jpost-shopper/api/v1/shelf/list');
+
+      final data = response.data as List<dynamic>;
+
+      final shelfList = data.map((e) {
+        final details = Shelf.fromMap(e);
+        return details;
+      }).toList();
+
+      SuccessResponse<List<Shelf>> su = SuccessResponse(shelfList);
       return su;
     } catch (e) {
       if (e is DioException) {

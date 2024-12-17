@@ -1,31 +1,32 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:j_courier/models/tasks/product.dart';
+import 'package:j_courier/models/tasks/shelf/shelf.dart';
+import 'package:j_courier/models/tasks/shelf/shelf_with_product.dart';
 import 'package:j_courier/models/tasks/task.dart';
 import 'package:j_courier/router/router.dart';
 import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
 
 Widget buildMultipleExpandableProductLists(
   Task task,
+  List<Shelf> shelfs,
   ThemeData theme,
   BuildContext context,
   List<int> selectedItems,
   void Function(VoidCallback fn) setState,
 ) {
-  final categoryProducts = [
-    'Молочные продукты',
-    'Завершено 6 из 8',
-    'Молочные продукты',
-    'Завершено 6 из 8'
-  ];
   List<Widget> views = [];
-  for (var element in categoryProducts) {
+  List<ShelfWithProduct> shelfWithProducts =
+      getnerateShleProductList(shelfs, task.productList!);
+
+  for (var element in shelfWithProducts) {
     List<Product> products = task.productList!;
 
     views.add(ExpansionTile(
       childrenPadding: EdgeInsets.zero,
       initiallyExpanded: false,
-      title: Text(element, style: theme.textTheme.bodyMedium),
+      title: Text('${element.shelf.shelf_name}',
+          style: theme.textTheme.bodyMedium),
       subtitle:
           Text('Завершено 6 из 8 Subtitle', style: theme.textTheme.bodySmall),
       children: products.map((product) {
@@ -82,9 +83,9 @@ Widget buildMultipleExpandableProductLists(
                       )
                     ],
                   ),
-                  const Row(
+                  Row(
                     children: [
-                      Text('1534₸ x 4 ш  т'),
+                      Text('${product.price}₸ x ${product.quantity} шт'),
                     ],
                   ),
                 ],
@@ -102,4 +103,20 @@ Widget buildMultipleExpandableProductLists(
   return ListView(
     children: views,
   );
+}
+
+getnerateShleProductList(List<Shelf> shelfs, List<Product> productList) {
+  List<ShelfWithProduct> shelfWithProducts = [];
+  shelfs.forEach((shelf) {
+    List<Product> products = [];
+    productList.forEach((product) {
+      if (product.companyShelf == shelf.id) {
+        products.add(product);
+      }
+    });
+    if (products.isNotEmpty) {
+      shelfWithProducts.add(ShelfWithProduct(shelf: shelf, products: products));
+    }
+  });
+  return shelfWithProducts;
 }

@@ -22,14 +22,18 @@ class AcceptedOrderScreen extends StatefulWidget {
 }
 
 class _AcceptedOrderScreenState extends State<AcceptedOrderScreen> {
-  final _listBloc = OrderBloc(
+  final _orderBloc = OrderBloc(
     GetIt.I<ListAbstractRepository>(),
   );
+  // final _shelfBloc = ShelfBloc(
+  //   GetIt.I<ListAbstractRepository>(),
+  // );
   List<int> selectedItems = [];
 
   @override
   void initState() {
-    _listBloc.add(LoadOrder(id: int.parse(widget.task.externalOrderId!)));
+    _orderBloc.add(LoadOrder(id: int.parse(widget.task.externalOrderId!)));
+    // _shelfBloc.add(LoadShelf());
     super.initState();
   }
 
@@ -40,15 +44,16 @@ class _AcceptedOrderScreenState extends State<AcceptedOrderScreen> {
       body: RefreshIndicator(
         onRefresh: () async {
           final completer = Completer();
-          _listBloc.add(LoadOrder(id: int.parse(widget.task.externalOrderId!)));
+          _orderBloc
+              .add(LoadOrder(id: int.parse(widget.task.externalOrderId!)));
           return completer.future;
         },
         child: BlocBuilder<OrderBloc, OrderState>(
-          bloc: _listBloc,
+          bloc: _orderBloc,
           builder: (context, state) {
-            if (state is OrderSuccess) {
-              return orderView(
-                  state.tasks, theme, context, selectedItems, setState);
+            if (state is OrderShelfSuccess) {
+              return orderView(state.task, state.shelfs, theme, context,
+                  selectedItems, setState);
             }
             if (state is OrderFailure) {
               return FailedRequest(callback: callback);
@@ -61,6 +66,6 @@ class _AcceptedOrderScreenState extends State<AcceptedOrderScreen> {
   }
 
   void callback() {
-    _listBloc.add(LoadOrder(id: int.parse(widget.task.externalOrderId!)));
+    _orderBloc.add(LoadOrder(id: int.parse(widget.task.externalOrderId!)));
   }
 }

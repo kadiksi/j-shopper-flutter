@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:j_courier/models/tasks/shelf/shelf.dart';
 import 'package:j_courier/models/tasks/task.dart';
 import 'package:j_courier/screens/order_screen/oder/order_button.dart';
 import 'package:j_courier/screens/order_screen/oder/order_info.dart';
@@ -7,6 +8,7 @@ import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
 
 Widget orderView(
   Task task,
+  List<Shelf> shelfs,
   ThemeData theme,
   BuildContext context,
   List<int> selectedItems,
@@ -16,11 +18,11 @@ Widget orderView(
     padding: const EdgeInsets.all(16.0),
     child: Column(
       children: [
-        buildOrderInfo(context, theme),
+        buildOrderInfo(context, theme, task),
         divider16,
         Expanded(
             child: buildMultipleExpandableProductLists(
-                task, theme, context, selectedItems, setState)),
+                task, shelfs, theme, context, selectedItems, setState)),
         buildAcceptOrderButton(context),
         Column(
           children: [buildCollectedButton(context, selectedItems)],

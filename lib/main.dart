@@ -18,7 +18,7 @@ import 'models/login/tokens/login_token_model.dart';
 import 'models/login/tokens/login_tokens_model.dart';
 import 'models/vars.dart';
 import 'repositories/list/list_abstarct_repository.dart';
-import 'repositories/list/list_rpository.dart';
+import 'repositories/list/list_repository.dart';
 import 'repositories/login/login_abstarct_repository.dart';
 import 'repositories/login/login_rpository.dart';
 import 'courier_app.dart';

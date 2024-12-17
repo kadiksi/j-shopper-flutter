@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:j_courier/generated/l10n.dart';
+import 'package:j_courier/models/tasks/task.dart';
 import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
 
-Widget buildOrderInfo(BuildContext context, ThemeData theme) {
+Widget buildOrderInfo(BuildContext context, ThemeData theme, Task task) {
   return Container(
     padding: const EdgeInsets.all(16),
     decoration: BoxDecoration(
@@ -19,22 +20,24 @@ Widget buildOrderInfo(BuildContext context, ThemeData theme) {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Row(
+        Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Диана Ш.',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            Text('${task.customerName}',
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             Row(
               children: [
-                Icon(Icons.access_time, color: Colors.orange),
-                SizedBox(width: 4),
-                Text('13:00 - 18:00', style: TextStyle(fontSize: 16)),
+                const Icon(Icons.access_time, color: Colors.orange),
+                const SizedBox(width: 4),
+                Text('${task.plannedDateInterval}',
+                    style: const TextStyle(fontSize: 16)),
               ],
             ),
           ],
         ),
         divider4,
-        Text('Плановая дата 24.09.24',
+        Text('Плановая дата ${'${task.plannedDate}'}',
             style: TextStyle(color: Colors.grey[600])),
         divider8,
         GestureDetector(

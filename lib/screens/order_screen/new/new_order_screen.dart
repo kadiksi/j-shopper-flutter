@@ -78,9 +78,9 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
         child: BlocBuilder<OrderBloc, OrderState>(
           bloc: _listBloc,
           builder: (context, state) {
-            if (state is OrderSuccess) {
-              return orderView(
-                  state.tasks, theme, context, selectedItems, setState);
+            if (state is OrderShelfSuccess) {
+              return orderView(state.task, state.shelfs, theme, context,
+                  selectedItems, setState);
             }
             if (state is OrderFailure) {
               return FailedRequest(callback: callback);

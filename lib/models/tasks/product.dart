@@ -13,6 +13,7 @@ class Product extends Equatable {
   final int? price;
   final int? quantity;
   final String? status; //NEW"
+  final int? companyShelf;
   final List<int>? categoryIds;
   Product({
     required this.jmartProductId,
@@ -21,6 +22,7 @@ class Product extends Equatable {
     required this.price,
     required this.quantity,
     required this.status,
+    required this.companyShelf,
     required this.categoryIds,
   });
 
@@ -33,6 +35,7 @@ class Product extends Equatable {
       'quantity': quantity,
       'status': status,
       'categoryIds': categoryIds,
+      'companyShelf': companyShelf
     };
   }
 
@@ -50,6 +53,8 @@ class Product extends Equatable {
       categoryIds: map['categoryIds'] != null
           ? List<int>.from((map['categoryIds']))
           : null,
+      companyShelf:
+          map['companyShelf'] != null ? map['companyShelf'] as int : null,
     );
   }
 
@@ -67,7 +72,8 @@ class Product extends Equatable {
       price,
       quantity,
       status,
-      // categoryIds,
+      categoryIds,
+      companyShelf
     ];
   }
 }

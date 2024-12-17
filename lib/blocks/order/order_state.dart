@@ -14,13 +14,22 @@ class OrderLoading extends OrderState {
 
 class OrderSuccess extends OrderState {
   OrderSuccess({
-    required this.tasks,
+    required this.task,
   });
 
-  final Task tasks;
+  final Task task;
 
   @override
-  List<Object?> get props => [tasks];
+  List<Object?> get props => [task];
+}
+
+class OrderShelfSuccess extends OrderState {
+  OrderShelfSuccess({required this.shelfs, required this.task});
+  final Task task;
+  final List<Shelf> shelfs;
+
+  @override
+  List<Object?> get props => [shelfs, task];
 }
 
 class OrderFailure extends OrderState {
