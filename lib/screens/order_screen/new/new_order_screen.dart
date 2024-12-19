@@ -6,14 +6,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:j_courier/blocks/order/order_bloc.dart';
 import 'package:j_courier/generated/l10n.dart';
-import 'package:j_courier/models/tasks/product.dart';
 import 'package:j_courier/models/tasks/task.dart';
 import 'package:j_courier/repositories/list/list_abstarct_repository.dart';
+import 'package:j_courier/screens/history_screens/active_orders/active_order_screen.dart';
 import 'package:j_courier/screens/order_screen/oder/oder.dart';
-import 'package:j_courier/screens/product_screen/product_replacement_screen.dart';
-import 'package:j_courier/screens/widgets/bottom_sheet/cancel_order.dart';
-import 'package:j_courier/screens/widgets/bottom_sheet/order_options.dart';
-import 'package:j_courier/screens/widgets/bottom_sheet/return_order.dart';
+import 'package:j_courier/screens/widgets/bottom_sheet/order_new_options.dart';
 import 'package:j_courier/screens/widgets/errors/failed_request.dart';
 
 @RoutePage()
@@ -58,13 +55,11 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
                 'Reason 3',
                 // Add more reasons if needed
               ];
-              showOrderOptions(
-                  context,
-                  showModelAddProduct,
-                  widget.task.productList!,
-                  showModelCancelOrder,
-                  reasons,
-                  showModelReturnOrder);
+              showNewOrderOptions(
+                context,
+                showModelCancelOrder,
+                reasons,
+              );
             },
           ),
         ],
@@ -95,43 +90,6 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
   void callback() {
     _listBloc.add(LoadOrder(id: int.parse(widget.task.externalOrderId!)));
   }
-}
-
-void showModelAddProduct(BuildContext context, List<Product> products) {
-  showModalBottomSheet(
-    context: context,
-    isScrollControlled: true,
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-    ),
-    builder: (context) => ProductReplacementSheet(
-        products: products,
-        isReplace: false,
-        action: addProduct,
-        title: S.of(context).add_product),
-  );
-}
-
-void showModelCancelOrder(BuildContext context, List<String> reasons) {
-  showModalBottomSheet(
-    context: context,
-    isScrollControlled: true,
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-    ),
-    builder: (context) => ReasonSelectionSheet(reasons: reasons),
-  );
-}
-
-void showModelReturnOrder(BuildContext context) {
-  showModalBottomSheet(
-    context: context,
-    isScrollControlled: true,
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-    ),
-    builder: (context) => const OrderReturnSheet(returnOrder),
-  );
 }
 
 void addProduct() {

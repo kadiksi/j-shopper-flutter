@@ -22,13 +22,18 @@ Widget buildCollectedButton(BuildContext context, List<int> selectedItems) {
           child: ElevatedButton(
               onPressed: () {},
               style: theme.elevatedButtonTheme.style!.copyWith(
-                  backgroundColor: WidgetStateProperty.all(Colors.black12)),
-              child: Text(S.of(context).not_exist)),
+                  backgroundColor: WidgetStateProperty.all(
+                      theme.colorScheme.secondaryContainer)),
+              child: Text(
+                S.of(context).not_exist,
+                style: theme.textTheme.bodyLarge
+                    ?.copyWith(color: theme.colorScheme.secondary),
+              )),
         ),
         SizedBox(
           child: ElevatedButton(
             onPressed: () {},
-            child: Text(S.of(context).accept_orders),
+            child: Text(S.of(context).collect),
           ),
         )
       ],

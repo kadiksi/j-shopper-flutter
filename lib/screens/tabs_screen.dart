@@ -5,7 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:j_courier/generated/l10n.dart';
 import 'package:j_courier/screens/history_screens/history_view.dart';
 import 'package:j_courier/screens/notifications_screens/notification_screen.dart';
-import 'package:j_courier/screens/order_screen/tabs/orders_view.dart';
+import 'package:j_courier/screens/order_screen/tabs/orders_main_screen.dart';
 import 'package:j_courier/screens/profile_screens/profile_screen.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 

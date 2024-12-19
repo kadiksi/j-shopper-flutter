@@ -25,15 +25,11 @@ class _AcceptedOrderScreenState extends State<AcceptedOrderScreen> {
   final _orderBloc = OrderBloc(
     GetIt.I<ListAbstractRepository>(),
   );
-  // final _shelfBloc = ShelfBloc(
-  //   GetIt.I<ListAbstractRepository>(),
-  // );
   List<int> selectedItems = [];
 
   @override
   void initState() {
     _orderBloc.add(LoadOrder(id: int.parse(widget.task.externalOrderId!)));
-    // _shelfBloc.add(LoadShelf());
     super.initState();
   }
 

@@ -2,8 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:j_courier/generated/l10n.dart';
 import 'package:j_courier/models/tasks/task.dart';
+import 'package:j_courier/screens/order_screen/orders_menu/accepted_menu_widgets.dart';
 import 'package:j_courier/screens/order_screen/accepted/accepted_tabs_orders_view.dart';
-import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
+import 'package:j_courier/screens/widgets/tabs/tab_with_badge.dart';
+import 'package:j_courier/screens/widgets/bottom_sheet/order_accepted_options.dart';
 
 @RoutePage()
 class AcceptedOrderTabedScreen extends StatefulWidget {
@@ -41,6 +43,30 @@ class _AcceptedOrderTabedScreenState extends State<AcceptedOrderTabedScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title:
+            Text(S.of(context).order_number('${widget.task.externalOrderId}')),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.more_vert),
+            onPressed: () {
+              final List<String> reasons = [
+                'Reason 1',
+                'Reason 2',
+                'Reason 3',
+                // Add more reasons if needed
+              ];
+              showAcceptedOrderOptions(
+                  context,
+                  showModelAddProduct,
+                  widget.task.productList!,
+                  showModelCancelOrder,
+                  reasons,
+                  showModelReturnOrder);
+            },
+          ),
+        ],
+      ),
       body: Column(
         children: [
           Container(
@@ -63,12 +89,12 @@ class _AcceptedOrderTabedScreenState extends State<AcceptedOrderTabedScreen>
               labelColor: Colors.black,
               unselectedLabelColor: Colors.grey,
               tabs: [
-                _buildTabWithBadge(
-                    S.of(context).collect, 12, _tabController.index == 0),
-                _buildTabWithBadge(
-                    S.of(context).absent, 12, _tabController.index == 1),
-                _buildTabWithBadge(
-                    S.of(context).collected, 24, _tabController.index == 2),
+                buildTabWithBadge(context, S.of(context).collect, 12,
+                    _tabController.index == 0),
+                buildTabWithBadge(context, S.of(context).absent, 12,
+                    _tabController.index == 1),
+                buildTabWithBadge(context, S.of(context).collected, 24,
+                    _tabController.index == 2),
               ],
             ),
           ),
@@ -80,45 +106,6 @@ class _AcceptedOrderTabedScreenState extends State<AcceptedOrderTabedScreen>
                 AcceptedOrderScreen(task: widget.task),
                 AcceptedOrderScreen(task: widget.task),
               ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildTabWithBadge(String title, int count, bool isSelected) {
-    final theme = Theme.of(context);
-    return Tab(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          Text(
-            title,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-            ),
-          ),
-          divider8,
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-            decoration: BoxDecoration(
-              color: isSelected
-                  ? theme.colorScheme.secondary
-                  : theme.colorScheme.onSecondary,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Text(
-              count.toString(),
-              style: TextStyle(
-                color: isSelected
-                    ? theme.colorScheme.onSecondary
-                    : theme.colorScheme.surfaceTint,
-                fontWeight: FontWeight.bold,
-                fontSize: 14,
-              ),
             ),
           ),
         ],

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:j_courier/generated/l10n.dart';
 import 'package:j_courier/models/tasks/product.dart';
+import 'package:j_courier/screens/widgets/bottom_sheet/option_button.dart';
 
-void showOrderOptions(
+void showAcceptedOrderOptions(
     BuildContext context,
     void Function(BuildContext context, List<Product> products)
         showModelAddProduct,
@@ -34,19 +34,19 @@ void showOrderOptions(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    _buildOptionItem(
+                    buildOptionItem(
                       context,
                       icon: 'assets/svg/add_order.svg',
                       text: S.of(context).add_product,
                       onTap: () => showModelAddProduct(context, products),
                     ),
-                    _buildOptionItem(
+                    buildOptionItem(
                       context,
                       icon: 'assets/svg/cancel_order.svg',
                       text: S.of(context).cancel_order,
                       onTap: () => showModelCancelProduct(context, reasons),
                     ),
-                    _buildOptionItem(
+                    buildOptionItem(
                       context,
                       icon: 'assets/svg/return_order.svg',
                       text: S.of(context).return_order,
@@ -73,39 +73,5 @@ void showOrderOptions(
             )
           ]));
     },
-  );
-}
-
-Widget _buildOptionItem(
-  BuildContext context, {
-  required String icon,
-  required String text,
-  required VoidCallback onTap,
-}) {
-  return InkWell(
-    onTap: onTap,
-    child: Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.all(Radius.circular(16)),
-      ),
-      child: Row(
-        children: [
-          SvgPicture.asset(
-            icon,
-            width: 24,
-            height: 24,
-          ),
-          const SizedBox(width: 16),
-          Expanded(child: Text(text, style: TextStyle(fontSize: 16))),
-          SvgPicture.asset(
-            'assets/svg/arrow_order.svg',
-            width: 24,
-            height: 24,
-          ),
-        ],
-      ),
-    ),
   );
 }
