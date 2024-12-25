@@ -15,6 +15,10 @@ class Product extends Equatable {
   final String? status; //NEW"
   final int? companyShelf;
   final List<int>? categoryIds;
+  final String? orderProductType; //SUPERMARKET, GOODS"
+  final int? productId;
+  final String? productType;
+
   Product({
     required this.jmartProductId,
     required this.productCode,
@@ -24,6 +28,9 @@ class Product extends Equatable {
     required this.status,
     required this.companyShelf,
     required this.categoryIds,
+    required this.orderProductType,
+    required this.productId,
+    required this.productType,
   });
 
   Map<String, dynamic> toMap() {
@@ -35,7 +42,10 @@ class Product extends Equatable {
       'quantity': quantity,
       'status': status,
       'categoryIds': categoryIds,
-      'companyShelf': companyShelf
+      'companyShelf': companyShelf,
+      'orderProductType': orderProductType,
+      'productId': productId,
+      'productType': productType
     };
   }
 
@@ -55,6 +65,12 @@ class Product extends Equatable {
           : null,
       companyShelf:
           map['companyShelf'] != null ? map['companyShelf'] as int : null,
+      orderProductType: map['orderProductType'] != null
+          ? map['orderProductType'] as String
+          : null,
+      productId: map['productId'] != null ? map['productId'] as int : null,
+      productType:
+          map['productType'] != null ? map['productType'] as String : null,
     );
   }
 
@@ -73,7 +89,38 @@ class Product extends Equatable {
       quantity,
       status,
       categoryIds,
-      companyShelf
+      companyShelf,
+      orderProductType,
+      productId,
+      productType
     ];
+  }
+
+  Product copyWith({
+    int? jmartProductId,
+    String? productCode,
+    String? productName,
+    int? price,
+    int? quantity,
+    String? status,
+    int? companyShelf,
+    List<int>? categoryIds,
+    String? orderProductType,
+    int? productId,
+    String? productType,
+  }) {
+    return Product(
+      jmartProductId: jmartProductId ?? this.jmartProductId,
+      productCode: productCode ?? this.productCode,
+      productName: productName ?? this.productName,
+      price: price ?? this.price,
+      quantity: quantity ?? this.quantity,
+      status: status ?? this.status,
+      companyShelf: companyShelf ?? this.companyShelf,
+      categoryIds: categoryIds ?? this.categoryIds,
+      orderProductType: orderProductType ?? this.orderProductType,
+      productId: productId ?? this.productId,
+      productType: productType ?? this.productType,
+    );
   }
 }

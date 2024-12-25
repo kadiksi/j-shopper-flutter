@@ -21,3 +21,15 @@ class LoadShelf extends OrderEvent {
   @override
   List<Object?> get props => [completer, task];
 }
+
+class LoadCollectOrder extends OrderEvent {
+  LoadCollectOrder(
+      {this.completer, required this.products, required this.status});
+
+  final Completer? completer;
+  final List<Product> products;
+  final String status;
+
+  @override
+  List<Object?> get props => [completer, products];
+}

@@ -20,7 +20,7 @@ class Notifications extends StatefulWidget {
 
 class _NotificationsState extends State<Notifications> {
   final _listBloc = ListBloc(
-    GetIt.I<ListAbstractRepository>(),
+    GetIt.I<OrderAbstractRepository>(),
   );
 
   List<int> selectedItems = [];

@@ -16,7 +16,7 @@ class ListBloc extends Bloc<ListEvent, ListState> {
     on<LoadList>(_load);
   }
 
-  final ListAbstractRepository loginRepository;
+  final OrderAbstractRepository loginRepository;
 
   Future<void> _load(
     LoadList event,

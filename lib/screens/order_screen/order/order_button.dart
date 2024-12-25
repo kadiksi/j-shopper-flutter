@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:j_courier/generated/l10n.dart';
+import 'package:j_courier/models/tasks/product.dart';
 import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
 
 Widget buildAcceptOrderButton(BuildContext context) {
@@ -12,7 +13,11 @@ Widget buildAcceptOrderButton(BuildContext context) {
   );
 }
 
-Widget buildCollectedButton(BuildContext context, List<int> selectedItems) {
+Widget buildCollectedButton(
+    BuildContext context,
+    List<Product> selectedItems,
+    void Function(List<Product> products) collect,
+    void Function(List<Product> products) doNotExist) {
   final theme = Theme.of(context);
   if (selectedItems.isNotEmpty) {
     return Row(
@@ -20,7 +25,9 @@ Widget buildCollectedButton(BuildContext context, List<int> selectedItems) {
       children: [
         SizedBox(
           child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                doNotExist(selectedItems);
+              },
               style: theme.elevatedButtonTheme.style!.copyWith(
                   backgroundColor: WidgetStateProperty.all(
                       theme.colorScheme.secondaryContainer)),
@@ -32,7 +39,9 @@ Widget buildCollectedButton(BuildContext context, List<int> selectedItems) {
         ),
         SizedBox(
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              collect(selectedItems);
+            },
             child: Text(S.of(context).collect),
           ),
         )

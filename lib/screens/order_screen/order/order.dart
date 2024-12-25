@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:j_courier/models/tasks/product.dart';
 import 'package:j_courier/models/tasks/shelf/shelf.dart';
 import 'package:j_courier/models/tasks/task.dart';
-import 'package:j_courier/screens/order_screen/oder/order_button.dart';
-import 'package:j_courier/screens/order_screen/oder/order_info.dart';
-import 'package:j_courier/screens/order_screen/oder/product_list.dart';
+import 'package:j_courier/screens/order_screen/order/order_button.dart';
+import 'package:j_courier/screens/order_screen/order/order_info.dart';
+import 'package:j_courier/screens/order_screen/order/product_list.dart';
 import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
 
 Widget orderView(
@@ -11,7 +12,7 @@ Widget orderView(
   List<Shelf> shelfs,
   ThemeData theme,
   BuildContext context,
-  List<int> selectedItems,
+  List<Product> selectedItems,
   void Function(VoidCallback fn) setState,
 ) {
   return Padding(
@@ -25,8 +26,8 @@ Widget orderView(
                 task, shelfs, theme, context, selectedItems, setState)),
         buildAcceptOrderButton(context),
         Column(
-          children: [buildCollectedButton(context, selectedItems)],
-        )
+            // children: [buildCollectedButton(context, selectedItems)],
+            )
       ],
     ),
   );

@@ -25,7 +25,7 @@ class ActiveOrderScreen extends StatefulWidget {
 
 class _ActiveOrderScreenState extends State<ActiveOrderScreen> {
   final _listBloc = OrderBloc(
-    GetIt.I<ListAbstractRepository>(),
+    GetIt.I<OrderAbstractRepository>(),
   );
   List<int> selectedItems = [];
 

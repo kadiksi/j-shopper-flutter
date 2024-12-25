@@ -25,7 +25,7 @@ class ActiveOrders extends StatefulWidget {
 
 class _ActiveOrdersState extends State<ActiveOrders> {
   final _listBloc = ListBloc(
-    GetIt.I<ListAbstractRepository>(),
+    GetIt.I<OrderAbstractRepository>(),
   );
 
   List<int> selectedItems = [];

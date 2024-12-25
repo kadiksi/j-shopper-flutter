@@ -66,7 +66,7 @@ void main() async {
     () => LoginRepository(dio: dio.dio),
   );
 
-  GetIt.I.registerLazySingleton<ListAbstractRepository>(
+  GetIt.I.registerLazySingleton<OrderAbstractRepository>(
     () => ListRepository(dio: dio.dio),
   );
 

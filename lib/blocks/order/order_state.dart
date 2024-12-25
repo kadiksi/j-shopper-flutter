@@ -32,6 +32,15 @@ class OrderShelfSuccess extends OrderState {
   List<Object?> get props => [shelfs, task];
 }
 
+class OrderCollectProductSuccess extends OrderState {
+  OrderCollectProductSuccess({required this.data});
+
+  final String data;
+
+  @override
+  List<Object?> get props => [data];
+}
+
 class OrderFailure extends OrderState {
   OrderFailure({
     this.exception,

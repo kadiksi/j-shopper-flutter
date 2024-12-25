@@ -12,7 +12,7 @@ Widget buildMultipleExpandableProductLists(
   List<Shelf> shelfs,
   ThemeData theme,
   BuildContext context,
-  List<int> selectedItems,
+  List<Product> selectedItems,
   void Function(VoidCallback fn) setState,
 ) {
   List<Widget> views = [];
@@ -30,12 +30,12 @@ Widget buildMultipleExpandableProductLists(
       subtitle:
           Text('Завершено 6 из 8 Subtitle', style: theme.textTheme.bodySmall),
       children: products.map((product) {
-        final isSelected = selectedItems.contains(product.jmartProductId);
+        final isSelected = selectedItems.contains(product.productId);
         return GestureDetector(
             onLongPress: () {
               if (selectedItems.isEmpty) {
                 setState(() {
-                  selectedItems.add(product.jmartProductId!);
+                  selectedItems.add(product);
                 });
               }
             },
@@ -43,9 +43,9 @@ Widget buildMultipleExpandableProductLists(
               if (selectedItems.isNotEmpty) {
                 setState(() {
                   if (isSelected) {
-                    selectedItems.remove(product.jmartProductId!);
+                    selectedItems.remove(product);
                   } else {
-                    selectedItems.add(product.jmartProductId!);
+                    selectedItems.add(product);
                   }
                 });
               } else {

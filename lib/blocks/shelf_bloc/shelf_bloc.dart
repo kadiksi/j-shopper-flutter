@@ -16,7 +16,7 @@ class ShelfBloc extends Bloc<ShelfEvent, ShelfState> {
     on<LoadShelf>(_load);
   }
 
-  final ListAbstractRepository listRepository;
+  final OrderAbstractRepository listRepository;
 
   Future<void> _load(
     LoadShelf event,

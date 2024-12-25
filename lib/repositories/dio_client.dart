@@ -19,6 +19,7 @@ class DioClient {
           accessToken = tokenBox.get(tokenModelName)?.tokens.auth.token;
           if (accessToken != null && accessToken!.isNotEmpty) {
             options.headers['Authorization'] = 'Bearer ${accessToken}';
+            options.headers['Content-Type'] = 'application/json';
           }
           // print('Request2: ${options.method} ${options.headers}');
           return handler.next(options);
@@ -28,7 +29,7 @@ class DioClient {
           return handler.next(response);
         },
         onError: (error, handler) async {
-          if (error.response?.statusCode == 400) {
+          if (error.response?.statusCode == 401) {
             try {
               await _refreshToken();
 

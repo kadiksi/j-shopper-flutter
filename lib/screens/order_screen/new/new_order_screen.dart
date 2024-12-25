@@ -6,10 +6,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:j_courier/blocks/order/order_bloc.dart';
 import 'package:j_courier/generated/l10n.dart';
+import 'package:j_courier/models/tasks/product.dart';
 import 'package:j_courier/models/tasks/task.dart';
 import 'package:j_courier/repositories/list/list_abstarct_repository.dart';
 import 'package:j_courier/screens/history_screens/active_orders/active_order_screen.dart';
-import 'package:j_courier/screens/order_screen/oder/oder.dart';
+import 'package:j_courier/screens/order_screen/order/order.dart';
 import 'package:j_courier/screens/widgets/bottom_sheet/order_new_options.dart';
 import 'package:j_courier/screens/widgets/errors/failed_request.dart';
 
@@ -28,9 +29,9 @@ class NewOrderScreen extends StatefulWidget {
 
 class _NewOrderScreenState extends State<NewOrderScreen> {
   final _listBloc = OrderBloc(
-    GetIt.I<ListAbstractRepository>(),
+    GetIt.I<OrderAbstractRepository>(),
   );
-  List<int> selectedItems = [];
+  List<Product> selectedItems = [];
 
   @override
   void initState() {
