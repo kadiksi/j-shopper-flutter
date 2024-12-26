@@ -32,7 +32,7 @@ class _NewOrdersState extends State<NewOrders> {
   List<int> selectedItems = [];
   @override
   void initState() {
-    _listBloc.add(LoadList());
+    _listBloc.add(LoadNewList());
     super.initState();
   }
 
@@ -46,7 +46,7 @@ class _NewOrdersState extends State<NewOrders> {
       body: RefreshIndicator(
         onRefresh: () async {
           final completer = Completer();
-          _listBloc.add(LoadList(completer: completer));
+          _listBloc.add(LoadNewList(completer: completer));
           return completer.future;
         },
         child: BlocBuilder<ListBloc, ListState>(
@@ -96,7 +96,7 @@ class _NewOrdersState extends State<NewOrders> {
   }
 
   void callback() {
-    _listBloc.add(LoadList());
+    _listBloc.add(LoadAcceptedList());
   }
 
   void showModalSheet() {

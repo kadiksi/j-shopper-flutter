@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:j_courier/models/tasks/produc%D0%B5_change_status%20copy.dart';
 import 'package:j_courier/models/tasks/product.dart';
 import 'package:j_courier/models/tasks/shelf/shelf.dart';
 import 'package:j_courier/models/tasks/task.dart';
@@ -17,7 +16,42 @@ class ListRepository implements OrderAbstractRepository {
   final Dio dio;
 
   @override
-  Future<ApiResponse> getList() async {
+  Future<ApiResponse> getNewList() async {
+    try {
+      Map<String, dynamic> item = {
+        'page': 1,
+        'size': 100,
+        'sort': ['string'],
+      };
+
+      final response = await dio.get(
+          'https://test5.jmart.kz/gw/jpost-shopper/api/v1/order/new/list',
+          queryParameters: item);
+
+      final data = response.data['data'] as List<dynamic>;
+
+      final taskList = data.map((e) {
+        final details = Task.fromJson(e);
+        return details;
+      }).toList();
+
+      SuccessResponse<List<Task>> su = SuccessResponse(taskList);
+      return su;
+    } catch (e) {
+      if (e is DioException) {
+        print("type: ${e.response?.data.runtimeType} ///${e.response?.data}");
+        if (e.response?.data['data'] == null) {
+          return ErrorResponse(e.response?.data['message']);
+        } else {
+          return ErrorResponse(e.response?.data['data']['message']);
+        }
+      }
+      return ErrorResponse(e.toString());
+    }
+  }
+
+  @override
+  Future<ApiResponse> getAcceptedList() async {
     try {
       final response = await dio.get(
           'https://test5.jmart.kz/gw/jpost-shopper/api/v1/order/accepted/list');
@@ -100,12 +134,6 @@ class ListRepository implements OrderAbstractRepository {
   Future<ApiResponse> changeProductStatus(
       List<Product> products, String status) async {
     try {
-      // final body = jsonEncode({
-      //   'status': 'PROCESSED',
-      //   'price': 10,
-      //   'quantity': 1,
-      // });
-
       List<Map<String, dynamic>> body = [];
       products.forEach((product) {
         Map<String, dynamic> item = {

@@ -12,20 +12,37 @@ part 'list_event.dart';
 part 'list_state.dart';
 
 class ListBloc extends Bloc<ListEvent, ListState> {
-  ListBloc(this.loginRepository) : super(ListInitial()) {
-    on<LoadList>(_load);
+  ListBloc(this.listRepository) : super(ListInitial()) {
+    on<LoadAcceptedList>(_loadAccepted);
+    on<LoadNewList>(_loadNew);
   }
 
-  final OrderAbstractRepository loginRepository;
+  final OrderAbstractRepository listRepository;
 
-  Future<void> _load(
-    LoadList event,
+  Future<void> _loadNew(
+    LoadNewList event,
     Emitter<ListState> emit,
   ) async {
     if (state is! ListSuccess) {
       emit(ListLoading());
     }
-    final response = await loginRepository.getList();
+    final response = await listRepository.getNewList();
+
+    if (response is SuccessResponse<List<Task>>) {
+      emit(ListSuccess(tasks: response.data));
+    } else if (response is ErrorResponse) {
+      emit(ListFailure(exception: response.errorMessage));
+    }
+  }
+
+  Future<void> _loadAccepted(
+    LoadAcceptedList event,
+    Emitter<ListState> emit,
+  ) async {
+    if (state is! ListSuccess) {
+      emit(ListLoading());
+    }
+    final response = await listRepository.getAcceptedList();
 
     if (response is SuccessResponse<List<Task>>) {
       emit(ListSuccess(tasks: response.data));

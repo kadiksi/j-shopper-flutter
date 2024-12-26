@@ -26,7 +26,7 @@ class _NotificationsState extends State<Notifications> {
   List<int> selectedItems = [];
   @override
   void initState() {
-    _listBloc.add(LoadList());
+    _listBloc.add(LoadAcceptedList());
     super.initState();
   }
 
@@ -41,7 +41,7 @@ class _NotificationsState extends State<Notifications> {
       body: RefreshIndicator(
         onRefresh: () async {
           final completer = Completer();
-          _listBloc.add(LoadList(completer: completer));
+          _listBloc.add(LoadAcceptedList(completer: completer));
           return completer.future;
         },
         child: BlocBuilder<ListBloc, ListState>(
@@ -72,7 +72,7 @@ class _NotificationsState extends State<Notifications> {
   }
 
   void callback() {
-    _listBloc.add(LoadList());
+    _listBloc.add(LoadAcceptedList());
   }
 
   void showModalSheet() {
