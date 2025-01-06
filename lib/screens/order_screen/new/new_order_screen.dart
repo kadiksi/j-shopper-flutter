@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:j_courier/blocks/order/order_bloc.dart';
 import 'package:j_courier/generated/l10n.dart';
+import 'package:j_courier/models/tasks/cacelation_reasons/cancelation_reasons.dart';
 import 'package:j_courier/models/tasks/product.dart';
 import 'package:j_courier/models/tasks/task.dart';
 import 'package:j_courier/repositories/list/list_abstarct_repository.dart';
@@ -32,9 +33,11 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
     GetIt.I<OrderAbstractRepository>(),
   );
   List<Product> selectedItems = [];
+  List<CancelationReasons> reasons = [];
 
   @override
   void initState() {
+    _listBloc.add(LoadCancelationReasons());
     _listBloc.add(LoadOrder(id: int.parse(widget.task.externalOrderId!)));
     super.initState();
   }
@@ -50,12 +53,6 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
           IconButton(
             icon: const Icon(Icons.more_vert),
             onPressed: () {
-              final List<String> reasons = [
-                'Reason 1',
-                'Reason 2',
-                'Reason 3',
-                // Add more reasons if needed
-              ];
               showNewOrderOptions(
                 context,
                 showModelCancelOrder,
@@ -71,19 +68,24 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
           _listBloc.add(LoadOrder(id: int.parse(widget.task.externalOrderId!)));
           return completer.future;
         },
-        child: BlocBuilder<OrderBloc, OrderState>(
-          bloc: _listBloc,
-          builder: (context, state) {
-            if (state is OrderShelfSuccess) {
-              return orderView(state.task, state.shelfs, theme, context,
-                  selectedItems, setState);
-            }
-            if (state is OrderFailure) {
-              return FailedRequest(callback: callback);
-            }
-            return const Center(child: CircularProgressIndicator());
-          },
-        ),
+        child: BlocConsumer<OrderBloc, OrderState>(
+            bloc: _listBloc,
+            builder: (context, state) {
+              if (state is OrderShelfSuccess) {
+                return orderView(state.task, state.shelfs, theme, context,
+                    selectedItems, setState);
+              }
+              if (state is OrderFailure) {
+                return FailedRequest(callback: callback);
+              }
+              return const Center(child: CircularProgressIndicator());
+            },
+            listener: (BuildContext context, OrderState state) {
+              if (state is OrderCancelReasonSuccess) {
+                reasons = state.cancelationReasons;
+                print("From OrderCancelReasonSuccess Listener");
+              }
+            }),
       ),
     );
   }

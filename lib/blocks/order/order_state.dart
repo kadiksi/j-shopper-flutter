@@ -32,6 +32,15 @@ class OrderShelfSuccess extends OrderState {
   List<Object?> get props => [shelfs, task];
 }
 
+class OrderCancelReasonSuccess extends OrderState {
+  OrderCancelReasonSuccess({required this.cancelationReasons});
+
+  final List<CancelationReasons> cancelationReasons;
+
+  @override
+  List<Object?> get props => [cancelationReasons];
+}
+
 class OrderCollectProductSuccess extends OrderState {
   OrderCollectProductSuccess({required this.data});
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:j_courier/generated/l10n.dart';
+import 'package:j_courier/models/tasks/cacelation_reasons/cancelation_reasons.dart';
 import 'package:j_courier/models/tasks/product.dart';
 import 'package:j_courier/screens/widgets/bottom_sheet/option_button.dart';
 
@@ -8,9 +9,9 @@ void showAcceptedOrderOptions(
     void Function(BuildContext context, List<Product> products)
         showModelAddProduct,
     List<Product> products,
-    void Function(BuildContext context, List<String> reasons)
+    void Function(BuildContext context, List<CancelationReasons> reasons)
         showModelCancelProduct,
-    List<String> reasons,
+    List<CancelationReasons> reasons,
     void Function(BuildContext context) showModelReturnOrder) {
   final theme = Theme.of(context);
   showModalBottomSheet(

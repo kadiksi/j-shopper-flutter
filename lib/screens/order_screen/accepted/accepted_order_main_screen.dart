@@ -1,9 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
+import 'package:j_courier/blocks/order/order_bloc.dart';
 import 'package:j_courier/generated/l10n.dart';
+import 'package:j_courier/models/tasks/cacelation_reasons/cancelation_reasons.dart';
 import 'package:j_courier/models/tasks/task.dart';
+import 'package:j_courier/repositories/list/list_abstarct_repository.dart';
 import 'package:j_courier/screens/order_screen/orders_menu/accepted_menu_widgets.dart';
 import 'package:j_courier/screens/order_screen/accepted/accepted_tabs_orders_view.dart';
+import 'package:j_courier/screens/widgets/errors/failed_request.dart';
 import 'package:j_courier/screens/widgets/tabs/tab_with_badge.dart';
 import 'package:j_courier/screens/widgets/bottom_sheet/order_accepted_options.dart';
 
@@ -25,9 +31,15 @@ class _AcceptedOrderTabedScreenState extends State<AcceptedOrderTabedScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
+  final _orderBloc = OrderBloc(
+    GetIt.I<OrderAbstractRepository>(),
+  );
+  List<CancelationReasons> reasons = [];
+
   @override
   void initState() {
     super.initState();
+    _orderBloc.add(LoadCancelationReasons());
     _tabController = TabController(length: 3, vsync: this);
     _tabController.addListener(() {
       setState(() {});
@@ -50,12 +62,6 @@ class _AcceptedOrderTabedScreenState extends State<AcceptedOrderTabedScreen>
           IconButton(
             icon: const Icon(Icons.more_vert),
             onPressed: () {
-              final List<String> reasons = [
-                'Reason 1',
-                'Reason 2',
-                'Reason 3',
-                // Add more reasons if needed
-              ];
               showAcceptedOrderOptions(
                   context,
                   showModelAddProduct,
@@ -99,17 +105,38 @@ class _AcceptedOrderTabedScreenState extends State<AcceptedOrderTabedScreen>
             ),
           ),
           Expanded(
-            child: TabBarView(
-              controller: _tabController,
-              children: [
-                AcceptedOrderScreen(task: widget.task),
-                AcceptedOrderScreen(task: widget.task),
-                AcceptedOrderScreen(task: widget.task),
-              ],
+            child: BlocConsumer<OrderBloc, OrderState>(
+              bloc: _orderBloc,
+              builder: (context, state) {
+                if (state is OrderCancelReasonSuccess) {
+                  return TabBarView(
+                    controller: _tabController,
+                    children: [
+                      AcceptedOrderScreen(task: widget.task),
+                      AcceptedOrderScreen(task: widget.task),
+                      AcceptedOrderScreen(task: widget.task),
+                    ],
+                  );
+                }
+                if (state is OrderFailure) {
+                  return FailedRequest(callback: loadCancelationReasons);
+                }
+                return const Center(child: CircularProgressIndicator());
+              },
+              listener: (BuildContext context, OrderState state) {
+                if (state is OrderCancelReasonSuccess) {
+                  reasons = state.cancelationReasons;
+                  print("From OrderCancelReasonSuccess Listener");
+                }
+              },
             ),
           ),
         ],
       ),
     );
+  }
+
+  void loadCancelationReasons() {
+    _orderBloc.add(LoadCancelationReasons());
   }
 }

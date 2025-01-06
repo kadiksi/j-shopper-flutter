@@ -31,6 +31,7 @@ class _AcceptedOrderScreenState extends State<AcceptedOrderScreen> {
   @override
   void initState() {
     _orderBloc.add(LoadOrder(id: int.parse(widget.task.externalOrderId!)));
+    // _orderBloc.add(LoadCancelationReasons());
     super.initState();
   }
 
@@ -61,6 +62,9 @@ class _AcceptedOrderScreenState extends State<AcceptedOrderScreen> {
             if (state is OrderCollectProductSuccess) {
               print("From OrderCollectProductSuccess Listener");
               getOrder();
+            }
+            if (state is OrderCancelReasonSuccess) {
+              print("From OrderCancelReasonSuccess Listener");
             }
           },
         ),

@@ -7,6 +7,7 @@ abstract class OrderAbstractRepository {
   Future<ApiResponse> getAcceptedList();
   Future<ApiResponse> getOrder(int id);
   Future<ApiResponse> getOrderShelf();
+  Future<ApiResponse> getCancelationReason();
   Future<ApiResponse> changeProductStatus(
       List<Product> products, String status);
 }

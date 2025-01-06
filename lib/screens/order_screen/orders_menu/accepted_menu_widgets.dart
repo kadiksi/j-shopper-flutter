@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:j_courier/generated/l10n.dart';
+import 'package:j_courier/models/tasks/cacelation_reasons/cancelation_reasons.dart';
 import 'package:j_courier/models/tasks/product.dart';
 import 'package:j_courier/screens/product_screen/product_replacement_screen.dart';
 import 'package:j_courier/screens/widgets/bottom_sheet/cancel_order.dart';
@@ -20,7 +21,8 @@ void showModelAddProduct(BuildContext context, List<Product> products) {
   );
 }
 
-void showModelCancelOrder(BuildContext context, List<String> reasons) {
+void showModelCancelOrder(
+    BuildContext context, List<CancelationReasons> reasons) {
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,

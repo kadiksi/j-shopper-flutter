@@ -109,7 +109,7 @@ class TaskTile extends StatelessWidget {
                           ?.copyWith(color: theme.colorScheme.surfaceTint),
                     ),
                     divider8,
-                    Text(S.of(context).createddate((task.plannedDate!)),
+                    Text(S.of(context).createddate((task.plannedDate ?? ' ')),
                         style: theme.textTheme.headlineMedium),
                   ],
                 ),

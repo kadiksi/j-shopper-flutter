@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:j_courier/models/tasks/cacelation_reasons/cancelation_reasons.dart';
 import 'package:j_courier/models/tasks/product.dart';
 import 'package:j_courier/models/tasks/shelf/shelf.dart';
 import 'package:j_courier/models/tasks/task.dart';
@@ -19,7 +20,7 @@ class ListRepository implements OrderAbstractRepository {
   Future<ApiResponse> getNewList() async {
     try {
       Map<String, dynamic> item = {
-        'page': 1,
+        'page': 0,
         'size': 100,
         'sort': ['string'],
       };
@@ -116,6 +117,34 @@ class ListRepository implements OrderAbstractRepository {
       }).toList();
 
       SuccessResponse<List<Shelf>> su = SuccessResponse(shelfList);
+      return su;
+    } catch (e) {
+      if (e is DioException) {
+        print("type: ${e.response?.data.runtimeType} ///${e.response?.data}");
+        if (e.response?.data['data'] == null) {
+          return ErrorResponse(e.response?.data['message']);
+        } else {
+          return ErrorResponse(e.response?.data['data']['message']);
+        }
+      }
+      return ErrorResponse(e.toString());
+    }
+  }
+
+  @override
+  Future<ApiResponse> getCancelationReason() async {
+    try {
+      final response = await dio.get(
+          'https://test5.jmart.kz/gw/jpost-shopper/api/v1/order/cancel-reason/list');
+
+      final data = response.data['data'] as List<dynamic>;
+
+      final shelfList = data.map((e) {
+        final details = CancelationReasons.fromMap(e);
+        return details;
+      }).toList();
+
+      SuccessResponse<List<CancelationReasons>> su = SuccessResponse(shelfList);
       return su;
     } catch (e) {
       if (e is DioException) {

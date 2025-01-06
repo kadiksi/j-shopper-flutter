@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:j_courier/models/tasks/cacelation_reasons/cancelation_reasons.dart';
 import 'package:j_courier/models/tasks/product.dart';
 import 'package:j_courier/models/tasks/shelf/shelf.dart';
 import 'package:j_courier/models/tasks/task.dart';
@@ -18,6 +19,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     on<LoadOrder>(_load);
     on<LoadShelf>(_loadShelf);
     on<LoadCollectOrder>(_collecProduct);
+    on<LoadCancelationReasons>(_loadCancelationReason);
   }
 
   final OrderAbstractRepository orderRepository;
@@ -50,6 +52,22 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
 
     if (response is SuccessResponse<List<Shelf>>) {
       emit(OrderShelfSuccess(shelfs: response.data, task: event.task));
+    } else if (response is ErrorResponse) {
+      emit(OrderFailure(exception: response.errorMessage));
+    }
+  }
+
+  Future<void> _loadCancelationReason(
+    LoadCancelationReasons event,
+    Emitter<OrderState> emit,
+  ) async {
+    // if (state is! OrderSuccess) {
+    //   emit(OrderLoading());
+    // }
+    final response = await orderRepository.getCancelationReason();
+
+    if (response is SuccessResponse<List<CancelationReasons>>) {
+      emit(OrderCancelReasonSuccess(cancelationReasons: response.data));
     } else if (response is ErrorResponse) {
       emit(OrderFailure(exception: response.errorMessage));
     }

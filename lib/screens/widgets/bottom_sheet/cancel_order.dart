@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:j_courier/generated/l10n.dart';
+import 'package:j_courier/models/tasks/cacelation_reasons/cancelation_reasons.dart';
 import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
 
 class ReasonSelectionSheet extends StatefulWidget {
-  final List<String> reasons;
+  final List<CancelationReasons> reasons;
 
   const ReasonSelectionSheet({super.key, required this.reasons});
   @override
@@ -28,10 +29,10 @@ class _ReasonSelectionSheetState extends State<ReasonSelectionSheet> {
           DropdownButtonFormField<String>(
             hint: Text(S.of(context).choose),
             value: selectedReason,
-            items: widget.reasons.map((String reason) {
+            items: widget.reasons.map((CancelationReasons reason) {
               return DropdownMenuItem<String>(
-                value: reason,
-                child: Text(reason),
+                value: reason.name,
+                child: Text(reason.name ?? ''),
               );
             }).toList(),
             onChanged: (newValue) {

@@ -80,14 +80,14 @@ class Task extends Equatable {
     return Task(
       externalOrderId: map['externalOrderId'] as String,
       orderSource: map['orderSource'] as String,
-      orderType: map['orderType'] as String,
+      orderType: map['orderType'] as String?,
       deliveryType: map['deliveryType'] as String,
       customerId: map['customerId'] as int,
       customerName: map['customerName'] as String,
       customerCityId: map['customerCityId'] as int,
       customerCityName: map['customerCityName'] as String,
-      plannedDate: map['plannedDate'] as String,
-      plannedDateInterval: map['plannedDateInterval'] as String,
+      plannedDate: map['plannedDate'] as String?,
+      plannedDateInterval: map['plannedDateInterval'] as String?,
       totalPrice: map['totalPrice'] as int,
       totalProductAmount: map['totalProductAmount'] as int,
       productList: List<Product>.from(
