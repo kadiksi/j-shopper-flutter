@@ -10,6 +10,7 @@ part 'task.g.dart';
 @JsonSerializable()
 // ignore: must_be_immutable
 class Task extends Equatable {
+  int? shopperOrderId;
   String? externalOrderId;
   String? orderSource;
   String? orderType; //SUPERMARKET
@@ -24,6 +25,7 @@ class Task extends Equatable {
   int? totalProductAmount;
   List<Product>? productList;
   Task({
+    required this.shopperOrderId,
     required this.externalOrderId,
     required this.orderSource,
     required this.orderType,
@@ -42,6 +44,7 @@ class Task extends Equatable {
   @override
   List<Object?> get props {
     return [
+      shopperOrderId,
       externalOrderId,
       orderSource,
       orderType,
@@ -60,6 +63,7 @@ class Task extends Equatable {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
+      'shopperOrderId': shopperOrderId,
       'externalOrderId': externalOrderId,
       'orderSource': orderSource,
       'orderType': orderType,
@@ -78,6 +82,7 @@ class Task extends Equatable {
 
   factory Task.fromMap(Map<String, dynamic> map) {
     return Task(
+      shopperOrderId: map['shopperOrderId'] as int,
       externalOrderId: map['externalOrderId'] as String,
       orderSource: map['orderSource'] as String,
       orderType: map['orderType'] as String?,
@@ -102,3 +107,5 @@ class Task extends Equatable {
 
   factory Task.fromJson(Map<String, dynamic> source) => Task.fromMap(source);
 }
+
+enum OrderStatus { PROCESSED, CANCELED, REJECTED }

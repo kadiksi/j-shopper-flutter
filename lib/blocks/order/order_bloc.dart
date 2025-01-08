@@ -20,6 +20,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     on<LoadShelf>(_loadShelf);
     on<LoadCollectOrder>(_collecProduct);
     on<LoadCancelationReasons>(_loadCancelationReason);
+    on<SetOrderStatus>(_changeStatus);
   }
 
   final OrderAbstractRepository orderRepository;
@@ -35,7 +36,26 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
 
     if (response is SuccessResponse<Task>) {
       add(LoadShelf(task: response.data));
-      // emit(OrderSuccess(tasks: response.data));
+    } else if (response is ErrorResponse) {
+      emit(OrderFailure(exception: response.errorMessage));
+    }
+  }
+
+  Future<void> _changeStatus(
+    SetOrderStatus event,
+    Emitter<OrderState> emit,
+  ) async {
+    if (state is! OrderSuccess) {
+      emit(OrderLoading());
+    }
+    final response = await orderRepository.changeOrderStatus(
+        event.shopperOrderId,
+        event.status,
+        event.cancellationReason,
+        event.cancellationReasonOther);
+
+    if (response is SuccessResponse<Task>) {
+      emit(OrderStatusSuccess(task: response.data));
     } else if (response is ErrorResponse) {
       emit(OrderFailure(exception: response.errorMessage));
     }
@@ -61,9 +81,6 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     LoadCancelationReasons event,
     Emitter<OrderState> emit,
   ) async {
-    // if (state is! OrderSuccess) {
-    //   emit(OrderLoading());
-    // }
     final response = await orderRepository.getCancelationReason();
 
     if (response is SuccessResponse<List<CancelationReasons>>) {

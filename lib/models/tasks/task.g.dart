@@ -7,6 +7,7 @@ part of 'task.dart';
 // **************************************************************************
 
 Task _$TaskFromJson(Map<String, dynamic> json) => Task(
+      shopperOrderId: (json['shopperOrderId'] as num?)?.toInt(),
       externalOrderId: json['externalOrderId'] as String?,
       orderSource: json['orderSource'] as String?,
       orderType: json['orderType'] as String?,
@@ -25,6 +26,7 @@ Task _$TaskFromJson(Map<String, dynamic> json) => Task(
     );
 
 Map<String, dynamic> _$TaskToJson(Task instance) => <String, dynamic>{
+      'shopperOrderId': instance.shopperOrderId,
       'externalOrderId': instance.externalOrderId,
       'orderSource': instance.orderSource,
       'orderType': instance.orderType,

@@ -68,7 +68,8 @@ class _AcceptedOrderTabedScreenState extends State<AcceptedOrderTabedScreen>
                   widget.task.productList!,
                   showModelCancelOrder,
                   reasons,
-                  showModelReturnOrder);
+                  showModelReturnOrder,
+                  cancelOrder);
             },
           ),
         ],
@@ -138,5 +139,15 @@ class _AcceptedOrderTabedScreenState extends State<AcceptedOrderTabedScreen>
 
   void loadCancelationReasons() {
     _orderBloc.add(LoadCancelationReasons());
+  }
+
+  void cancelOrder(String cancellationReason) {
+    widget.task.customerId;
+    print('Load Cancel Order Main');
+    _orderBloc.add(SetOrderStatus(
+        shopperOrderId: widget.task.shopperOrderId!,
+        status: OrderStatus.CANCELED,
+        cancellationReason: cancellationReason,
+        cancellationReasonOther: 'cancellationReasonOther'));
   }
 }

@@ -260,12 +260,17 @@ class _ActiveOrderScreenState extends State<ActiveOrderScreen> {
 
 void showModelCancelOrder(
     BuildContext context, List<CancelationReasons> reasons) {
-  showModalBottomSheet(
-    context: context,
-    isScrollControlled: true,
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-    ),
-    builder: (context) => ReasonSelectionSheet(reasons: reasons),
-  );
+  // showModalBottomSheet(
+  //   context: context,
+  //   isScrollControlled: true,
+  //   shape: const RoundedRectangleBorder(
+  //     borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+  //   ),
+  //   builder: (context) =>
+  //       ReasonSelectionSheet(reasons: reasons, action: loadOrder),
+  // );
+}
+
+void loadOrder() {
+  print('Load order order active screen');
 }

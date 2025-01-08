@@ -6,7 +6,8 @@ import 'package:j_courier/screens/product_screen/product_replacement_screen.dart
 import 'package:j_courier/screens/widgets/bottom_sheet/cancel_order.dart';
 import 'package:j_courier/screens/widgets/bottom_sheet/return_order.dart';
 
-void showModelAddProduct(BuildContext context, List<Product> products) {
+void showModelAddProduct(BuildContext context, List<Product> products,
+    final Function(String reason) action) {
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
@@ -21,15 +22,16 @@ void showModelAddProduct(BuildContext context, List<Product> products) {
   );
 }
 
-void showModelCancelOrder(
-    BuildContext context, List<CancelationReasons> reasons) {
+void showModelCancelOrder(BuildContext context,
+    List<CancelationReasons> reasons, final Function(String reason) action) {
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
     ),
-    builder: (context) => ReasonSelectionSheet(reasons: reasons),
+    builder: (context) =>
+        ReasonSelectionSheet(action: action, reasons: reasons),
   );
 }
 
