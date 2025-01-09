@@ -96,7 +96,7 @@ class _NewOrdersState extends State<NewOrders> {
   }
 
   void callback() {
-    _listBloc.add(LoadAcceptedList());
+    _listBloc.add(LoadNewList());
   }
 
   void showModalSheet() {

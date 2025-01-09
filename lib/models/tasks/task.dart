@@ -25,7 +25,7 @@ class Task extends Equatable {
   int? totalProductAmount;
   List<Product>? productList;
   Task({
-    required this.shopperOrderId,
+    this.shopperOrderId,
     required this.externalOrderId,
     required this.orderSource,
     required this.orderType,
@@ -82,7 +82,7 @@ class Task extends Equatable {
 
   factory Task.fromMap(Map<String, dynamic> map) {
     return Task(
-      shopperOrderId: map['shopperOrderId'] as int,
+      shopperOrderId: map['shopperOrderId'] as int?,
       externalOrderId: map['externalOrderId'] as String,
       orderSource: map['orderSource'] as String,
       orderType: map['orderType'] as String?,

@@ -5,8 +5,9 @@ import '../../models/ApiResponse';
 
 abstract class OrderAbstractRepository {
   Future<ApiResponse> getNewList();
+  Future<ApiResponse> getNewOrder(int id);
   Future<ApiResponse> getAcceptedList();
-  Future<ApiResponse> getOrder(int id);
+  Future<ApiResponse> getAcceptedOrder(int id);
   Future<ApiResponse> getOrderShelf();
   Future<ApiResponse> getCancelationReason();
   Future<ApiResponse> changeOrderStatus(int shopperOrderId, OrderStatus status,

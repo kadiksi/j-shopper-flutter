@@ -37,8 +37,8 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
 
   @override
   void initState() {
-    _listBloc.add(LoadCancelationReasons());
-    _listBloc.add(LoadOrder(id: int.parse(widget.task.externalOrderId!)));
+    // _listBloc.add(LoadCancelationReasons());
+    callback();
     super.initState();
   }
 
@@ -65,15 +65,15 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
       body: RefreshIndicator(
         onRefresh: () async {
           final completer = Completer();
-          _listBloc.add(LoadOrder(id: int.parse(widget.task.externalOrderId!)));
+          callback();
           return completer.future;
         },
         child: BlocConsumer<OrderBloc, OrderState>(
             bloc: _listBloc,
             builder: (context, state) {
               if (state is OrderShelfSuccess) {
-                return orderView(state.task, state.shelfs, theme, context,
-                    selectedItems, setState);
+                return newOrderView(state.task, state.shelfs, theme, context,
+                    selectedItems, setState, callback);
               }
               if (state is OrderFailure) {
                 return FailedRequest(callback: callback);
@@ -81,17 +81,17 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
               return const Center(child: CircularProgressIndicator());
             },
             listener: (BuildContext context, OrderState state) {
-              if (state is OrderCancelReasonSuccess) {
-                reasons = state.cancelationReasons;
-                print("From OrderCancelReasonSuccess Listener");
-              }
+              // if (state is OrderCancelReasonSuccess) {
+              //   reasons = state.cancelationReasons;
+              //   print("From OrderCancelReasonSuccess Listener");
+              // }
             }),
       ),
     );
   }
 
   void callback() {
-    _listBloc.add(LoadOrder(id: int.parse(widget.task.externalOrderId!)));
+    _listBloc.add(LoadNewOrder(id: int.parse(widget.task.externalOrderId!)));
   }
 }
 

@@ -16,7 +16,8 @@ part 'order_state.dart';
 
 class OrderBloc extends Bloc<OrderEvent, OrderState> {
   OrderBloc(this.orderRepository) : super(OrderInitial()) {
-    on<LoadOrder>(_load);
+    on<LoadAcceptedOrder>(_loadAcceptedOrder);
+    on<LoadNewOrder>(_loadNewOrder);
     on<LoadShelf>(_loadShelf);
     on<LoadCollectOrder>(_collecProduct);
     on<LoadCancelationReasons>(_loadCancelationReason);
@@ -25,14 +26,30 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
 
   final OrderAbstractRepository orderRepository;
 
-  Future<void> _load(
-    LoadOrder event,
+  Future<void> _loadAcceptedOrder(
+    LoadAcceptedOrder event,
     Emitter<OrderState> emit,
   ) async {
     if (state is! OrderSuccess) {
       emit(OrderLoading());
     }
-    final response = await orderRepository.getOrder(event.id);
+    final response = await orderRepository.getAcceptedOrder(event.id);
+
+    if (response is SuccessResponse<Task>) {
+      add(LoadShelf(task: response.data));
+    } else if (response is ErrorResponse) {
+      emit(OrderFailure(exception: response.errorMessage));
+    }
+  }
+
+  Future<void> _loadNewOrder(
+    LoadNewOrder event,
+    Emitter<OrderState> emit,
+  ) async {
+    if (state is! OrderSuccess) {
+      emit(OrderLoading());
+    }
+    final response = await orderRepository.getNewOrder(event.id);
 
     if (response is SuccessResponse<Task>) {
       add(LoadShelf(task: response.data));

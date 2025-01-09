@@ -52,6 +52,30 @@ class ListRepository implements OrderAbstractRepository {
   }
 
   @override
+  Future<ApiResponse> getNewOrder(int id) async {
+    try {
+      final response = await dio.get(
+          'https://test5.jmart.kz/gw/jpost-shopper/api/v1/order/new/${id}');
+
+      final data = response.data['data'] as dynamic;
+      final details = Task.fromJson(data);
+
+      SuccessResponse<Task> su = SuccessResponse(details);
+      return su;
+    } catch (e) {
+      if (e is DioException) {
+        print("type: ${e.response?.data.runtimeType} ///${e.response?.data}");
+        if (e.response?.data['data'] == null) {
+          return ErrorResponse(e.response?.data['message']);
+        } else {
+          return ErrorResponse(e.response?.data['data']['message']);
+        }
+      }
+      return ErrorResponse(e.toString());
+    }
+  }
+
+  @override
   Future<ApiResponse> getAcceptedList() async {
     try {
       final response = await dio.get(
@@ -80,7 +104,7 @@ class ListRepository implements OrderAbstractRepository {
   }
 
   @override
-  Future<ApiResponse> getOrder(int id) async {
+  Future<ApiResponse> getAcceptedOrder(int id) async {
     try {
       final response = await dio.get(
           'https://test5.jmart.kz/gw/jpost-shopper/api/v1/order/accepted/${id}');

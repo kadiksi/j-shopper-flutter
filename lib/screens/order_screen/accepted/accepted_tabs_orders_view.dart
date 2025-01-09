@@ -30,7 +30,8 @@ class _AcceptedOrderScreenState extends State<AcceptedOrderScreen> {
 
   @override
   void initState() {
-    _orderBloc.add(LoadOrder(id: int.parse(widget.task.externalOrderId!)));
+    _orderBloc
+        .add(LoadAcceptedOrder(id: int.parse(widget.task.externalOrderId!)));
     // _orderBloc.add(LoadCancelationReasons());
     super.initState();
   }
@@ -42,8 +43,8 @@ class _AcceptedOrderScreenState extends State<AcceptedOrderScreen> {
       body: RefreshIndicator(
         onRefresh: () async {
           final completer = Completer();
-          _orderBloc
-              .add(LoadOrder(id: int.parse(widget.task.externalOrderId!)));
+          _orderBloc.add(
+              LoadAcceptedOrder(id: int.parse(widget.task.externalOrderId!)));
           return completer.future;
         },
         child: BlocConsumer<OrderBloc, OrderState>(
@@ -73,7 +74,8 @@ class _AcceptedOrderScreenState extends State<AcceptedOrderScreen> {
   }
 
   void getOrder() {
-    _orderBloc.add(LoadOrder(id: int.parse(widget.task.externalOrderId!)));
+    _orderBloc
+        .add(LoadAcceptedOrder(id: int.parse(widget.task.externalOrderId!)));
   }
 
   void collect(List<Product> products) {

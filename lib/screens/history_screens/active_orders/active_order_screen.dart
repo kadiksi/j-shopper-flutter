@@ -254,7 +254,8 @@ class _ActiveOrderScreenState extends State<ActiveOrderScreen> {
   }
 
   void loadOrder() {
-    _listBloc.add(LoadOrder(id: int.parse(widget.task.externalOrderId!)));
+    _listBloc
+        .add(LoadAcceptedOrder(id: int.parse(widget.task.externalOrderId!)));
   }
 }
 

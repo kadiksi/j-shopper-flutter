@@ -3,11 +3,13 @@ import 'package:j_courier/generated/l10n.dart';
 import 'package:j_courier/models/tasks/product.dart';
 import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
 
-Widget buildAcceptOrderButton(BuildContext context) {
+Widget buildAcceptOrderButton(BuildContext context, void Function() accept) {
   return SizedBox(
     width: double.infinity,
     child: ElevatedButton(
-      onPressed: () {},
+      onPressed: () {
+        accept();
+      },
       child: Text(S.of(context).accept_orders),
     ),
   );
