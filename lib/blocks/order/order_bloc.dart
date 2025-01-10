@@ -66,7 +66,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
       emit(OrderLoading());
     }
     final response = await orderRepository.changeOrderStatus(
-        event.shopperOrderId,
+        event.externalOrderId,
         event.status,
         event.cancellationReason,
         event.cancellationReasonOther);

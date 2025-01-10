@@ -25,20 +25,20 @@ class LoadNewOrder extends OrderEvent {
 class SetOrderStatus extends OrderEvent {
   SetOrderStatus(
       {this.completer,
-      required this.shopperOrderId,
+      required this.externalOrderId,
       required this.status,
       required this.cancellationReason,
       required this.cancellationReasonOther});
 
   final Completer? completer;
-  final int shopperOrderId;
+  final String externalOrderId;
   final OrderStatus status;
   final String cancellationReason;
   final String cancellationReasonOther;
 
   @override
   List<Object?> get props =>
-      [completer, shopperOrderId, cancellationReason, cancellationReasonOther];
+      [completer, externalOrderId, cancellationReason, cancellationReasonOther];
 }
 
 class LoadShelf extends OrderEvent {

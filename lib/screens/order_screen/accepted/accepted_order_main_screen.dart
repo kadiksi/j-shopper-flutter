@@ -128,6 +128,9 @@ class _AcceptedOrderTabedScreenState extends State<AcceptedOrderTabedScreen>
                 if (state is OrderCancelReasonSuccess) {
                   reasons = state.cancelationReasons;
                   print("From OrderCancelReasonSuccess Listener");
+                } else if (state is OrderStatusSuccess) {
+                  print("From OrderStatusSuccess Listener");
+                  handleCancel();
                 }
               },
             ),
@@ -141,13 +144,19 @@ class _AcceptedOrderTabedScreenState extends State<AcceptedOrderTabedScreen>
     _orderBloc.add(LoadCancelationReasons());
   }
 
+  void handleCancel() {
+    Navigator.pop(context);
+    Navigator.pop(context);
+  }
+
   void cancelOrder(String cancellationReason) {
-    widget.task.customerId;
-    print('Load Cancel Order Main');
-    _orderBloc.add(SetOrderStatus(
-        shopperOrderId: widget.task.shopperOrderId!,
-        status: OrderStatus.CANCELED,
-        cancellationReason: cancellationReason,
-        cancellationReasonOther: 'cancellationReasonOther'));
+    handleCancel();
+    // widget.task.customerId;
+    // print('Load Cancel Order Main');
+    // _orderBloc.add(SetOrderStatus(
+    //     externalOrderId: widget.task.externalOrderId!,
+    //     status: OrderStatus.CANCELED,
+    //     cancellationReason: cancellationReason,
+    //     cancellationReasonOther: 'cancellationReasonOther'));
   }
 }

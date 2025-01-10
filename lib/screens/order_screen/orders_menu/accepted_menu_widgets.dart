@@ -22,8 +22,10 @@ void showModelAddProduct(BuildContext context, List<Product> products,
   );
 }
 
-void showModelCancelOrder(BuildContext context,
-    List<CancelationReasons> reasons, final Function(String reason) action) {
+void showModelCancelOrder(
+    BuildContext context,
+    List<CancelationReasons> reasons,
+    final Function(String reason) cancelOrder) {
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
@@ -31,7 +33,7 @@ void showModelCancelOrder(BuildContext context,
       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
     ),
     builder: (context) =>
-        ReasonSelectionSheet(action: action, reasons: reasons),
+        ReasonSelectionSheet(cancelOrder: cancelOrder, reasons: reasons),
   );
 }
 

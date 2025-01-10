@@ -15,7 +15,7 @@ void showAcceptedOrderOptions(
         showModelCancelProduct,
     List<CancelationReasons> reasons,
     void Function(BuildContext context) showModelReturnOrder,
-    final Function(String reason) action) {
+    final Function(String reason) cancelOrder) {
   final theme = Theme.of(context);
   showModalBottomSheet(
     context: context,
@@ -43,14 +43,14 @@ void showAcceptedOrderOptions(
                       icon: 'assets/svg/add_order.svg',
                       text: S.of(context).add_product,
                       onTap: () =>
-                          showModelAddProduct(context, products, action),
+                          showModelAddProduct(context, products, cancelOrder),
                     ),
                     buildOptionItem(
                       context,
                       icon: 'assets/svg/cancel_order.svg',
                       text: S.of(context).cancel_order,
                       onTap: () =>
-                          showModelCancelProduct(context, reasons, action),
+                          showModelCancelProduct(context, reasons, cancelOrder),
                     ),
                     buildOptionItem(
                       context,

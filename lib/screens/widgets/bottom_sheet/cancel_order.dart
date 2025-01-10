@@ -5,10 +5,10 @@ import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
 
 class ReasonSelectionSheet extends StatefulWidget {
   final List<CancelationReasons> reasons;
-  final Function(String reason) action;
+  final Function(String reason) cancelOrder;
 
   const ReasonSelectionSheet(
-      {super.key, required this.action, required this.reasons});
+      {super.key, required this.cancelOrder, required this.reasons});
   @override
   _ReasonSelectionSheetState createState() => _ReasonSelectionSheetState();
 }
@@ -33,7 +33,7 @@ class _ReasonSelectionSheetState extends State<ReasonSelectionSheet> {
             value: selectedReason,
             items: widget.reasons.map((CancelationReasons reason) {
               return DropdownMenuItem<String>(
-                value: reason.name,
+                value: reason.code,
                 child: Text(reason.name ?? ''),
               );
             }).toList(),
@@ -46,7 +46,7 @@ class _ReasonSelectionSheetState extends State<ReasonSelectionSheet> {
           divider16,
           ElevatedButton(
             onPressed: () {
-              widget.action(selectedReason ?? 'test reason');
+              widget.cancelOrder(selectedReason ?? 'test reason');
               Navigator.pop(context);
             },
             child: Text(S.of(context).cancel_order),

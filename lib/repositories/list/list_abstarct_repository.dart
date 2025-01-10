@@ -10,8 +10,11 @@ abstract class OrderAbstractRepository {
   Future<ApiResponse> getAcceptedOrder(int id);
   Future<ApiResponse> getOrderShelf();
   Future<ApiResponse> getCancelationReason();
-  Future<ApiResponse> changeOrderStatus(int shopperOrderId, OrderStatus status,
-      String cancellationReason, String cancellationReasonOther);
+  Future<ApiResponse> changeOrderStatus(
+      String externalOrderId,
+      OrderStatus status,
+      String cancellationReason,
+      String cancellationReasonOther);
   Future<ApiResponse> changeProductStatus(
       List<Product> products, String status);
 }

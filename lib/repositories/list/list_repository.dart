@@ -184,8 +184,11 @@ class ListRepository implements OrderAbstractRepository {
   }
 
   @override
-  Future<ApiResponse> changeOrderStatus(int shopperOrderId, OrderStatus status,
-      String cancellationReason, String cancellationReasonOther) async {
+  Future<ApiResponse> changeOrderStatus(
+      String externalOrderId,
+      OrderStatus status,
+      String cancellationReason,
+      String cancellationReasonOther) async {
     try {
       // List<Map<String, dynamic>> body = [];
 
@@ -196,7 +199,7 @@ class ListRepository implements OrderAbstractRepository {
       };
       // body.add(item);
       final response = await dio.put(
-          'https://test5.jmart.kz/gw/jpost-shopper/api/v1/order/${shopperOrderId}/status',
+          'https://test5.jmart.kz/gw/jpost-shopper/api/v1/order/${externalOrderId}/status',
           data: jsonEncode(item));
 
       final data = response.data as dynamic;
