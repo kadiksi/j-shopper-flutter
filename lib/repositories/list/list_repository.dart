@@ -78,16 +78,6 @@ class ListRepository implements OrderAbstractRepository {
   @override
   Future<ApiResponse> acceptNewOrder(List<int> externalOrderId) async {
     try {
-      // List<Map<String, dynamic>> body = [];
-      // products.forEach((product) {
-      //   Map<String, dynamic> item = {
-      //     'productId': product.productId,
-      //     'price': product.price,
-      //     'quantity': product.quantity,
-      //     'status': status
-      //   };
-      //   body.add(item);
-      // });
       final response = await dio.post(
           'https://test5.jmart.kz/gw/jpost-shopper/api/v1/order/accept',
           data: jsonEncode(externalOrderId));
