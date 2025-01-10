@@ -29,7 +29,7 @@ class NewOrderScreen extends StatefulWidget {
 }
 
 class _NewOrderScreenState extends State<NewOrderScreen> {
-  final _listBloc = OrderBloc(
+  final _orderBloc = OrderBloc(
     GetIt.I<OrderAbstractRepository>(),
   );
   List<Product> selectedItems = [];
@@ -37,7 +37,7 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
 
   @override
   void initState() {
-    // _listBloc.add(LoadCancelationReasons());
+    // _orderBloc.add(LoadCancelationReasons());
     callback();
     super.initState();
   }
@@ -69,11 +69,11 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
           return completer.future;
         },
         child: BlocConsumer<OrderBloc, OrderState>(
-            bloc: _listBloc,
+            bloc: _orderBloc,
             builder: (context, state) {
               if (state is OrderShelfSuccess) {
                 return newOrderView(state.task, state.shelfs, theme, context,
-                    selectedItems, setState, callback);
+                    selectedItems, setState, acceptOrder);
               }
               if (state is OrderFailure) {
                 return FailedRequest(callback: callback);
@@ -81,6 +81,9 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
               return const Center(child: CircularProgressIndicator());
             },
             listener: (BuildContext context, OrderState state) {
+              if (state is OrderAcceptSuccess) {
+                handleAcceptOrder();
+              }
               // if (state is OrderCancelReasonSuccess) {
               //   reasons = state.cancelationReasons;
               //   print("From OrderCancelReasonSuccess Listener");
@@ -91,7 +94,16 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
   }
 
   void callback() {
-    _listBloc.add(LoadNewOrder(id: int.parse(widget.task.externalOrderId!)));
+    _orderBloc.add(LoadNewOrder(id: int.parse(widget.task.externalOrderId!)));
+  }
+
+  void acceptOrder() {
+    _orderBloc.add(AcceptOrder(ids: [int.parse(widget.task.externalOrderId!)]));
+  }
+
+  void handleAcceptOrder() {
+    print("handleAcceptOrder");
+    Navigator.pop(context);
   }
 }
 

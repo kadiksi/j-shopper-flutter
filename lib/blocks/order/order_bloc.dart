@@ -18,6 +18,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
   OrderBloc(this.orderRepository) : super(OrderInitial()) {
     on<LoadAcceptedOrder>(_loadAcceptedOrder);
     on<LoadNewOrder>(_loadNewOrder);
+    on<AcceptOrder>(_acceptNewOrder);
     on<LoadShelf>(_loadShelf);
     on<LoadCollectOrder>(_collecProduct);
     on<LoadCancelationReasons>(_loadCancelationReason);
@@ -53,6 +54,22 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
 
     if (response is SuccessResponse<Task>) {
       add(LoadShelf(task: response.data));
+    } else if (response is ErrorResponse) {
+      emit(OrderFailure(exception: response.errorMessage));
+    }
+  }
+
+  Future<void> _acceptNewOrder(
+    AcceptOrder event,
+    Emitter<OrderState> emit,
+  ) async {
+    if (state is! OrderSuccess) {
+      emit(OrderLoading());
+    }
+    final response = await orderRepository.acceptNewOrder(event.ids);
+
+    if (response is SuccessResponse<Task>) {
+      emit(OrderAcceptSuccess());
     } else if (response is ErrorResponse) {
       emit(OrderFailure(exception: response.errorMessage));
     }

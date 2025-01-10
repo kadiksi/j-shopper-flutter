@@ -6,6 +6,7 @@ import '../../models/ApiResponse';
 abstract class OrderAbstractRepository {
   Future<ApiResponse> getNewList();
   Future<ApiResponse> getNewOrder(int id);
+  Future<ApiResponse> acceptNewOrder(List<int> externalOrderId);
   Future<ApiResponse> getAcceptedList();
   Future<ApiResponse> getAcceptedOrder(int id);
   Future<ApiResponse> getOrderShelf();

@@ -83,18 +83,18 @@ class Task extends Equatable {
   factory Task.fromMap(Map<String, dynamic> map) {
     return Task(
       shopperOrderId: map['shopperOrderId'] as int?,
-      externalOrderId: map['externalOrderId'] as String,
-      orderSource: map['orderSource'] as String,
+      externalOrderId: map['externalOrderId'] as String?,
+      orderSource: map['orderSource'] as String?,
       orderType: map['orderType'] as String?,
-      deliveryType: map['deliveryType'] as String,
-      customerId: map['customerId'] as int,
-      customerName: map['customerName'] as String,
-      customerCityId: map['customerCityId'] as int,
-      customerCityName: map['customerCityName'] as String,
+      deliveryType: map['deliveryType'] as String?,
+      customerId: map['customerId'] as int?,
+      customerName: map['customerName'] as String?,
+      customerCityId: map['customerCityId'] as int?,
+      customerCityName: map['customerCityName'] as String?,
       plannedDate: map['plannedDate'] as String?,
       plannedDateInterval: map['plannedDateInterval'] as String?,
-      totalPrice: map['totalPrice'] as int,
-      totalProductAmount: map['totalProductAmount'] as int,
+      totalPrice: map['totalPrice'] as int?,
+      totalProductAmount: map['totalProductAmount'] as int?,
       productList: List<Product>.from(
         (map['productList']).map<Product>(
           (x) => Product.fromMap(x as Map<String, dynamic>),

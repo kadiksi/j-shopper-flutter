@@ -22,6 +22,16 @@ class LoadNewOrder extends OrderEvent {
   List<Object?> get props => [completer, id];
 }
 
+class AcceptOrder extends OrderEvent {
+  AcceptOrder({this.completer, required this.ids});
+
+  final Completer? completer;
+  final List<int> ids;
+
+  @override
+  List<Object?> get props => [completer, ids];
+}
+
 class SetOrderStatus extends OrderEvent {
   SetOrderStatus(
       {this.completer,

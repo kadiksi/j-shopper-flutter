@@ -23,6 +23,13 @@ class OrderSuccess extends OrderState {
   List<Object?> get props => [task];
 }
 
+class OrderAcceptSuccess extends OrderState {
+  OrderAcceptSuccess();
+
+  @override
+  List<Object?> get props => [];
+}
+
 class OrderStatusSuccess extends OrderState {
   OrderStatusSuccess({
     required this.task,
