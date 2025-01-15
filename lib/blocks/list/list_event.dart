@@ -11,6 +11,16 @@ class LoadAcceptedList extends ListEvent {
   List<Object?> get props => [completer];
 }
 
+class LoadActiveList extends ListEvent {
+  LoadActiveList({this.completer, required this.isFinished});
+
+  final Completer? completer;
+  final bool isFinished;
+
+  @override
+  List<Object?> get props => [completer];
+}
+
 class LoadNewList extends ListEvent {
   LoadNewList({this.completer});
 

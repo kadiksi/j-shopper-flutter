@@ -64,9 +64,9 @@ class _HistoryScreenState extends State<HistoryScreen>
           Expanded(
             child: TabBarView(
               controller: _tabController,
-              children: const [
-                ActiveOrders(),
-                ActiveOrders(),
+              children: [
+                ActiveOrders(isFinished: true),
+                ActiveOrders(isFinished: false),
               ],
             ),
           ),

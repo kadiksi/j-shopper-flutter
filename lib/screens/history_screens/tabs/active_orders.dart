@@ -15,9 +15,9 @@ import '../../widgets/list/task_tile.dart';
 
 @RoutePage()
 class ActiveOrders extends StatefulWidget {
-  const ActiveOrders({
-    super.key,
-  });
+  ActiveOrders({super.key, required this.isFinished});
+
+  bool isFinished = true;
 
   @override
   State<ActiveOrders> createState() => _ActiveOrdersState();
@@ -31,7 +31,7 @@ class _ActiveOrdersState extends State<ActiveOrders> {
   List<int> selectedItems = [];
   @override
   void initState() {
-    _listBloc.add(LoadAcceptedList());
+    loadAccepted();
     super.initState();
   }
 
@@ -85,7 +85,7 @@ class _ActiveOrdersState extends State<ActiveOrders> {
               ]);
             }
             if (state is ListFailure) {
-              return FailedRequest(callback: callback);
+              return FailedRequest(callback: loadAccepted);
             }
             return const Center(child: CircularProgressIndicator());
           },
@@ -94,8 +94,8 @@ class _ActiveOrdersState extends State<ActiveOrders> {
     );
   }
 
-  void callback() {
-    _listBloc.add(LoadAcceptedList());
+  void loadAccepted() {
+    _listBloc.add(LoadActiveList(isFinished: widget.isFinished));
   }
 
   void showModalSheet() {

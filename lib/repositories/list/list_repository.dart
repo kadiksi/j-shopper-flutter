@@ -153,6 +153,39 @@ class ListRepository implements OrderAbstractRepository {
   }
 
   @override
+  Future<ApiResponse> getActiveList(bool isFinished) async {
+    try {
+      Map<String, dynamic> body = {
+        'isFinished': isFinished,
+      };
+
+      final response = await dio.post(
+          'https://test5.jmart.kz/gw/jpost-shopper/api/v1/order/processed/list',
+          data: jsonEncode(body));
+
+      final data = response.data['data'] as List<dynamic>;
+
+      final taskList = data.map((e) {
+        final details = Task.fromJson(e);
+        return details;
+      }).toList();
+
+      SuccessResponse<List<Task>> su = SuccessResponse(taskList);
+      return su;
+    } catch (e) {
+      if (e is DioException) {
+        print("type: ${e.response?.data.runtimeType} ///${e.response?.data}");
+        if (e.response?.data['data'] == null) {
+          return ErrorResponse(e.response?.data['message']);
+        } else {
+          return ErrorResponse(e.response?.data['data']['message']);
+        }
+      }
+      return ErrorResponse(e.toString());
+    }
+  }
+
+  @override
   Future<ApiResponse> getOrderShelf() async {
     try {
       final response = await dio

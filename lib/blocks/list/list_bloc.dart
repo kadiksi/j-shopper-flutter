@@ -15,6 +15,7 @@ class ListBloc extends Bloc<ListEvent, ListState> {
   ListBloc(this.listRepository) : super(ListInitial()) {
     on<LoadAcceptedList>(_loadAccepted);
     on<LoadNewList>(_loadNew);
+    on<LoadActiveList>(_loadActive);
   }
 
   final OrderAbstractRepository listRepository;
@@ -43,6 +44,22 @@ class ListBloc extends Bloc<ListEvent, ListState> {
       emit(ListLoading());
     }
     final response = await listRepository.getAcceptedList();
+
+    if (response is SuccessResponse<List<Task>>) {
+      emit(ListSuccess(tasks: response.data));
+    } else if (response is ErrorResponse) {
+      emit(ListFailure(exception: response.errorMessage));
+    }
+  }
+
+  Future<void> _loadActive(
+    LoadActiveList event,
+    Emitter<ListState> emit,
+  ) async {
+    if (state is! ListSuccess) {
+      emit(ListLoading());
+    }
+    final response = await listRepository.getActiveList(event.isFinished);
 
     if (response is SuccessResponse<List<Task>>) {
       emit(ListSuccess(tasks: response.data));

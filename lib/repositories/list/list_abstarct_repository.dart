@@ -9,6 +9,7 @@ abstract class OrderAbstractRepository {
   Future<ApiResponse> acceptNewOrder(List<int> externalOrderId);
   Future<ApiResponse> getAcceptedList();
   Future<ApiResponse> getAcceptedOrder(int id);
+  Future<ApiResponse> getActiveList(bool isFinished);
   Future<ApiResponse> getOrderShelf();
   Future<ApiResponse> getCancelationReason();
   Future<ApiResponse> changeOrderStatus(
