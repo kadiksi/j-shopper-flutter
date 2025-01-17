@@ -6,9 +6,10 @@ import 'package:get_it/get_it.dart';
 import 'package:j_courier/blocks/order/order_bloc.dart';
 import 'package:j_courier/generated/l10n.dart';
 import 'package:j_courier/models/tasks/cacelation_reasons/cancelation_reasons.dart';
-import 'package:j_courier/models/tasks/task.dart';
+import 'package:j_courier/models/tasks/processed/processed_task.dart';
+// import 'package:j_courier/models/tasks/task.dart';
 import 'package:j_courier/repositories/list/list_abstarct_repository.dart';
-import 'package:j_courier/screens/widgets/bottom_sheet/cancel_order.dart';
+// import 'package:j_courier/screens/widgets/bottom_sheet/cancel_order.dart';
 
 import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
 import 'package:j_courier/screens/widgets/errors/failed_request.dart';
@@ -20,7 +21,7 @@ class ActiveOrderScreen extends StatefulWidget {
     required this.task,
   });
 
-  final Task task;
+  final ProcessedTask task;
 
   @override
   State<ActiveOrderScreen> createState() => _ActiveOrderScreenState();
@@ -35,7 +36,7 @@ class _ActiveOrderScreenState extends State<ActiveOrderScreen> {
 
   @override
   void initState() {
-    _listBloc.add(LoadCancelationReasons());
+    // _listBloc.add(LoadCancelationReasons());
     loadOrder();
     super.initState();
   }
@@ -53,7 +54,7 @@ class _ActiveOrderScreenState extends State<ActiveOrderScreen> {
           child: BlocConsumer<OrderBloc, OrderState>(
               bloc: _listBloc,
               builder: (context, state) {
-                if (state is OrderShelfSuccess) {
+                if (state is OrderProcessedSuccess) {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -63,7 +64,7 @@ class _ActiveOrderScreenState extends State<ActiveOrderScreen> {
                       ),
                       divider4,
                       Text(
-                        'Диана Ш.',
+                        '${state.task.customerName}',
                         style: theme.textTheme.headlineLarge,
                       ),
                       divider16,
@@ -75,7 +76,7 @@ class _ActiveOrderScreenState extends State<ActiveOrderScreen> {
                             style: theme.textTheme.headlineMedium,
                           ),
                           Text(
-                            '25.02.2024  16:00',
+                            '${state.task.plannedDateInterval}',
                             style: theme.textTheme.headlineMedium,
                           ),
                         ],
@@ -89,7 +90,7 @@ class _ActiveOrderScreenState extends State<ActiveOrderScreen> {
                             style: theme.textTheme.headlineMedium,
                           ),
                           Text(
-                            '2 578 ₸',
+                            '${state.task.totalPrice}',
                             style: theme.textTheme.headlineMedium
                                 ?.copyWith(fontWeight: FontWeight.bold),
                           ),
@@ -112,12 +113,12 @@ class _ActiveOrderScreenState extends State<ActiveOrderScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  '12 товаров',
+                                  '${state.task.productList?.withoutChange?.length} товаров',
                                   style: theme.textTheme.headlineMedium
                                       ?.copyWith(fontWeight: FontWeight.bold),
                                 ),
                                 Text(
-                                  '2 отсутствуют',
+                                  '${state.task.productList?.notAvailable?.length} отсутствуют',
                                   style: theme.textTheme.headlineMedium,
                                 ),
                               ],
@@ -255,7 +256,7 @@ class _ActiveOrderScreenState extends State<ActiveOrderScreen> {
 
   void loadOrder() {
     _listBloc
-        .add(LoadAcceptedOrder(id: int.parse(widget.task.externalOrderId!)));
+        .add(LoadProcessedOrder(id: int.parse(widget.task.externalOrderId!)));
   }
 }
 

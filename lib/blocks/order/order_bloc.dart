@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:j_courier/models/tasks/cacelation_reasons/cancelation_reasons.dart';
+import 'package:j_courier/models/tasks/processed/processed_task.dart';
 import 'package:j_courier/models/tasks/product.dart';
 import 'package:j_courier/models/tasks/shelf/shelf.dart';
 import 'package:j_courier/models/tasks/task.dart';
@@ -19,6 +20,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     on<LoadAcceptedOrder>(_loadAcceptedOrder);
     on<LoadNewOrder>(_loadNewOrder);
     on<AcceptOrder>(_acceptNewOrder);
+    on<LoadProcessedOrder>(_loadProcessedOrder);
     on<LoadShelf>(_loadShelf);
     on<LoadCollectOrder>(_collecProduct);
     on<LoadCancelationReasons>(_loadCancelationReason);
@@ -59,6 +61,22 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     }
   }
 
+  Future<void> _loadProcessedOrder(
+    LoadProcessedOrder event,
+    Emitter<OrderState> emit,
+  ) async {
+    if (state is! OrderSuccess) {
+      emit(OrderLoading());
+    }
+    final response = await orderRepository.getProcessedOrder(event.id);
+
+    if (response is SuccessResponse<ProcessedTask>) {
+      emit(OrderProcessedSuccess(task: response.data));
+    } else if (response is ErrorResponse) {
+      emit(OrderFailure(exception: response.errorMessage));
+    }
+  }
+
   Future<void> _acceptNewOrder(
     AcceptOrder event,
     Emitter<OrderState> emit,
@@ -79,9 +97,9 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     SetOrderStatus event,
     Emitter<OrderState> emit,
   ) async {
-    if (state is! OrderSuccess) {
-      emit(OrderLoading());
-    }
+    // if (state is! OrderSuccess) {
+    //   emit(OrderLoading());
+    // }
     final response = await orderRepository.changeOrderStatus(
         event.externalOrderId,
         event.status,
@@ -91,7 +109,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     if (response is SuccessResponse<Task>) {
       emit(OrderStatusSuccess(task: response.data));
     } else if (response is ErrorResponse) {
-      emit(OrderFailure(exception: response.errorMessage));
+      emit(OrderStatusFailure(exception: response.errorMessage));
     }
   }
 

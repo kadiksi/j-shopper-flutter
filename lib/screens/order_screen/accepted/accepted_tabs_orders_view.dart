@@ -8,6 +8,7 @@ import 'package:j_courier/models/tasks/product.dart';
 import 'package:j_courier/models/tasks/task.dart';
 import 'package:j_courier/repositories/list/list_abstarct_repository.dart';
 import 'package:j_courier/screens/order_screen/accepted/accepted_order/accepted_oder.dart';
+import 'package:j_courier/screens/widgets/alerts/alert.dart';
 import 'package:j_courier/screens/widgets/errors/failed_request.dart';
 
 class AcceptedOrderScreen extends StatefulWidget {
@@ -52,7 +53,7 @@ class _AcceptedOrderScreenState extends State<AcceptedOrderScreen> {
           builder: (context, state) {
             if (state is OrderShelfSuccess) {
               return acceptedOrderView(state.task, state.shelfs, theme, context,
-                  selectedItems, setState, collect, doNotExist);
+                  selectedItems, setState, collect, doNotExist, sendToDelivery);
             }
             if (state is OrderFailure) {
               return FailedRequest(callback: getOrder);
@@ -66,6 +67,10 @@ class _AcceptedOrderScreenState extends State<AcceptedOrderScreen> {
             }
             if (state is OrderCancelReasonSuccess) {
               print("From OrderCancelReasonSuccess Listener");
+            }
+            if (state is OrderStatusFailure) {
+              showAlert(context, state.exception.toString(),
+                  state.exception.toString());
             }
           },
         ),
@@ -81,6 +86,15 @@ class _AcceptedOrderScreenState extends State<AcceptedOrderScreen> {
   void collect(List<Product> products) {
     print('Collect');
     _orderBloc.add(LoadCollectOrder(products: products, status: 'PROCESSED'));
+  }
+
+  void sendToDelivery() {
+    print('sendToDelivery');
+    _orderBloc.add(SetOrderStatus(
+        externalOrderId: widget.task.externalOrderId!,
+        status: OrderStatus.PROCESSED));
+    // print('Collect');
+    // _orderBloc.add(SetOrderStatus(products: products, status: 'PROCESSED'));
   }
 
 // NEW, NOT_AVAILABLE, PROCESSED

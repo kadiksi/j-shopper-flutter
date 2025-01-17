@@ -10,6 +10,7 @@ class Product extends Equatable {
   final int? jmartProductId;
   final String? productCode;
   final String? productName;
+  final String? imageUrl;
   final int? price;
   final int? quantity;
   final String? status; //NEW"
@@ -23,6 +24,7 @@ class Product extends Equatable {
     required this.jmartProductId,
     required this.productCode,
     required this.productName,
+    required this.imageUrl,
     required this.price,
     required this.quantity,
     required this.status,
@@ -38,6 +40,7 @@ class Product extends Equatable {
       'jmartProductId': jmartProductId,
       'productCode': productCode,
       'productName': productName,
+      'imageUrl': imageUrl,
       'price': price,
       'quantity': quantity,
       'status': status,
@@ -57,6 +60,7 @@ class Product extends Equatable {
           map['productCode'] != null ? map['productCode'] as String : null,
       productName:
           map['productName'] != null ? map['productName'] as String : null,
+      imageUrl: map['imageUrl'] != null ? map['imageUrl'] as String : null,
       price: map['price'] != null ? map['price'] as int : null,
       quantity: map['quantity'] != null ? map['quantity'] as int : null,
       status: map['status'] != null ? map['status'] as String : null,
@@ -85,6 +89,7 @@ class Product extends Equatable {
       jmartProductId,
       productCode,
       productName,
+      imageUrl,
       price,
       quantity,
       status,
@@ -100,6 +105,7 @@ class Product extends Equatable {
     int? jmartProductId,
     String? productCode,
     String? productName,
+    String? imageUrl,
     int? price,
     int? quantity,
     String? status,
@@ -113,6 +119,7 @@ class Product extends Equatable {
       jmartProductId: jmartProductId ?? this.jmartProductId,
       productCode: productCode ?? this.productCode,
       productName: productName ?? this.productName,
+      imageUrl: imageUrl ?? this.imageUrl,
       price: price ?? this.price,
       quantity: quantity ?? this.quantity,
       status: status ?? this.status,

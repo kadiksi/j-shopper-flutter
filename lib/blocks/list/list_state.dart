@@ -23,6 +23,17 @@ class ListSuccess extends ListState {
   List<Object?> get props => [tasks];
 }
 
+class ListActiveSuccess extends ListState {
+  ListActiveSuccess({
+    required this.tasks,
+  });
+
+  final List<ProcessedTask> tasks;
+
+  @override
+  List<Object?> get props => [tasks];
+}
+
 class ListFailure extends ListState {
   ListFailure({
     this.exception,

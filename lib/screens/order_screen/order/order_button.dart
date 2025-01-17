@@ -15,6 +15,19 @@ Widget buildAcceptOrderButton(BuildContext context, void Function() accept) {
   );
 }
 
+Widget buildSendToDeliveryButton(
+    BuildContext context, void Function() sendToDelivery) {
+  return SizedBox(
+    width: double.infinity,
+    child: ElevatedButton(
+      onPressed: () {
+        sendToDelivery();
+      },
+      child: Text(S.of(context).send_to_delivery),
+    ),
+  );
+}
+
 Widget buildCollectedButton(
     BuildContext context,
     List<Product> selectedItems,

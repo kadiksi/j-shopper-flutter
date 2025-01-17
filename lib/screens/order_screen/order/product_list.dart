@@ -91,7 +91,7 @@ Widget buildMultipleExpandableProductLists(
                 ],
               ),
               trailing: Image.network(
-                'https://images.igdb.com/igdb/image/upload/t_cover_big/ss6bi7081my4mzebjkzb.png',
+                '${product.imageUrl}',
                 width: 62,
                 height: 62,
               ),

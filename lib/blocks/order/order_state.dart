@@ -23,6 +23,17 @@ class OrderSuccess extends OrderState {
   List<Object?> get props => [task];
 }
 
+class OrderProcessedSuccess extends OrderState {
+  OrderProcessedSuccess({
+    required this.task,
+  });
+
+  final ProcessedTask task;
+
+  @override
+  List<Object?> get props => [task];
+}
+
 class OrderAcceptSuccess extends OrderState {
   OrderAcceptSuccess();
 
@@ -70,6 +81,17 @@ class OrderCollectProductSuccess extends OrderState {
 
 class OrderFailure extends OrderState {
   OrderFailure({
+    this.exception,
+  });
+
+  final Object? exception;
+
+  @override
+  List<Object?> get props => [exception];
+}
+
+class OrderStatusFailure extends OrderState {
+  OrderStatusFailure({
     this.exception,
   });
 

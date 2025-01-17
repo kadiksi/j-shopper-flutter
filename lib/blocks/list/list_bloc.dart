@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:j_courier/models/tasks/processed/processed_task.dart';
 import 'package:j_courier/models/tasks/task.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 import '../../models/ApiResponse';
@@ -61,8 +62,8 @@ class ListBloc extends Bloc<ListEvent, ListState> {
     }
     final response = await listRepository.getActiveList(event.isFinished);
 
-    if (response is SuccessResponse<List<Task>>) {
-      emit(ListSuccess(tasks: response.data));
+    if (response is SuccessResponse<List<ProcessedTask>>) {
+      emit(ListActiveSuccess(tasks: response.data));
     } else if (response is ErrorResponse) {
       emit(ListFailure(exception: response.errorMessage));
     }

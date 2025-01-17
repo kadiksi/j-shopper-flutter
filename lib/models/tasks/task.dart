@@ -13,7 +13,7 @@ class Task extends Equatable {
   int? shopperOrderId;
   String? externalOrderId;
   String? orderSource;
-  String? orderType; //SUPERMARKET
+  OrderType? orderType; //SUPERMARKET
   String? deliveryType; //J
   int? customerId;
   String? customerName;
@@ -85,7 +85,7 @@ class Task extends Equatable {
       shopperOrderId: map['shopperOrderId'] as int?,
       externalOrderId: map['externalOrderId'] as String?,
       orderSource: map['orderSource'] as String?,
-      orderType: map['orderType'] as String?,
+      orderType: map['orderType'] as OrderType?,
       deliveryType: map['deliveryType'] as String?,
       customerId: map['customerId'] as int?,
       customerName: map['customerName'] as String?,
@@ -109,3 +109,5 @@ class Task extends Equatable {
 }
 
 enum OrderStatus { PROCESSED, CANCELED, REJECTED }
+
+enum OrderType { SUPERMARKET, GOODS }

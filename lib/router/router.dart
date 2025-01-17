@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:j_courier/models/login/login_data_model.dart';
+import 'package:j_courier/models/tasks/processed/processed_task.dart';
 import 'package:j_courier/models/tasks/product.dart';
 import 'package:j_courier/models/tasks/task.dart';
 import 'package:j_courier/screens/order_screen/accepted/accepted_order_main_screen.dart';

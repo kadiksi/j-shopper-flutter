@@ -80,7 +80,7 @@ class AcceptedOrderTabedRouteArgs {
 class ActiveOrderRoute extends PageRouteInfo<ActiveOrderRouteArgs> {
   ActiveOrderRoute({
     Key? key,
-    required Task task,
+    required ProcessedTask task,
     List<PageRouteInfo>? children,
   }) : super(
           ActiveOrderRoute.name,
@@ -113,7 +113,7 @@ class ActiveOrderRouteArgs {
 
   final Key? key;
 
-  final Task task;
+  final ProcessedTask task;
 
   @override
   String toString() {
@@ -123,10 +123,17 @@ class ActiveOrderRouteArgs {
 
 /// generated route for
 /// [ActiveOrders]
-// class ActiveOrders extends PageRouteInfo<void> {
-//   const ActiveOrders({List<PageRouteInfo>? children})
-//       : super(
+// class ActiveOrders extends PageRouteInfo<ActiveOrdersArgs> {
+//   ActiveOrders({
+//     Key? key,
+//     required bool isFinished,
+//     List<PageRouteInfo>? children,
+//   }) : super(
 //           ActiveOrders.name,
+//           args: ActiveOrdersArgs(
+//             key: key,
+//             isFinished: isFinished,
+//           ),
 //           initialChildren: children,
 //         );
 
@@ -135,10 +142,30 @@ class ActiveOrderRouteArgs {
 //   static PageInfo page = PageInfo(
 //     name,
 //     builder: (data) {
-//       return const ActiveOrders();
+//       final args = data.argsAs<ActiveOrdersArgs>();
+//       return ActiveOrders(
+//         key: args.key,
+//         isFinished: args.isFinished,
+//       );
 //     },
 //   );
 // }
+
+class ActiveOrdersArgs {
+  const ActiveOrdersArgs({
+    this.key,
+    required this.isFinished,
+  });
+
+  final Key? key;
+
+  final bool isFinished;
+
+  @override
+  String toString() {
+    return 'ActiveOrdersArgs{key: $key, isFinished: $isFinished}';
+  }
+}
 
 /// generated route for
 /// [ChooseLanguageScreen]

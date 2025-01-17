@@ -22,6 +22,16 @@ class LoadNewOrder extends OrderEvent {
   List<Object?> get props => [completer, id];
 }
 
+class LoadProcessedOrder extends OrderEvent {
+  LoadProcessedOrder({this.completer, required this.id});
+
+  final Completer? completer;
+  final int id;
+
+  @override
+  List<Object?> get props => [completer, id];
+}
+
 class AcceptOrder extends OrderEvent {
   AcceptOrder({this.completer, required this.ids});
 
@@ -37,14 +47,14 @@ class SetOrderStatus extends OrderEvent {
       {this.completer,
       required this.externalOrderId,
       required this.status,
-      required this.cancellationReason,
-      required this.cancellationReasonOther});
+      this.cancellationReason,
+      this.cancellationReasonOther});
 
   final Completer? completer;
   final String externalOrderId;
   final OrderStatus status;
-  final String cancellationReason;
-  final String cancellationReasonOther;
+  final String? cancellationReason;
+  final String? cancellationReasonOther;
 
   @override
   List<Object?> get props =>

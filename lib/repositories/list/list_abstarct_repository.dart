@@ -9,14 +9,15 @@ abstract class OrderAbstractRepository {
   Future<ApiResponse> acceptNewOrder(List<int> externalOrderId);
   Future<ApiResponse> getAcceptedList();
   Future<ApiResponse> getAcceptedOrder(int id);
+  Future<ApiResponse> getProcessedOrder(int id);
   Future<ApiResponse> getActiveList(bool isFinished);
   Future<ApiResponse> getOrderShelf();
   Future<ApiResponse> getCancelationReason();
   Future<ApiResponse> changeOrderStatus(
       String externalOrderId,
       OrderStatus status,
-      String cancellationReason,
-      String cancellationReasonOther);
+      String? cancellationReason,
+      String? cancellationReasonOther);
   Future<ApiResponse> changeProductStatus(
       List<Product> products, String status);
 }

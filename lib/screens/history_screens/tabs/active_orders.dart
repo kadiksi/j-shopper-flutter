@@ -4,20 +4,22 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:j_courier/models/tasks/task.dart';
+import 'package:j_courier/models/tasks/processed/processed_task.dart';
+// import 'package:j_courier/models/tasks/task.dart';
 import 'package:j_courier/router/router.dart';
 import 'package:j_courier/screens/widgets/bottom_sheet/confirm_order_dialog.dart';
 import 'package:j_courier/screens/widgets/errors/failed_request.dart';
+import 'package:j_courier/screens/widgets/list/task_acctive_tile.dart';
 
 import '../../../blocks/list/list_bloc.dart';
 import '../../../repositories/list/list_abstarct_repository.dart';
-import '../../widgets/list/task_tile.dart';
+// import '../../widgets/list/task_tile.dart';
 
 @RoutePage()
 class ActiveOrders extends StatefulWidget {
-  ActiveOrders({super.key, required this.isFinished});
+  const ActiveOrders({super.key, required this.isFinished});
 
-  bool isFinished = true;
+  final bool isFinished;
 
   @override
   State<ActiveOrders> createState() => _ActiveOrdersState();
@@ -35,7 +37,7 @@ class _ActiveOrdersState extends State<ActiveOrders> {
     super.initState();
   }
 
-  void goTo(Task task) {
+  void goTo(ProcessedTask task) {
     AutoRouter.of(context).push(ActiveOrderRoute(task: task));
   }
 
@@ -51,7 +53,7 @@ class _ActiveOrdersState extends State<ActiveOrders> {
         child: BlocBuilder<ListBloc, ListState>(
           bloc: _listBloc,
           builder: (context, state) {
-            if (state is ListSuccess) {
+            if (state is ListActiveSuccess) {
               return Stack(children: [
                 ListView.separated(
                   padding: const EdgeInsets.only(top: 16),
@@ -61,7 +63,7 @@ class _ActiveOrdersState extends State<ActiveOrders> {
                   ),
                   itemBuilder: (context, i) {
                     final task = state.tasks[i];
-                    return TaskTile(
+                    return TaskActiveTile(
                         task: task,
                         selectedItems: selectedItems,
                         setState: setState,

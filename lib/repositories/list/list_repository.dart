@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:j_courier/models/tasks/cacelation_reasons/cancelation_reasons.dart';
+import 'package:j_courier/models/tasks/processed/processed_task.dart';
 import 'package:j_courier/models/tasks/product.dart';
 import 'package:j_courier/models/tasks/shelf/shelf.dart';
 import 'package:j_courier/models/tasks/task.dart';
@@ -153,6 +154,30 @@ class ListRepository implements OrderAbstractRepository {
   }
 
   @override
+  Future<ApiResponse> getProcessedOrder(int id) async {
+    try {
+      final response = await dio.get(
+          'https://test5.jmart.kz/gw/jpost-shopper/api/v1/order/processed/${id}');
+
+      final data = response.data['data'] as dynamic;
+      final details = ProcessedTask.fromJson(data);
+
+      SuccessResponse<ProcessedTask> su = SuccessResponse(details);
+      return su;
+    } catch (e) {
+      if (e is DioException) {
+        print("type: ${e.response?.data.runtimeType} ///${e.response?.data}");
+        if (e.response?.data['data'] == null) {
+          return ErrorResponse(e.response?.data['message']);
+        } else {
+          return ErrorResponse(e.response?.data['data']['message']);
+        }
+      }
+      return ErrorResponse(e.toString());
+    }
+  }
+
+  @override
   Future<ApiResponse> getActiveList(bool isFinished) async {
     try {
       Map<String, dynamic> body = {
@@ -166,11 +191,11 @@ class ListRepository implements OrderAbstractRepository {
       final data = response.data['data'] as List<dynamic>;
 
       final taskList = data.map((e) {
-        final details = Task.fromJson(e);
+        final details = ProcessedTask.fromJson(e);
         return details;
       }).toList();
 
-      SuccessResponse<List<Task>> su = SuccessResponse(taskList);
+      SuccessResponse<List<ProcessedTask>> su = SuccessResponse(taskList);
       return su;
     } catch (e) {
       if (e is DioException) {
@@ -245,16 +270,20 @@ class ListRepository implements OrderAbstractRepository {
   Future<ApiResponse> changeOrderStatus(
       String externalOrderId,
       OrderStatus status,
-      String cancellationReason,
-      String cancellationReasonOther) async {
+      String? cancellationReason,
+      String? cancellationReasonOther) async {
     try {
       // List<Map<String, dynamic>> body = [];
 
       Map<String, dynamic> item = {
         'status': status.name,
-        'cancellationReason': cancellationReason,
-        'cancellationReasonOther': cancellationReasonOther,
+        // 'cancellationReason': cancellationReason,
+        // 'cancellationReasonOther': cancellationReasonOther,
       };
+      if (cancellationReason != null && cancellationReason.isNotEmpty) {
+        item['cancellationReason'] = cancellationReason;
+        item['cancellationReasonOther'] = cancellationReasonOther;
+      }
       // body.add(item);
       final response = await dio.put(
           'https://test5.jmart.kz/gw/jpost-shopper/api/v1/order/${externalOrderId}/status',
@@ -285,10 +314,11 @@ class ListRepository implements OrderAbstractRepository {
       products.forEach((product) {
         Map<String, dynamic> item = {
           'productId': product.productId,
-          'price': product.price,
-          'quantity': product.quantity,
+          // 'price': product.price,
+          // 'quantity': product.quantity,
           'status': status
         };
+
         body.add(item);
       });
       final response = await dio.put(

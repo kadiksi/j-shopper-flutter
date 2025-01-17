@@ -15,7 +15,8 @@ Widget acceptedOrderView(
     List<Product> selectedItems,
     void Function(VoidCallback fn) setState,
     void Function(List<Product> products) collect,
-    void Function(List<Product> products) doNotExist) {
+    void Function(List<Product> products) doNotExist,
+    void Function() sendToDelivery) {
   return Padding(
     padding: const EdgeInsets.all(16.0),
     child: Column(
@@ -27,7 +28,8 @@ Widget acceptedOrderView(
                 task, shelfs, theme, context, selectedItems, setState)),
         Column(
           children: [
-            buildCollectedButton(context, selectedItems, collect, doNotExist)
+            buildCollectedButton(context, selectedItems, collect, doNotExist),
+            buildSendToDeliveryButton(context, sendToDelivery)
           ],
         )
       ],
