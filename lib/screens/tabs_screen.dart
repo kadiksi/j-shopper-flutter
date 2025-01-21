@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get_it/get_it.dart';
 import 'package:j_courier/generated/l10n.dart';
@@ -18,6 +20,68 @@ class TabsScreen extends StatefulWidget {
 }
 
 class _TabsScreenState extends State<TabsScreen> {
+  late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
+
+  @override
+  void initState() {
+    super.initState();
+    initializeFCM();
+    initializeLocalNotifications();
+  }
+
+  void initializeFCM() {
+    FirebaseMessaging.instance.requestPermission();
+
+    // Handle messages while the app is in the foreground
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      print('Received message: ${message.notification?.title}');
+      if (message.notification != null) {
+        showNotification(
+          message.notification!.title ?? '',
+          message.notification!.body ?? '',
+        );
+      }
+    });
+  }
+
+  void initializeLocalNotifications() {
+    flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+
+    const initializationSettingsAndroid =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
+    const initializationSettingsIOS = DarwinInitializationSettings();
+
+    const initializationSettings = InitializationSettings(
+      android: initializationSettingsAndroid,
+      iOS: initializationSettingsIOS,
+    );
+
+    flutterLocalNotificationsPlugin.initialize(initializationSettings);
+  }
+
+  void showNotification(String title, String body) {
+    const androidPlatformChannelSpecifics = AndroidNotificationDetails(
+      'high_importance_channel', // channel ID
+      'High Importance Notifications', // channel name
+      channelDescription: 'This channel is used for important notifications.',
+      importance: Importance.max,
+      priority: Priority.high,
+    );
+    const iOSPlatformChannelSpecifics = DarwinNotificationDetails();
+
+    const notificationDetails = NotificationDetails(
+      android: androidPlatformChannelSpecifics,
+      iOS: iOSPlatformChannelSpecifics,
+    );
+
+    flutterLocalNotificationsPlugin.show(
+      0, // Notification ID
+      title,
+      body,
+      notificationDetails,
+    );
+  }
+
   int _selectedIndex = 0;
   String _tabName = '';
   List<String> tabNames = [];

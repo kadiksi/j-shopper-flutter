@@ -23,7 +23,28 @@ import 'repositories/login/login_abstarct_repository.dart';
 import 'repositories/login/login_rpository.dart';
 import 'courier_app.dart';
 
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  requestPermission();
+  getToken();
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    print('Message data: ${message.data}');
+
+    if (message.notification != null) {
+      print('Notification Title: ${message.notification?.title}');
+      print('Notification Body: ${message.notification?.body}');
+    }
+  });
+
   WidgetsFlutterBinding.ensureInitialized();
   final talker = TalkerFlutter.init();
   GetIt.I.registerSingleton(talker);
@@ -80,4 +101,31 @@ void main() async {
           )), (e, st) {
     GetIt.I<Talker>().handle(e, st);
   });
+}
+
+void getToken() async {
+  String? token = await FirebaseMessaging.instance.getToken();
+  print("FCM Token: $token");
+}
+
+Future<void> requestPermission() async {
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+  NotificationSettings settings = await messaging.requestPermission(
+    alert: true,
+    badge: true,
+    sound: true,
+  );
+
+  if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+    print('User granted permission');
+  } else if (settings.authorizationStatus == AuthorizationStatus.provisional) {
+    print('User granted provisional permission');
+  } else {
+    print('User denied permission');
+  }
+}
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+  print('Handling a background message: ${message.messageId}');
 }
