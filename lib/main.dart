@@ -8,6 +8,7 @@ import 'package:j_courier/repositories/dio_client.dart';
 import 'package:j_courier/repositories/profile/profile_abstarct_repository.dart';
 import 'package:j_courier/repositories/profile/profile_rpository.dart';
 import 'package:j_courier/repositories/urls.dart';
+import 'package:j_courier/utils/token_utils.dart';
 import 'package:provider/provider.dart';
 import 'package:talker_bloc_logger/talker_bloc_logger.dart';
 import 'package:talker_dio_logger/talker_dio_logger.dart';
@@ -34,7 +35,7 @@ void main() async {
   );
   requestPermission();
   getToken();
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
 
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
     print('Message data: ${message.data}');
@@ -101,31 +102,4 @@ void main() async {
           )), (e, st) {
     GetIt.I<Talker>().handle(e, st);
   });
-}
-
-void getToken() async {
-  String? token = await FirebaseMessaging.instance.getToken();
-  print("FCM Token: $token");
-}
-
-Future<void> requestPermission() async {
-  FirebaseMessaging messaging = FirebaseMessaging.instance;
-  NotificationSettings settings = await messaging.requestPermission(
-    alert: true,
-    badge: true,
-    sound: true,
-  );
-
-  if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-    print('User granted permission');
-  } else if (settings.authorizationStatus == AuthorizationStatus.provisional) {
-    print('User granted provisional permission');
-  } else {
-    print('User denied permission');
-  }
-}
-
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  await Firebase.initializeApp();
-  print('Handling a background message: ${message.messageId}');
 }

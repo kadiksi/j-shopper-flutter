@@ -23,6 +23,17 @@ class ProfileSuccess extends ProfileState {
   List<Object?> get props => [profile];
 }
 
+class RegisterTokenSuccess extends ProfileState {
+  RegisterTokenSuccess({
+    required this.profile,
+  });
+
+  final String profile;
+
+  @override
+  List<Object?> get props => [profile];
+}
+
 class ProfileFailure extends ProfileState {
   ProfileFailure({
     this.exception,

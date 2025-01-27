@@ -37,6 +37,31 @@ class ProfileRepository implements ProfileAbstractRepository {
   }
 
   @override
+  Future<ApiResponse> registerToken(String token) async {
+    try {
+      Map<String, String> tokenMap = <String, String>{};
+      tokenMap['token'] = token;
+      final response = await dio.post(
+          '$test_url/jpost-push/api/v1/token/register',
+          queryParameters: tokenMap);
+
+      final data = response.data.toString();
+      SuccessResponse<String> su = SuccessResponse(data);
+      return su;
+    } catch (e) {
+      if (e is DioException) {
+        print("type: ${e.response?.data.runtimeType} ///${e.response?.data}");
+        if (e.response?.data['data'] == null) {
+          return ErrorResponse(e.response?.data['message']);
+        } else {
+          return ErrorResponse(e.response?.data['data']['message']);
+        }
+      }
+      return ErrorResponse(e.toString());
+    }
+  }
+
+  @override
   Future<ApiResponse> getCallSupport() async {
     try {
       final response = await dio

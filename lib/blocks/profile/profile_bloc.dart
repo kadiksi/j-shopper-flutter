@@ -15,6 +15,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ProfileBloc(this.profileRepository) : super(ProfileInitial()) {
     on<LoadProfile>(_load);
     on<LoadCallSupport>(_loadCall);
+    on<RegisterToken>(_registerToken);
   }
 
   final ProfileAbstractRepository profileRepository;
@@ -30,6 +31,22 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
     if (response is SuccessResponse<Profile>) {
       emit(ProfileSuccess(profile: response.data));
+    } else if (response is ErrorResponse) {
+      emit(ProfileFailure(exception: response.errorMessage));
+    }
+  }
+
+  Future<void> _registerToken(
+    RegisterToken event,
+    Emitter<ProfileState> emit,
+  ) async {
+    if (state is! RegisterTokenSuccess) {
+      emit(ProfileLoading());
+    }
+    final response = await profileRepository.registerToken(event.token!);
+
+    if (response is SuccessResponse<String>) {
+      emit(RegisterTokenSuccess(profile: response.data));
     } else if (response is ErrorResponse) {
       emit(ProfileFailure(exception: response.errorMessage));
     }
