@@ -18,11 +18,11 @@ class ProductScreen extends StatefulWidget {
 class _ProductDetailScreenState extends State<ProductScreen> {
   final TextEditingController priceController = TextEditingController(text: '');
 
-  int total = 0;
+  double total = 0;
   int quantity = 0;
 
   void _calculateTotal() {
-    int price = widget.product.price ?? 0;
+    double price = widget.product.price ?? 0;
     setState(() {
       total = price * quantity;
     });

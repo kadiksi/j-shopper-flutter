@@ -11,7 +11,7 @@ class Product extends Equatable {
   final String? productCode;
   final String? productName;
   final String? imageUrl;
-  final int? price;
+  final double? price;
   final int? quantity;
   final String? status; //NEW"
   final int? companyShelf;
@@ -61,7 +61,7 @@ class Product extends Equatable {
       productName:
           map['productName'] != null ? map['productName'] as String : null,
       imageUrl: map['imageUrl'] != null ? map['imageUrl'] as String : null,
-      price: map['price'] != null ? map['price'] as int : null,
+      price: map['price'] != null ? map['price'] as double : null,
       quantity: map['quantity'] != null ? map['quantity'] as int : null,
       status: map['status'] != null ? map['status'] as String : null,
       categoryIds: map['categoryIds'] != null
@@ -106,7 +106,7 @@ class Product extends Equatable {
     String? productCode,
     String? productName,
     String? imageUrl,
-    int? price,
+    double? price,
     int? quantity,
     String? status,
     int? companyShelf,

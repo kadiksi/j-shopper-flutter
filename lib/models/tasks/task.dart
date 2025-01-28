@@ -13,7 +13,7 @@ class Task extends Equatable {
   int? shopperOrderId;
   String? externalOrderId;
   String? orderSource;
-  OrderType? orderType; //SUPERMARKET
+  String? orderType; //SUPERMARKET
   String? deliveryType; //J
   int? customerId;
   String? customerName;
@@ -21,7 +21,7 @@ class Task extends Equatable {
   String? customerCityName;
   String? plannedDate;
   String? plannedDateInterval;
-  int? totalPrice;
+  double? totalPrice;
   int? totalProductAmount;
   List<Product>? productList;
   Task({
@@ -85,7 +85,7 @@ class Task extends Equatable {
       shopperOrderId: map['shopperOrderId'] as int?,
       externalOrderId: map['externalOrderId'] as String?,
       orderSource: map['orderSource'] as String?,
-      orderType: map['orderType'] as OrderType?,
+      orderType: map['orderType'] as String?,
       deliveryType: map['deliveryType'] as String?,
       customerId: map['customerId'] as int?,
       customerName: map['customerName'] as String?,
@@ -93,7 +93,7 @@ class Task extends Equatable {
       customerCityName: map['customerCityName'] as String?,
       plannedDate: map['plannedDate'] as String?,
       plannedDateInterval: map['plannedDateInterval'] as String?,
-      totalPrice: map['totalPrice'] as int?,
+      totalPrice: map['totalPrice'] as double?,
       totalProductAmount: map['totalProductAmount'] as int?,
       productList: List<Product>.from(
         (map['productList']).map<Product>(
@@ -110,4 +110,4 @@ class Task extends Equatable {
 
 enum OrderStatus { PROCESSED, CANCELED, REJECTED }
 
-enum OrderType { SUPERMARKET, GOODS }
+enum OrderType { SUPERMARKET, GOODS, N }
