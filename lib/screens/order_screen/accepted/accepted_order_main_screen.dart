@@ -127,7 +127,6 @@ class _AcceptedOrderTabedScreenState extends State<AcceptedOrderTabedScreen>
               listener: (BuildContext context, OrderState state) {
                 if (state is OrderCancelReasonSuccess) {
                   reasons = state.cancelationReasons;
-                  print("From OrderCancelReasonSuccess Listener");
                 } else if (state is OrderStatusSuccess) {
                   print("From OrderStatusSuccess Listener");
                   handleCancel();

@@ -19,7 +19,7 @@ class DioClient {
           accessToken = tokenBox.get(tokenModelName)?.tokens.auth.token;
           if (accessToken != null && accessToken!.isNotEmpty) {
             options.headers['Authorization'] = 'Bearer ${accessToken}';
-            options.headers['Content-Type'] = 'application/json';
+            options.headers['Content-Type'] = 'application/json; charset=utf-8';
           }
           // print('Request2: ${options.method} ${options.headers}');
           return handler.next(options);

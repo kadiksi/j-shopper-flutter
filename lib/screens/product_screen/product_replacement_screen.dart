@@ -1,7 +1,13 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get_it/get_it.dart';
+import 'package:j_courier/blocks/product/product_bloc.dart';
 import 'package:j_courier/generated/l10n.dart';
 import 'package:j_courier/models/tasks/product.dart';
+import 'package:j_courier/repositories/product/product_abstarct_repository.dart';
 import 'package:j_courier/screens/widgets/bottom_sheet/swap_confirmation_dialog.dart';
 import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
 
@@ -24,6 +30,10 @@ class ProductReplacementSheet extends StatefulWidget {
 }
 
 class _ProductReplacementSheetState extends State<ProductReplacementSheet> {
+  final _productBloc = ProductBloc(
+    GetIt.I<ProductAbstractRepository>(),
+  );
+  Timer? timer;
   List<Product> products = List.empty();
 
   TextEditingController searchController = TextEditingController();
@@ -48,11 +58,9 @@ class _ProductReplacementSheetState extends State<ProductReplacementSheet> {
 
   void _filterProducts() {
     final query = searchController.text.toLowerCase();
-    setState(() {
-      filteredProducts = products
-          .where(
-              (product) => product.productName!.toLowerCase().contains(query))
-          .toList();
+    timer?.cancel();
+    timer = Timer(const Duration(seconds: 1), () async {
+      _productBloc.add(LoadProdactList(search: query));
     });
   }
 
@@ -201,7 +209,24 @@ class _ProductReplacementSheetState extends State<ProductReplacementSheet> {
         );
       },
     );
-    return sheet;
+
+    return Scaffold(
+        body: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: BlocConsumer<ProductBloc, ProductState>(
+                bloc: _productBloc,
+                builder: (context, state) {
+                  return sheet;
+                },
+                listener: (BuildContext context, ProductState state) {
+                  if (state is ProductSuccess) {
+                    print("From ProductSuccess Listener");
+                    filteredProducts = state.productList;
+                    setState(() {
+                      filteredProducts = state.productList;
+                    });
+                  }
+                })));
   }
 
   void showReplaceConfirmationModalSheet(String title, String tip,

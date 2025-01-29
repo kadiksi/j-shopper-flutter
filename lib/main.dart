@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:j_courier/repositories/dio_client.dart';
+import 'package:j_courier/repositories/product/product_abstarct_repository.dart';
+import 'package:j_courier/repositories/product/product_repository.dart';
 import 'package:j_courier/repositories/profile/profile_abstarct_repository.dart';
 import 'package:j_courier/repositories/profile/profile_rpository.dart';
 import 'package:j_courier/repositories/urls.dart';
@@ -90,6 +92,10 @@ void main() async {
 
   GetIt.I.registerLazySingleton<OrderAbstractRepository>(
     () => ListRepository(dio: dio.dio),
+  );
+
+  GetIt.I.registerLazySingleton<ProductAbstractRepository>(
+    () => ProductRepository(dio: dio.dio),
   );
 
   FlutterError.onError =

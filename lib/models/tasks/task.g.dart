@@ -21,7 +21,7 @@ Task _$TaskFromJson(Map<String, dynamic> json) => Task(
       totalPrice: (json['totalPrice'] as num?)?.toDouble(),
       totalProductAmount: (json['totalProductAmount'] as num?)?.toInt(),
       productList: (json['productList'] as List<dynamic>?)
-          ?.map((e) => Product.fromJson(e as String))
+          ?.map((e) => Product.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

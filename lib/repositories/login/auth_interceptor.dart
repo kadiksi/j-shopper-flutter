@@ -13,6 +13,7 @@ class AuthInterceptor extends Interceptor {
     if (token != null && token.isNotEmpty) {
       options.headers['Authorization'] =
           'Bearer ${tokenBox.get(tokenModelName)?.tokens.auth.token}';
+      options.headers['Content-Type'] = 'application/json; charset=utf-8';
     }
     print('Request2: ${options.method} ${options.headers}');
     super.onRequest(options, handler);

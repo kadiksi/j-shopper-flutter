@@ -52,11 +52,8 @@ class _ProductDetailScreenState extends State<ProductScreen> {
           Column(
             children: [
               Center(
-                child: Image.network(
-                  'https://images.igdb.com/igdb/image/upload/t_cover_big/ss6bi7081my4mzebjkzb.png',
-                  width: double.infinity,
-                  height: 262,
-                ),
+                child: Image.network('${widget.product.imageUrl}',
+                    width: 200, height: 262, fit: BoxFit.cover),
               ),
               divider20,
               Padding(

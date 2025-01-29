@@ -9,16 +9,16 @@ part of 'processed_product.dart';
 ProcessedProduct _$ProcessedProductFromJson(Map<String, dynamic> json) =>
     ProcessedProduct(
       added: (json['added'] as List<dynamic>?)
-          ?.map((e) => Product.fromJson(e as String))
+          ?.map((e) => Product.fromJson(e as Map<String, dynamic>))
           .toList(),
       replaced: (json['replaced'] as List<dynamic>?)
-          ?.map((e) => Product.fromJson(e as String))
+          ?.map((e) => Product.fromJson(e as Map<String, dynamic>))
           .toList(),
       withoutChange: (json['withoutChange'] as List<dynamic>?)
-          ?.map((e) => Product.fromJson(e as String))
+          ?.map((e) => Product.fromJson(e as Map<String, dynamic>))
           .toList(),
       notAvailable: (json['notAvailable'] as List<dynamic>?)
-          ?.map((e) => Product.fromJson(e as String))
+          ?.map((e) => Product.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

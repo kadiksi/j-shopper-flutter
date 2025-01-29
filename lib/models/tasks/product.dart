@@ -80,8 +80,8 @@ class Product extends Equatable {
 
   String toJson() => json.encode(toMap());
 
-  factory Product.fromJson(String source) =>
-      Product.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Product.fromJson(Map<String, dynamic> source) =>
+      Product.fromMap(source);
 
   @override
   List<Object?> get props {
