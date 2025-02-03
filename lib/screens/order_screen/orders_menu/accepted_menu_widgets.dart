@@ -6,7 +6,7 @@ import 'package:j_courier/screens/product_screen/product_replacement_screen.dart
 import 'package:j_courier/screens/widgets/bottom_sheet/cancel_order.dart';
 import 'package:j_courier/screens/widgets/bottom_sheet/return_order.dart';
 
-void showModelAddProduct(BuildContext context, List<Product> products,
+void showModelReplaceProduct(BuildContext context, Product mainProduct,
     final Function(String reason) action) {
   showModalBottomSheet(
     context: context,
@@ -15,11 +15,27 @@ void showModelAddProduct(BuildContext context, List<Product> products,
       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
     ),
     builder: (context) => ProductReplacementSheet(
-        products: products,
+        mainProduct: mainProduct,
         isReplace: false,
-        action: addProduct,
+        confirmProductSwap: confirmProductSwap,
         title: S.of(context).add_product),
   );
+}
+
+void showModelAddProduct(BuildContext context, List<Product> products,
+    final Function(String reason) action) {
+  // showModalBottomSheet(
+  //   context: context,
+  //   isScrollControlled: true,
+  //   shape: const RoundedRectangleBorder(
+  //     borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+  //   ),
+  //   builder: (context) => ProductReplacementSheet(
+  //       products: products,
+  //       isReplace: false,
+  //       action: confirmProductSwap,
+  //       title: S.of(context).add_product),
+  // );
 }
 
 void showModelCancelOrder(
@@ -48,7 +64,7 @@ void showModelReturnOrder(BuildContext context) {
   );
 }
 
-void addProduct() {
+void confirmProductSwap(Product product, int replaceProductId) {
   print("Add Product");
 }
 

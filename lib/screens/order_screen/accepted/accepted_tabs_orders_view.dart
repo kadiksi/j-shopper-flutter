@@ -12,12 +12,11 @@ import 'package:j_courier/screens/widgets/alerts/alert.dart';
 import 'package:j_courier/screens/widgets/errors/failed_request.dart';
 
 class AcceptedOrderScreen extends StatefulWidget {
-  const AcceptedOrderScreen({
-    super.key,
-    required this.task,
-  });
+  const AcceptedOrderScreen(
+      {super.key, required this.task, required this.productStatus});
 
   final Task task;
+  final ProductStatus productStatus;
 
   @override
   State<AcceptedOrderScreen> createState() => _AcceptedOrderScreenState();
@@ -39,6 +38,7 @@ class _AcceptedOrderScreenState extends State<AcceptedOrderScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print('Hash Code of page ${hashCode}');
     final theme = Theme.of(context);
     return Scaffold(
       body: RefreshIndicator(
@@ -52,8 +52,17 @@ class _AcceptedOrderScreenState extends State<AcceptedOrderScreen> {
           bloc: _orderBloc,
           builder: (context, state) {
             if (state is OrderShelfSuccess) {
-              return acceptedOrderView(state.task, state.shelfs, theme, context,
-                  selectedItems, setState, collect, doNotExist, sendToDelivery);
+              return acceptedOrderView(
+                  state.task,
+                  state.shelfs,
+                  theme,
+                  context,
+                  selectedItems,
+                  widget.productStatus,
+                  setState,
+                  collect,
+                  doNotExist,
+                  sendToDelivery);
             }
             if (state is OrderFailure) {
               return FailedRequest(callback: getOrder);

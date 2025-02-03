@@ -23,6 +23,7 @@ class NewOrderScreen extends StatefulWidget {
   });
 
   final Task task;
+  final ProductStatus productStatus = ProductStatus.NEW;
 
   @override
   State<NewOrderScreen> createState() => _NewOrderScreenState();
@@ -73,7 +74,7 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
             builder: (context, state) {
               if (state is OrderShelfSuccess) {
                 return newOrderView(state.task, state.shelfs, theme, context,
-                    selectedItems, setState, acceptOrder);
+                    selectedItems, widget.productStatus, setState, acceptOrder);
               }
               if (state is OrderFailure) {
                 return FailedRequest(callback: callback);

@@ -13,6 +13,7 @@ Widget newOrderView(
     ThemeData theme,
     BuildContext context,
     List<Product> selectedItems,
+    ProductStatus productStatus,
     void Function(VoidCallback fn) setState,
     void Function() accept) {
   return Padding(
@@ -22,8 +23,8 @@ Widget newOrderView(
         buildOrderInfo(context, theme, task),
         divider16,
         Expanded(
-            child: buildMultipleExpandableProductLists(
-                task, shelfs, theme, context, selectedItems, setState)),
+            child: buildMultipleExpandableProductLists(task, shelfs, theme,
+                context, selectedItems, productStatus, setState)),
         buildAcceptOrderButton(context, accept),
         Column(
             // children: [buildCollectedButton(context, selectedItems)],

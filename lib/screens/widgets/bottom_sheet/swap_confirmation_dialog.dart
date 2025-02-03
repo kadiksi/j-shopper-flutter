@@ -1,22 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:j_courier/models/tasks/product.dart';
 
 import '../box_decorations/dividers.dart';
 
 class SwapConfirmationDialog extends StatelessWidget {
-  SwapConfirmationDialog(
-      {super.key,
-      required this.title,
-      required this.tip,
-      required this.action,
-      required this.buttonText,
-      required this.icon});
+  SwapConfirmationDialog({
+    super.key,
+    required this.replacedProductId,
+    required this.product,
+    required this.title,
+    required this.tip,
+    required this.buttonText,
+    required this.icon,
+    required this.confirmProductSwap,
+  });
 
+  final int replacedProductId;
+  final Product product;
   final String title;
   final String tip;
   final String buttonText;
   final String icon;
-  final VoidCallback action;
+  final Function(Product product, int replacedProductId) confirmProductSwap;
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +73,7 @@ class SwapConfirmationDialog extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      action();
+                      confirmProductSwap(product, replacedProductId);
                       Navigator.of(context).pop();
                     },
                     child: Text(buttonText),

@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:j_courier/blocks/order/order_bloc.dart';
 import 'package:j_courier/generated/l10n.dart';
 import 'package:j_courier/models/tasks/cacelation_reasons/cancelation_reasons.dart';
+import 'package:j_courier/models/tasks/product.dart';
 import 'package:j_courier/models/tasks/task.dart';
 import 'package:j_courier/repositories/list/list_abstarct_repository.dart';
 import 'package:j_courier/screens/order_screen/orders_menu/accepted_menu_widgets.dart';
@@ -42,7 +43,7 @@ class _AcceptedOrderTabedScreenState extends State<AcceptedOrderTabedScreen>
     _orderBloc.add(LoadCancelationReasons());
     _tabController = TabController(length: 3, vsync: this);
     _tabController.addListener(() {
-      setState(() {});
+      // setState(() {});
     });
   }
 
@@ -113,9 +114,14 @@ class _AcceptedOrderTabedScreenState extends State<AcceptedOrderTabedScreen>
                   return TabBarView(
                     controller: _tabController,
                     children: [
-                      AcceptedOrderScreen(task: widget.task),
-                      AcceptedOrderScreen(task: widget.task),
-                      AcceptedOrderScreen(task: widget.task),
+                      AcceptedOrderScreen(
+                          task: widget.task, productStatus: ProductStatus.NEW),
+                      AcceptedOrderScreen(
+                          task: widget.task,
+                          productStatus: ProductStatus.NOT_AVAILABLE),
+                      AcceptedOrderScreen(
+                          task: widget.task,
+                          productStatus: ProductStatus.PROCESSED),
                     ],
                   );
                 }

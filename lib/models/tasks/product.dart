@@ -1,5 +1,4 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -13,12 +12,12 @@ class Product extends Equatable {
   final String? imageUrl;
   final double? price;
   final int? quantity;
-  final String? status; //NEW"
+  final ProductStatus? status; // NEW, NOT_AVAILABLE, PROCESSED
   final int? companyShelf;
   final List<int>? categoryIds;
-  final String? orderProductType; //SUPERMARKET, GOODS"
+  final OrderProductType? orderProductType; // GOODS, SUPERMARKET, SERVICE"
   final int? productId;
-  final String? productType;
+  final ProductType? productType; // ADDED, ORIGINAL, REPLACED
 
   Product({
     required this.jmartProductId,
@@ -63,25 +62,33 @@ class Product extends Equatable {
       imageUrl: map['imageUrl'] != null ? map['imageUrl'] as String : null,
       price: map['price'] != null ? map['price'] as double : null,
       quantity: map['quantity'] != null ? map['quantity'] as int : null,
-      status: map['status'] != null ? map['status'] as String : null,
+      status: map['status'] != null
+          ? ProductStatus.values.byName(map['status'])
+          : null,
       categoryIds: map['categoryIds'] != null
           ? List<int>.from((map['categoryIds']))
           : null,
       companyShelf:
           map['companyShelf'] != null ? map['companyShelf'] as int : null,
       orderProductType: map['orderProductType'] != null
-          ? map['orderProductType'] as String
+          ? OrderProductType.values.byName(map['orderProductType'])
           : null,
       productId: map['productId'] != null ? map['productId'] as int : null,
-      productType:
-          map['productType'] != null ? map['productType'] as String : null,
+      productType: map['productType'] != null
+          ? ProductType.values.byName(map['productType'])
+          : null,
     );
   }
 
-  String toJson() => json.encode(toMap());
+  // String toJson() => json.encode(toMap());
 
-  factory Product.fromJson(Map<String, dynamic> source) =>
-      Product.fromMap(source);
+  // factory Product.fromJson(Map<String, dynamic> source) =>
+  //     Product.fromMap(source);
+
+  factory Product.fromJson(Map<String, dynamic> json) =>
+      _$ProductFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ProductToJson(this);
 
   @override
   List<Object?> get props {
@@ -108,12 +115,12 @@ class Product extends Equatable {
     String? imageUrl,
     double? price,
     int? quantity,
-    String? status,
+    ProductStatus? status,
     int? companyShelf,
     List<int>? categoryIds,
-    String? orderProductType,
+    OrderProductType? orderProductType,
     int? productId,
-    String? productType,
+    ProductType? productType,
   }) {
     return Product(
       jmartProductId: jmartProductId ?? this.jmartProductId,
@@ -130,4 +137,34 @@ class Product extends Equatable {
       productType: productType ?? this.productType,
     );
   }
+}
+
+@JsonEnum(valueField: 'status')
+enum ProductStatus {
+  @JsonValue('NEW')
+  NEW,
+  @JsonValue('NOT_AVAILABLE')
+  NOT_AVAILABLE,
+  @JsonValue('PROCESSED')
+  PROCESSED
+}
+
+@JsonEnum(valueField: 'status')
+enum OrderProductType {
+  @JsonValue('GOODS')
+  GOODS,
+  @JsonValue('SUPERMARKET')
+  SUPERMARKET,
+  @JsonValue('SERVICE')
+  SERVICE
+}
+
+@JsonEnum(valueField: 'status')
+enum ProductType {
+  @JsonValue('ADDED')
+  ADDED,
+  @JsonValue('ORIGINAL')
+  ORIGINAL,
+  @JsonValue('REPLACED')
+  REPLACED
 }

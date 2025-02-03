@@ -1,8 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
+import 'package:j_courier/blocks/product/product_bloc.dart';
 import 'package:j_courier/generated/l10n.dart';
 import 'package:j_courier/models/tasks/product.dart';
+import 'package:j_courier/repositories/product/product_abstarct_repository.dart';
 import 'package:j_courier/screens/product_screen/product_replacement_screen.dart';
+import 'package:j_courier/screens/widgets/alerts/alert.dart';
 import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
 
 @RoutePage()
@@ -16,6 +21,9 @@ class ProductScreen extends StatefulWidget {
 }
 
 class _ProductDetailScreenState extends State<ProductScreen> {
+  final _productBloc = ProductBloc(
+    GetIt.I<ProductAbstractRepository>(),
+  );
   final TextEditingController priceController = TextEditingController(text: '');
 
   double total = 0;
@@ -33,7 +41,6 @@ class _ProductDetailScreenState extends State<ProductScreen> {
     final theme = Theme.of(context);
     Product product = widget.product;
     priceController.text = '${product.price}';
-    List<Product> products = [product];
 
     if (quantity == 0) {
       quantity = product.quantity!;
@@ -41,7 +48,7 @@ class _ProductDetailScreenState extends State<ProductScreen> {
     if (total == 0) {
       total = (product.price! * quantity);
     }
-    return Scaffold(
+    var sheet = Scaffold(
       appBar: AppBar(
         title: Text(S.of(context).product_id('${product.jmartProductId}')),
       ),
@@ -175,21 +182,21 @@ class _ProductDetailScreenState extends State<ProductScreen> {
                               .copyWith(color: theme.colorScheme.secondary)),
                     )),
                 divider10,
+                // SizedBox(
+                //     width: double.infinity,
+                //     child: ElevatedButton(
+                //       onPressed: () {
+                //         Navigator.of(context).pop();
+                //       },
+                //       child: Text(S.of(context).accept_selected,
+                //           style: theme.textTheme.bodyLarge!
+                //               .copyWith(color: theme.colorScheme.surface)),
+                //     )),
                 SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: Text(S.of(context).accept_selected,
-                          style: theme.textTheme.bodyLarge!
-                              .copyWith(color: theme.colorScheme.surface)),
-                    )),
-                SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        showModelReplaceProduct(context, products);
+                        showModelReplaceProduct(context, product);
                       },
                       child: Text(S.of(context).replace_product,
                           style: theme.textTheme.bodyLarge!
@@ -201,9 +208,25 @@ class _ProductDetailScreenState extends State<ProductScreen> {
         ],
       ),
     );
+
+    return Scaffold(
+        body: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: BlocConsumer<ProductBloc, ProductState>(
+                bloc: _productBloc,
+                builder: (context, state) {
+                  return sheet;
+                },
+                listener: (BuildContext context, ProductState state) {
+                  if (state is ProductSuccess) {
+                    print("From Replace Success Listener");
+                  } else if (state is ProductFailure) {
+                    showAlert(context, ' ', state.exception.toString());
+                  }
+                })));
   }
 
-  void showModelReplaceProduct(BuildContext context, List<Product> products) {
+  void showModelReplaceProduct(BuildContext context, Product mainProduct) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -211,14 +234,16 @@ class _ProductDetailScreenState extends State<ProductScreen> {
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (context) => ProductReplacementSheet(
-          products: products,
+          mainProduct: mainProduct,
           isReplace: true,
-          action: replaceProduct,
+          confirmProductSwap: replaceProduct,
           title: S.of(context).replace_product),
     );
   }
 
-  void replaceProduct() {
+  void replaceProduct(Product product, int replacedProductId) {
     print('Replace product');
+    _productBloc.add(
+        ReplaceProdact(product: product, replacedProductId: replacedProductId));
   }
 }

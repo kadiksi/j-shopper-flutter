@@ -14,6 +14,7 @@ part 'product_state.dart';
 class ProductBloc extends Bloc<ProductEvent, ProductState> {
   ProductBloc(this.orderRepository) : super(ProductInitial()) {
     on<LoadProdactList>(_loadProduct);
+    on<ReplaceProdact>(_replaceProduct);
   }
 
   final ProductAbstractRepository orderRepository;
@@ -29,6 +30,23 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       emit(ProductLoading());
     }
     final response = await orderRepository.getProductByText(event.search);
+
+    if (response is SuccessResponse<List<Product>>) {
+      emit(ProductSuccess(productList: response.data));
+    } else if (response is ErrorResponse) {
+      emit(ProductFailure(exception: response.errorMessage));
+    }
+  }
+
+  Future<void> _replaceProduct(
+    ReplaceProdact event,
+    Emitter<ProductState> emit,
+  ) async {
+    if (state is! ProductSuccess) {
+      emit(ProductLoading());
+    }
+    final response = await orderRepository.replaceProduct(
+        event.replacedProductId, event.product);
 
     if (response is SuccessResponse<List<Product>>) {
       emit(ProductSuccess(productList: response.data));

@@ -13,6 +13,7 @@ Widget acceptedOrderView(
     ThemeData theme,
     BuildContext context,
     List<Product> selectedItems,
+    ProductStatus productStatus,
     void Function(VoidCallback fn) setState,
     void Function(List<Product> products) collect,
     void Function(List<Product> products) doNotExist,
@@ -24,8 +25,8 @@ Widget acceptedOrderView(
         buildOrderInfo(context, theme, task),
         divider16,
         Expanded(
-            child: buildMultipleExpandableProductLists(
-                task, shelfs, theme, context, selectedItems, setState)),
+            child: buildMultipleExpandableProductLists(task, shelfs, theme,
+                context, selectedItems, productStatus, setState)),
         Column(
           children: [
             buildCollectedButton(context, selectedItems, collect, doNotExist),

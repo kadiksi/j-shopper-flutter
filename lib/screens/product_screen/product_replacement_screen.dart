@@ -14,19 +14,18 @@ import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
 class ProductReplacementSheet extends StatefulWidget {
   const ProductReplacementSheet(
       {super.key,
-      required this.products,
+      required this.mainProduct,
       required this.isReplace,
-      required this.action,
-      required this.title});
-
-  final List<Product> products;
+      required this.title,
+      required this.confirmProductSwap});
+  final Product mainProduct;
   final bool isReplace;
-  final VoidCallback action;
+  final Function(Product product, int replacedProductId) confirmProductSwap;
   final String title;
 
   @override
   _ProductReplacementSheetState createState() =>
-      _ProductReplacementSheetState(products: products);
+      _ProductReplacementSheetState(products: []);
 }
 
 class _ProductReplacementSheetState extends State<ProductReplacementSheet> {
@@ -178,6 +177,8 @@ class _ProductReplacementSheetState extends State<ProductReplacementSheet> {
                                   onPressed: () {
                                     if (widget.isReplace) {
                                       showReplaceConfirmationModalSheet(
+                                          widget.mainProduct.productId!,
+                                          product,
                                           S
                                               .of(context)
                                               .replace_product_confirmation_question,
@@ -186,14 +187,16 @@ class _ProductReplacementSheetState extends State<ProductReplacementSheet> {
                                               .Replacement_of_good_will_result,
                                           S.of(context).replace_product,
                                           'assets/svg/three_dots_replace_product.svg',
-                                          widget.action);
+                                          widget.confirmProductSwap);
                                     } else {
                                       showReplaceConfirmationModalSheet(
+                                          widget.mainProduct.productId!,
+                                          product,
                                           S.of(context).add_product_question,
                                           S.of(context).cant_cancel_action,
                                           S.of(context).add_product,
                                           'assets/svg/qr_add_order.svg',
-                                          widget.action);
+                                          widget.confirmProductSwap);
                                     }
                                   },
                                 )),
@@ -229,8 +232,14 @@ class _ProductReplacementSheetState extends State<ProductReplacementSheet> {
                 })));
   }
 
-  void showReplaceConfirmationModalSheet(String title, String tip,
-      String buttonText, String icon, VoidCallback action) {
+  void showReplaceConfirmationModalSheet(
+      int replacedProductId,
+      Product product,
+      String title,
+      String tip,
+      String buttonText,
+      String icon,
+      Function(Product product, int replacedProductId) confirmProductSwap) {
     showModalBottomSheet(
       context: context,
       shape: const RoundedRectangleBorder(
@@ -240,7 +249,9 @@ class _ProductReplacementSheetState extends State<ProductReplacementSheet> {
       ),
       builder: (BuildContext context) {
         return SwapConfirmationDialog(
-            action: action,
+            replacedProductId: replacedProductId,
+            product: product,
+            confirmProductSwap: confirmProductSwap,
             title: title,
             tip: tip,
             buttonText: buttonText,

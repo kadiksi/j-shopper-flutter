@@ -11,3 +11,15 @@ class LoadProdactList extends ProductEvent {
   @override
   List<Object?> get props => [completer, search];
 }
+
+class ReplaceProdact extends ProductEvent {
+  ReplaceProdact(
+      {this.completer, required this.product, required this.replacedProductId});
+
+  final Completer? completer;
+  final Product product;
+  final int replacedProductId;
+
+  @override
+  List<Object?> get props => [completer, product];
+}
