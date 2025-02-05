@@ -10,6 +10,7 @@ import 'package:j_courier/models/tasks/task.dart';
 import 'package:j_courier/repositories/list/list_abstarct_repository.dart';
 import 'package:j_courier/screens/order_screen/orders_menu/accepted_menu_widgets.dart';
 import 'package:j_courier/screens/order_screen/accepted/accepted_tabs_orders_view.dart';
+import 'package:j_courier/screens/widgets/alerts/alert.dart';
 import 'package:j_courier/screens/widgets/errors/failed_request.dart';
 import 'package:j_courier/screens/widgets/tabs/tab_with_badge.dart';
 import 'package:j_courier/screens/widgets/bottom_sheet/order_accepted_options.dart';
@@ -37,20 +38,34 @@ class _AcceptedOrderTabedScreenState extends State<AcceptedOrderTabedScreen>
   );
   List<CancelationReasons> reasons = [];
 
+  List<AcceptedOrderScreen> tabList = [];
+
   @override
   void initState() {
     super.initState();
+    initTabController();
     _orderBloc.add(LoadCancelationReasons());
-    _tabController = TabController(length: 3, vsync: this);
-    _tabController.addListener(() {
-      // setState(() {});
-    });
   }
 
   @override
   void dispose() {
     _tabController.dispose();
     super.dispose();
+  }
+
+  initTabController() {
+    tabList.addAll([
+      AcceptedOrderScreen(task: widget.task, productStatus: ProductStatus.NEW),
+      AcceptedOrderScreen(
+          task: widget.task, productStatus: ProductStatus.NOT_AVAILABLE),
+      AcceptedOrderScreen(
+          task: widget.task, productStatus: ProductStatus.PROCESSED),
+    ]);
+
+    _tabController = TabController(length: 3, vsync: this);
+    _tabController.addListener(() {
+      setState(() {});
+    });
   }
 
   @override
@@ -66,11 +81,11 @@ class _AcceptedOrderTabedScreenState extends State<AcceptedOrderTabedScreen>
               showAcceptedOrderOptions(
                   context,
                   showModelAddProduct,
-                  widget.task.productList!,
                   showModelCancelOrder,
                   reasons,
                   showModelReturnOrder,
-                  cancelOrder);
+                  cancelOrder,
+                  addProduct);
             },
           ),
         ],
@@ -111,19 +126,13 @@ class _AcceptedOrderTabedScreenState extends State<AcceptedOrderTabedScreen>
               bloc: _orderBloc,
               builder: (context, state) {
                 if (state is OrderCancelReasonSuccess) {
-                  return TabBarView(
-                    controller: _tabController,
-                    children: [
-                      AcceptedOrderScreen(
-                          task: widget.task, productStatus: ProductStatus.NEW),
-                      AcceptedOrderScreen(
-                          task: widget.task,
-                          productStatus: ProductStatus.NOT_AVAILABLE),
-                      AcceptedOrderScreen(
-                          task: widget.task,
-                          productStatus: ProductStatus.PROCESSED),
-                    ],
-                  );
+                  return tabBars();
+                }
+                if (state is AddProductSuccess) {
+                  return tabBars();
+                }
+                if (state is OrderStatusSuccess) {
+                  return tabBars();
                 }
                 if (state is OrderFailure) {
                   return FailedRequest(callback: loadCancelationReasons);
@@ -133,9 +142,15 @@ class _AcceptedOrderTabedScreenState extends State<AcceptedOrderTabedScreen>
               listener: (BuildContext context, OrderState state) {
                 if (state is OrderCancelReasonSuccess) {
                   reasons = state.cancelationReasons;
+                } else if (state is AddProductSuccess) {
+                  handleBackWindow();
+                  // initTabController();
+                  _tabController.animateTo(_tabController.index);
+                  setState(() {});
                 } else if (state is OrderStatusSuccess) {
-                  print("From OrderStatusSuccess Listener");
-                  handleCancel();
+                  handleBackWindow();
+                } else if (state is AddProductFailure) {
+                  showAlert(context, ' ', state.exception.toString());
                 }
               },
             ),
@@ -149,19 +164,24 @@ class _AcceptedOrderTabedScreenState extends State<AcceptedOrderTabedScreen>
     _orderBloc.add(LoadCancelationReasons());
   }
 
-  void handleCancel() {
+  void handleBackWindow() {
     Navigator.pop(context);
     Navigator.pop(context);
   }
 
   void cancelOrder(String cancellationReason) {
-    handleCancel();
-    // widget.task.customerId;
-    // print('Load Cancel Order Main');
-    // _orderBloc.add(SetOrderStatus(
-    //     externalOrderId: widget.task.externalOrderId!,
-    //     status: OrderStatus.CANCELED,
-    //     cancellationReason: cancellationReason,
-    //     cancellationReasonOther: 'cancellationReasonOther'));
+    handleBackWindow();
+  }
+
+  void addProduct(Product product) {
+    _orderBloc.add(AddProductToOrder(
+        product: product, externalOrderId: widget.task.externalOrderId!));
+  }
+
+  tabBars() {
+    return TabBarView(
+      controller: _tabController,
+      children: tabList,
+    );
   }
 }

@@ -341,4 +341,50 @@ class ListRepository implements OrderAbstractRepository {
       return ErrorResponse(e.toString());
     }
   }
+
+  @override
+  Future<ApiResponse> addProduct(
+      Product product, String externalOrderId) async {
+    double price = 0;
+    if (product.price! <= 0) {
+      price = 1;
+    } else {
+      price = product.price!;
+    }
+    try {
+      Map<String, dynamic> item = {
+        'jmartProductId': product.jmartProductId,
+        'productCode': product.productCode,
+        'productName': product.productName,
+        'imageUrl': product.imageUrl,
+        'price': price,
+        // 'quantity': product.quantity,
+        'categoryIds': product.categoryIds,
+        'orderProductType': product.orderProductType?.name
+      };
+
+      Map<String, dynamic> query = {
+        'externalOrderId': externalOrderId,
+      };
+      final response = await dio.post(
+          'https://test5.jmart.kz/gw/jpost-shopper/api/v1/product/add',
+          data: jsonEncode(item),
+          queryParameters: query);
+
+      final data = response.data as dynamic;
+
+      SuccessResponse<String> su = SuccessResponse(data);
+      return su;
+    } catch (e) {
+      if (e is DioException) {
+        print("type: ${e.response?.data.runtimeType} ///${e.response?.data}");
+        if (e.response?.data['data'] == null) {
+          return ErrorResponse(e.response?.data['message']);
+        } else {
+          return ErrorResponse(e.response?.data['data']['message']);
+        }
+      }
+      return ErrorResponse(e.toString());
+    }
+  }
 }

@@ -25,6 +25,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     on<LoadCollectOrder>(_collecProduct);
     on<LoadCancelationReasons>(_loadCancelationReason);
     on<SetOrderStatus>(_changeStatus);
+    on<AddProductToOrder>(_addProduct);
   }
 
   final OrderAbstractRepository orderRepository;
@@ -156,6 +157,23 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
       emit(OrderCollectProductSuccess(data: response.data));
     } else if (response is ErrorResponse) {
       emit(OrderFailure(exception: response.errorMessage));
+    }
+  }
+
+  Future<void> _addProduct(
+    AddProductToOrder event,
+    Emitter<OrderState> emit,
+  ) async {
+    // if (state is! OrderSuccess) {
+    //   emit(OrderLoading());
+    // }
+    final response =
+        await orderRepository.addProduct(event.product, event.externalOrderId);
+
+    if (response is SuccessResponse<String>) {
+      emit(AddProductSuccess(data: response.data));
+    } else if (response is ErrorResponse) {
+      emit(AddProductFailure(exception: response.errorMessage));
     }
   }
 

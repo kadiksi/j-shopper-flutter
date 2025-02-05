@@ -59,8 +59,8 @@ class ProductRepository implements ProductAbstractRepository {
         'productCode': product.productCode,
         'productName': product.productName,
         'imageUrl': product.imageUrl,
-        'price': 100,
-        'quantity': product.quantity,
+        'price': product.price,
+        // 'quantity': product.quantity,
         'categoryIds': product.categoryIds,
         'orderProductType': product.orderProductType?.name.toString(),
       };
@@ -68,14 +68,7 @@ class ProductRepository implements ProductAbstractRepository {
           'https://test5.jmart.kz/gw/jpost-shopper/api/v1/product/${replacedProductid}/replace',
           data: jsonEncode(item));
 
-      final data = response.data['data'] as List<dynamic>;
-
-      final productList = data.map((e) {
-        final details = Product.fromJson(e);
-        return details;
-      }).toList();
-
-      SuccessResponse<List<Product>> su = SuccessResponse(productList);
+      SuccessResponse<String> su = SuccessResponse(response.data['data']);
       return su;
     } catch (e) {
       if (e is DioException) {

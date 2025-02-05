@@ -235,8 +235,7 @@ class _ProductDetailScreenState extends State<ProductScreen> {
       ),
       builder: (context) => ProductReplacementSheet(
           mainProduct: mainProduct,
-          isReplace: true,
-          confirmProductSwap: replaceProduct,
+          replaceProduct: replaceProduct,
           title: S.of(context).replace_product),
     );
   }

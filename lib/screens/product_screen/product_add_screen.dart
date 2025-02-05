@@ -8,17 +8,12 @@ import 'package:j_courier/blocks/product/product_bloc.dart';
 import 'package:j_courier/generated/l10n.dart';
 import 'package:j_courier/models/tasks/product.dart';
 import 'package:j_courier/repositories/product/product_abstarct_repository.dart';
-import 'package:j_courier/screens/widgets/bottom_sheet/swap_confirmation_dialog.dart';
+import 'package:j_courier/screens/widgets/bottom_sheet/add_confirmation_dialog.dart';
 import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
 
-class ProductReplacementSheet extends StatefulWidget {
-  ProductReplacementSheet(
-      {super.key,
-      required this.mainProduct,
-      required this.title,
-      required this.replaceProduct});
-  final Product mainProduct;
-  final Function(Product product, int replacedProductId) replaceProduct;
+class ProductAddSheet extends StatefulWidget {
+  ProductAddSheet({super.key, required this.title, required this.addProduct});
+  final Function(Product product) addProduct;
   final String title;
 
   @override
@@ -26,7 +21,7 @@ class ProductReplacementSheet extends StatefulWidget {
       _ProductReplacementSheetState(products: []);
 }
 
-class _ProductReplacementSheetState extends State<ProductReplacementSheet> {
+class _ProductReplacementSheetState extends State<ProductAddSheet> {
   final _productBloc = ProductBloc(
     GetIt.I<ProductAbstractRepository>(),
   );
@@ -174,28 +169,26 @@ class _ProductReplacementSheetState extends State<ProductReplacementSheet> {
                                   ),
                                   onPressed: () {
                                     // if (widget.isReplace) {
-                                    showReplaceConfirmationModalSheet(
-                                        widget.mainProduct.productId!,
+                                    // showReplaceConfirmationModalSheet(
+                                    //     widget.mainProduct.productId!,
+                                    //     product,
+                                    //     S
+                                    //         .of(context)
+                                    //         .replace_product_confirmation_question,
+                                    //     S
+                                    //         .of(context)
+                                    //         .Replacement_of_good_will_result,
+                                    //     S.of(context).replace_product,
+                                    //     'assets/svg/three_dots_replace_product.svg',
+                                    //     widget.replaceProduct);
+                                    // // } else {
+                                    showAddfirmationModalSheet(
                                         product,
-                                        S
-                                            .of(context)
-                                            .replace_product_confirmation_question,
-                                        S
-                                            .of(context)
-                                            .Replacement_of_good_will_result,
-                                        S.of(context).replace_product,
-                                        'assets/svg/three_dots_replace_product.svg',
-                                        widget.replaceProduct);
-                                    // } else {
-                                    //   showReplaceConfirmationModalSheet(
-                                    //       widget.mainProduct.productId!
-                                    //           .toString(),
-                                    //       product,
-                                    //       S.of(context).add_product_question,
-                                    //       S.of(context).cant_cancel_action,
-                                    //       S.of(context).add_product,
-                                    //       'assets/svg/qr_add_order.svg',
-                                    //       widget.replace);
+                                        S.of(context).add_product_question,
+                                        S.of(context).cant_cancel_action,
+                                        S.of(context).add_product,
+                                        'assets/svg/qr_add_order.svg',
+                                        widget.addProduct);
                                     // }
                                   },
                                 )),
@@ -231,14 +224,8 @@ class _ProductReplacementSheetState extends State<ProductReplacementSheet> {
                 })));
   }
 
-  void showReplaceConfirmationModalSheet(
-      int replacedProductId,
-      Product product,
-      String title,
-      String tip,
-      String buttonText,
-      String icon,
-      Function(Product product, int id) replace) {
+  void showAddfirmationModalSheet(Product product, String title, String tip,
+      String buttonText, String icon, Function(Product product) add) {
     showModalBottomSheet(
       context: context,
       shape: const RoundedRectangleBorder(
@@ -247,10 +234,9 @@ class _ProductReplacementSheetState extends State<ProductReplacementSheet> {
         ),
       ),
       builder: (BuildContext context) {
-        return SwapConfirmationDialog(
-            replacedProductId: replacedProductId,
+        return AddConfirmationDialog(
             product: product,
-            confirmProductSwap: replace,
+            confirmProductAdd: add,
             title: title,
             tip: tip,
             buttonText: buttonText,

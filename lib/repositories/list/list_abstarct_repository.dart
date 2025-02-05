@@ -20,4 +20,5 @@ abstract class OrderAbstractRepository {
       String? cancellationReasonOther);
   Future<ApiResponse> changeProductStatus(
       List<Product> products, String status);
+  Future<ApiResponse> addProduct(Product products, String externalOrderId);
 }

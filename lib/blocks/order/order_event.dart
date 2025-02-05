@@ -71,6 +71,18 @@ class LoadShelf extends OrderEvent {
   List<Object?> get props => [completer, task];
 }
 
+class AddProductToOrder extends OrderEvent {
+  AddProductToOrder(
+      {this.completer, required this.product, required this.externalOrderId});
+
+  final Completer? completer;
+  final Product product;
+  final String externalOrderId;
+
+  @override
+  List<Object?> get props => [completer, product];
+}
+
 class LoadCancelationReasons extends OrderEvent {
   @override
   List<Object?> get props => [];
