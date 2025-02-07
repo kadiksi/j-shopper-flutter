@@ -8,7 +8,7 @@ import 'package:j_courier/generated/l10n.dart';
 import 'package:j_courier/models/tasks/cacelation_reasons/cancelation_reasons.dart';
 import 'package:j_courier/models/tasks/processed/processed_task.dart';
 // import 'package:j_courier/models/tasks/task.dart';
-import 'package:j_courier/repositories/list/list_abstarct_repository.dart';
+import 'package:j_courier/repositories/list/order_abstarct_repository.dart';
 // import 'package:j_courier/screens/widgets/bottom_sheet/cancel_order.dart';
 
 import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';

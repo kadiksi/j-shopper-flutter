@@ -1,115 +1,47 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
-import 'package:j_courier/blocks/order/order_bloc.dart';
 import 'package:j_courier/models/tasks/product.dart';
+import 'package:j_courier/models/tasks/shelf/shelf.dart';
 import 'package:j_courier/models/tasks/task.dart';
-import 'package:j_courier/repositories/list/list_abstarct_repository.dart';
 import 'package:j_courier/screens/order_screen/accepted/accepted_order/accepted_oder.dart';
-import 'package:j_courier/screens/widgets/alerts/alert.dart';
-import 'package:j_courier/screens/widgets/errors/failed_request.dart';
 
 class AcceptedOrderScreen extends StatefulWidget {
-  const AcceptedOrderScreen(
-      {super.key, required this.task, required this.productStatus});
+  const AcceptedOrderScreen({
+    super.key,
+    required this.task,
+    required this.productStatus,
+    required this.shelfs,
+    required this.changeProductStatus,
+    required this.sendToDelivery,
+  });
 
   final Task task;
+  final List<Shelf> shelfs;
   final ProductStatus productStatus;
+  final void Function(List<Product> products, String status)
+      changeProductStatus;
+  final VoidCallback sendToDelivery;
 
   @override
   State<AcceptedOrderScreen> createState() => _AcceptedOrderScreenState();
 }
 
 class _AcceptedOrderScreenState extends State<AcceptedOrderScreen> {
-  final _orderBloc = OrderBloc(
-    GetIt.I<OrderAbstractRepository>(),
-  );
-  List<Product> selectedItems = [];
-
-  @override
-  void initState() {
-    _orderBloc
-        .add(LoadAcceptedOrder(id: int.parse(widget.task.externalOrderId!)));
-    // _orderBloc.add(LoadCancelationReasons());
-    super.initState();
-  }
+  final List<Product> selectedItems = [];
 
   @override
   Widget build(BuildContext context) {
-    print('Hash Code of page ${hashCode}');
-    final theme = Theme.of(context);
     return Scaffold(
-      body: RefreshIndicator(
-        onRefresh: () async {
-          final completer = Completer();
-          _orderBloc.add(
-              LoadAcceptedOrder(id: int.parse(widget.task.externalOrderId!)));
-          return completer.future;
-        },
-        child: BlocConsumer<OrderBloc, OrderState>(
-          bloc: _orderBloc,
-          builder: (context, state) {
-            if (state is OrderShelfSuccess) {
-              return acceptedOrderView(
-                  state.task,
-                  state.shelfs,
-                  theme,
-                  context,
-                  selectedItems,
-                  widget.productStatus,
-                  setState,
-                  collect,
-                  doNotExist,
-                  sendToDelivery);
-            }
-            if (state is OrderFailure) {
-              return FailedRequest(callback: getOrder);
-            }
-            return const Center(child: CircularProgressIndicator());
-          },
-          listener: (BuildContext context, OrderState state) {
-            if (state is OrderCollectProductSuccess) {
-              print("From OrderCollectProductSuccess Listener");
-              getOrder();
-            }
-            if (state is OrderCancelReasonSuccess) {
-              print("From OrderCancelReasonSuccess Listener");
-            }
-            if (state is OrderStatusFailure) {
-              showAlert(context, state.exception.toString(),
-                  state.exception.toString());
-            }
-          },
-        ),
+      body: acceptedOrderView(
+        widget.task,
+        widget.shelfs,
+        Theme.of(context),
+        context,
+        selectedItems,
+        widget.productStatus,
+        setState,
+        widget.changeProductStatus,
+        widget.sendToDelivery,
       ),
     );
-  }
-
-  void getOrder() {
-    _orderBloc
-        .add(LoadAcceptedOrder(id: int.parse(widget.task.externalOrderId!)));
-  }
-
-  void collect(List<Product> products) {
-    print('Collect');
-    _orderBloc.add(LoadCollectOrder(products: products, status: 'PROCESSED'));
-  }
-
-  void sendToDelivery() {
-    print('sendToDelivery');
-    _orderBloc.add(SetOrderStatus(
-        externalOrderId: widget.task.externalOrderId!,
-        status: OrderStatus.PROCESSED));
-    // print('Collect');
-    // _orderBloc.add(SetOrderStatus(products: products, status: 'PROCESSED'));
-  }
-
-// NEW, NOT_AVAILABLE, PROCESSED
-  void doNotExist(List<Product> products) {
-    print('doNotExist');
-    _orderBloc
-        .add(LoadCollectOrder(products: products, status: 'NOT_AVAILABLE'));
   }
 }

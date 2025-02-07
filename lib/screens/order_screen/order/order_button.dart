@@ -28,11 +28,8 @@ Widget buildSendToDeliveryButton(
   );
 }
 
-Widget buildCollectedButton(
-    BuildContext context,
-    List<Product> selectedItems,
-    void Function(List<Product> products) collect,
-    void Function(List<Product> products) doNotExist) {
+Widget buildCollectedButton(BuildContext context, List<Product> selectedItems,
+    void Function(List<Product> products, String status) changeProductStatus) {
   final theme = Theme.of(context);
   if (selectedItems.isNotEmpty) {
     return Row(
@@ -41,7 +38,7 @@ Widget buildCollectedButton(
         SizedBox(
           child: ElevatedButton(
               onPressed: () {
-                doNotExist(selectedItems);
+                changeProductStatus(selectedItems, 'NOT_AVAILABLE');
               },
               style: theme.elevatedButtonTheme.style!.copyWith(
                   backgroundColor: WidgetStateProperty.all(
@@ -55,7 +52,7 @@ Widget buildCollectedButton(
         SizedBox(
           child: ElevatedButton(
             onPressed: () {
-              collect(selectedItems);
+              changeProductStatus(selectedItems, 'PROCESSED');
             },
             child: Text(S.of(context).collect),
           ),

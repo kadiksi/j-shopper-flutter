@@ -11,7 +11,7 @@ import 'package:j_courier/screens/widgets/bottom_sheet/confirm_order_dialog.dart
 import 'package:j_courier/screens/widgets/errors/failed_request.dart';
 
 import '../../../blocks/list/list_bloc.dart';
-import '../../../repositories/list/list_abstarct_repository.dart';
+import '../../../repositories/list/order_abstarct_repository.dart';
 import '../../widgets/list/task_tile.dart';
 
 @RoutePage()

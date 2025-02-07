@@ -6,7 +6,7 @@ import 'package:get_it/get_it.dart';
 import 'package:j_courier/models/tasks/shelf/shelf.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 import '../../models/ApiResponse';
-import '../../repositories/list/list_abstarct_repository.dart';
+import '../../repositories/list/order_abstarct_repository.dart';
 
 part 'shelf_event.dart';
 part 'shelf_state.dart';

@@ -21,8 +21,6 @@ Widget buildMultipleExpandableProductLists(
       getnerateShleProductList(shelfs, task.productList!, productStatus);
 
   for (var element in shelfWithProducts) {
-    List<Product> products = task.productList!;
-
     views.add(ExpansionTile(
       childrenPadding: EdgeInsets.zero,
       initiallyExpanded: false,
@@ -30,8 +28,8 @@ Widget buildMultipleExpandableProductLists(
           style: theme.textTheme.bodyMedium),
       subtitle:
           Text('Завершено 6 из 8 Subtitle', style: theme.textTheme.bodySmall),
-      children: products.map((product) {
-        final isSelected = selectedItems.contains(product.productId);
+      children: element.products.map((product) {
+        final isSelected = selectedItems.contains(product);
         return GestureDetector(
             onLongPress: () {
               if (selectedItems.isEmpty) {
@@ -129,8 +127,8 @@ getnerateShleProductList(List<Shelf> shelfs, List<Product> productList,
     List<Product> products = [];
     productList.forEach((product) {
       if (product.companyShelf == shelf.id &&
-          product.status.toString() == productStatus.toString()) {
-        print('${product.status.toString()} / ${productStatus.toString()}');
+          product.status?.name == productStatus.name) {
+        print('${product.status?.name} / ${productStatus.name}');
         products.add(product);
       }
     });

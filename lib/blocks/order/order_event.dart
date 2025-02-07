@@ -88,8 +88,8 @@ class LoadCancelationReasons extends OrderEvent {
   List<Object?> get props => [];
 }
 
-class LoadCollectOrder extends OrderEvent {
-  LoadCollectOrder(
+class LoadChangeProductStatus extends OrderEvent {
+  LoadChangeProductStatus(
       {this.completer, required this.products, required this.status});
 
   final Completer? completer;

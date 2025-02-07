@@ -10,7 +10,7 @@ import 'package:j_courier/models/tasks/shelf/shelf.dart';
 import 'package:j_courier/models/tasks/task.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 import '../../models/ApiResponse';
-import '../../repositories/list/list_abstarct_repository.dart';
+import '../../repositories/list/order_abstarct_repository.dart';
 
 part 'order_event.dart';
 part 'order_state.dart';
@@ -22,7 +22,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     on<AcceptOrder>(_acceptNewOrder);
     on<LoadProcessedOrder>(_loadProcessedOrder);
     on<LoadShelf>(_loadShelf);
-    on<LoadCollectOrder>(_collecProduct);
+    on<LoadChangeProductStatus>(_changeProductStatus);
     on<LoadCancelationReasons>(_loadCancelationReason);
     on<SetOrderStatus>(_changeStatus);
     on<AddProductToOrder>(_addProduct);
@@ -143,8 +143,8 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     }
   }
 
-  Future<void> _collecProduct(
-    LoadCollectOrder event,
+  Future<void> _changeProductStatus(
+    LoadChangeProductStatus event,
     Emitter<OrderState> emit,
   ) async {
     if (state is! OrderSuccess) {
