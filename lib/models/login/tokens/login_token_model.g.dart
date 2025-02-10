@@ -50,6 +50,7 @@ class LoginTokenModelAdapter extends TypeAdapter<LoginTokenModel> {
 // JsonSerializableGenerator
 // **************************************************************************
 
+// ignore: unused_element
 LoginTokenModel _$LoginTokenModelFromJson(Map<String, dynamic> json) =>
     LoginTokenModel(
       token: json['token'] as String,
@@ -57,6 +58,7 @@ LoginTokenModel _$LoginTokenModelFromJson(Map<String, dynamic> json) =>
       expired: json['expired'] as String,
     );
 
+// ignore: unused_element
 Map<String, dynamic> _$LoginTokenModelToJson(LoginTokenModel instance) =>
     <String, dynamic>{
       'token': instance.token,

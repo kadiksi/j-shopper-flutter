@@ -5,6 +5,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'product.g.dart';
 
 @JsonSerializable()
+// ignore: must_be_immutable
 class Product extends Equatable {
   final int? jmartProductId;
   final String? productCode;

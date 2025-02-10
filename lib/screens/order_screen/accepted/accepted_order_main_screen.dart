@@ -19,6 +19,7 @@ import 'package:j_courier/screens/widgets/tabs/tab_with_badge.dart';
 import 'package:j_courier/screens/widgets/bottom_sheet/order_accepted_options.dart';
 
 @RoutePage()
+// ignore: must_be_immutable
 class AcceptedOrderTabedScreen extends StatefulWidget {
   AcceptedOrderTabedScreen({super.key, required this.task});
 
