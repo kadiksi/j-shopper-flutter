@@ -94,7 +94,7 @@ class LoadChangeProductStatus extends OrderEvent {
 
   final Completer? completer;
   final List<Product> products;
-  final String status;
+  final ProductStatus status;
 
   @override
   List<Object?> get props => [completer, products];

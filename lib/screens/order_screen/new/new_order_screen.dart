@@ -10,6 +10,8 @@ import 'package:j_courier/models/tasks/cacelation_reasons/cancelation_reasons.da
 import 'package:j_courier/models/tasks/product.dart';
 import 'package:j_courier/models/tasks/task.dart';
 import 'package:j_courier/repositories/list/order_abstarct_repository.dart';
+import 'package:j_courier/repositories/product/product_abstarct_repository.dart';
+import 'package:j_courier/router/router.dart';
 import 'package:j_courier/screens/history_screens/active_orders/active_order_screen.dart';
 import 'package:j_courier/screens/order_screen/order/order.dart';
 import 'package:j_courier/screens/widgets/bottom_sheet/order_new_options.dart';
@@ -32,6 +34,7 @@ class NewOrderScreen extends StatefulWidget {
 class _NewOrderScreenState extends State<NewOrderScreen> {
   final _orderBloc = OrderBloc(
     GetIt.I<OrderAbstractRepository>(),
+    GetIt.I<ProductAbstractRepository>(),
   );
   List<Product> selectedItems = [];
   List<CancelationReasons> reasons = [];
@@ -73,8 +76,16 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
             bloc: _orderBloc,
             builder: (context, state) {
               if (state is OrderShelfSuccess) {
-                return newOrderView(state.task, state.shelfs, theme, context,
-                    selectedItems, widget.productStatus, setState, acceptOrder);
+                return newOrderView(
+                    state.task,
+                    state.shelfs,
+                    theme,
+                    context,
+                    selectedItems,
+                    widget.productStatus,
+                    setState,
+                    acceptOrder,
+                    toToProduct);
               }
               if (state is OrderFailure) {
                 return FailedRequest(callback: callback);
@@ -105,6 +116,14 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
   void handleAcceptOrder() {
     print("handleAcceptOrder");
     Navigator.pop(context);
+  }
+
+  void toToProduct(Product product) {
+    AutoRouter.of(context).push(ProductRoute(product: product)).then((onValue) {
+      if (onValue == "refresh") {
+        loadOrder();
+      }
+    });
   }
 }
 

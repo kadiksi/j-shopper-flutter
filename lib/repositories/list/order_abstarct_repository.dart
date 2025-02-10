@@ -1,4 +1,3 @@
-import 'package:j_courier/models/tasks/product.dart';
 import 'package:j_courier/models/tasks/task.dart';
 
 import '../../models/ApiResponse';
@@ -18,7 +17,4 @@ abstract class OrderAbstractRepository {
       OrderStatus status,
       String? cancellationReason,
       String? cancellationReasonOther);
-  Future<ApiResponse> changeProductStatus(
-      List<Product> products, String status);
-  Future<ApiResponse> addProduct(Product products, String externalOrderId);
 }

@@ -15,7 +15,8 @@ Widget newOrderView(
     List<Product> selectedItems,
     ProductStatus productStatus,
     void Function(VoidCallback fn) setState,
-    void Function() accept) {
+    void Function() accept,
+    void Function(Product product) goToProduct) {
   return Padding(
     padding: const EdgeInsets.all(16.0),
     child: Column(
@@ -24,7 +25,7 @@ Widget newOrderView(
         divider16,
         Expanded(
             child: buildMultipleExpandableProductLists(task, shelfs, theme,
-                context, selectedItems, productStatus, setState)),
+                context, selectedItems, productStatus, setState, goToProduct)),
         buildAcceptOrderButton(context, accept),
         Column(
             // children: [buildCollectedButton(context, selectedItems)],

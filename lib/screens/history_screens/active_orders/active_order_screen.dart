@@ -9,6 +9,7 @@ import 'package:j_courier/models/tasks/cacelation_reasons/cancelation_reasons.da
 import 'package:j_courier/models/tasks/processed/processed_task.dart';
 // import 'package:j_courier/models/tasks/task.dart';
 import 'package:j_courier/repositories/list/order_abstarct_repository.dart';
+import 'package:j_courier/repositories/product/product_abstarct_repository.dart';
 // import 'package:j_courier/screens/widgets/bottom_sheet/cancel_order.dart';
 
 import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
@@ -30,6 +31,7 @@ class ActiveOrderScreen extends StatefulWidget {
 class _ActiveOrderScreenState extends State<ActiveOrderScreen> {
   final _listBloc = OrderBloc(
     GetIt.I<OrderAbstractRepository>(),
+    GetIt.I<ProductAbstractRepository>(),
   );
   List<CancelationReasons> reasons = [];
   List<int> selectedItems = [];

@@ -8,15 +8,18 @@ import 'package:j_courier/screens/order_screen/order/product_list.dart';
 import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
 
 Widget acceptedOrderView(
-    Task task,
-    List<Shelf> shelfs,
-    ThemeData theme,
-    BuildContext context,
-    List<Product> selectedItems,
-    ProductStatus productStatus,
-    void Function(VoidCallback fn) setState,
-    void Function(List<Product> products, String status) changeProductStatus,
-    void Function() sendToDelivery) {
+  Task task,
+  List<Shelf> shelfs,
+  ThemeData theme,
+  BuildContext context,
+  List<Product> selectedItems,
+  ProductStatus productStatus,
+  void Function(VoidCallback fn) setState,
+  void Function(List<Product> products, ProductStatus status)
+      changeProductStatus,
+  void Function() sendToDelivery,
+  void Function(Product product) goToProduct,
+) {
   return Padding(
     padding: const EdgeInsets.all(16.0),
     child: Column(
@@ -25,7 +28,7 @@ Widget acceptedOrderView(
         divider16,
         Expanded(
             child: buildMultipleExpandableProductLists(task, shelfs, theme,
-                context, selectedItems, productStatus, setState)),
+                context, selectedItems, productStatus, setState, goToProduct)),
         Column(
           children: [
             buildCollectedButton(context, selectedItems, changeProductStatus),

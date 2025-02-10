@@ -12,13 +12,15 @@ class AcceptedOrderScreen extends StatefulWidget {
     required this.shelfs,
     required this.changeProductStatus,
     required this.sendToDelivery,
+    required this.goToProduct,
   });
 
   final Task task;
   final List<Shelf> shelfs;
   final ProductStatus productStatus;
-  final void Function(List<Product> products, String status)
+  final void Function(List<Product> products, ProductStatus status)
       changeProductStatus;
+  final void Function(Product product) goToProduct;
   final VoidCallback sendToDelivery;
 
   @override
@@ -32,16 +34,16 @@ class _AcceptedOrderScreenState extends State<AcceptedOrderScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: acceptedOrderView(
-        widget.task,
-        widget.shelfs,
-        Theme.of(context),
-        context,
-        selectedItems,
-        widget.productStatus,
-        setState,
-        widget.changeProductStatus,
-        widget.sendToDelivery,
-      ),
+          widget.task,
+          widget.shelfs,
+          Theme.of(context),
+          context,
+          selectedItems,
+          widget.productStatus,
+          setState,
+          widget.changeProductStatus,
+          widget.sendToDelivery,
+          widget.goToProduct),
     );
   }
 }

@@ -23,3 +23,15 @@ class ReplaceProdact extends ProductEvent {
   @override
   List<Object?> get props => [completer, product];
 }
+
+class ChangeProdactStatus extends ProductEvent {
+  ChangeProdactStatus(
+      {this.completer, required this.products, required this.status});
+
+  final Completer? completer;
+  final List<Product> products;
+  final ProductStatus status;
+
+  @override
+  List<Object?> get props => [completer, products, status];
+}

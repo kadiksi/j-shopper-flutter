@@ -175,7 +175,12 @@ class _ProductDetailScreenState extends State<ProductScreen> {
                           backgroundColor: WidgetStateProperty.all(
                               theme.colorScheme.secondaryContainer)),
                       onPressed: () {
-                        Navigator.of(context).pop();
+                        product.quantity = quantity;
+                        _productBloc.add(ChangeProdactStatus(
+                            products: [product],
+                            status: ProductStatus.PROCESSED));
+
+                        // Navigator.of(context).pop();
                       },
                       child: Text(S.of(context).collected,
                           style: theme.textTheme.bodyLarge!
@@ -196,6 +201,7 @@ class _ProductDetailScreenState extends State<ProductScreen> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
+                        product.quantity = quantity;
                         showModelReplaceProduct(context, product);
                       },
                       child: Text(S.of(context).replace_product,
@@ -222,6 +228,11 @@ class _ProductDetailScreenState extends State<ProductScreen> {
                     print("From Replace Success Listener");
                   } else if (state is ProductFailure) {
                     showAlert(context, ' ', state.exception.toString());
+                  } else if (state is ProductReplaceSuccess) {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).pop('refreshData');
+                  } else if (state is ProductStatusSuccess) {
+                    Navigator.of(context).pop('refreshData');
                   }
                 })));
   }

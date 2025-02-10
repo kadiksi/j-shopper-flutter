@@ -9,6 +9,8 @@ import 'package:j_courier/models/tasks/product.dart';
 import 'package:j_courier/models/tasks/shelf/shelf.dart';
 import 'package:j_courier/models/tasks/task.dart';
 import 'package:j_courier/repositories/list/order_abstarct_repository.dart';
+import 'package:j_courier/repositories/product/product_abstarct_repository.dart';
+import 'package:j_courier/router/router.dart';
 import 'package:j_courier/screens/order_screen/orders_menu/accepted_menu_widgets.dart';
 import 'package:j_courier/screens/order_screen/accepted/accepted_tabs_orders_view.dart';
 import 'package:j_courier/screens/widgets/alerts/alert.dart';
@@ -30,7 +32,10 @@ class AcceptedOrderTabedScreen extends StatefulWidget {
 class _AcceptedOrderTabedScreenState extends State<AcceptedOrderTabedScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  final OrderBloc _orderBloc = OrderBloc(GetIt.I<OrderAbstractRepository>());
+  final OrderBloc _orderBloc = OrderBloc(
+    GetIt.I<OrderAbstractRepository>(),
+    GetIt.I<ProductAbstractRepository>(),
+  );
 
   List<Shelf> shelves = [];
   List<CancelationReasons> reasons = [];
@@ -67,24 +72,27 @@ class _AcceptedOrderTabedScreenState extends State<AcceptedOrderTabedScreen>
           productStatus: ProductStatus.NEW,
           shelfs: shelves,
           changeProductStatus: changeProductStatus,
-          sendToDelivery: sendToDelivery),
+          sendToDelivery: sendToDelivery,
+          goToProduct: toToProduct),
       AcceptedOrderScreen(
           task: widget.task,
           productStatus: ProductStatus.NOT_AVAILABLE,
           shelfs: shelves,
           changeProductStatus: changeProductStatus,
-          sendToDelivery: sendToDelivery),
+          sendToDelivery: sendToDelivery,
+          goToProduct: toToProduct),
       AcceptedOrderScreen(
           task: widget.task,
           productStatus: ProductStatus.PROCESSED,
           shelfs: shelves,
           changeProductStatus: changeProductStatus,
-          sendToDelivery: sendToDelivery),
+          sendToDelivery: sendToDelivery,
+          goToProduct: toToProduct),
     ];
     // }
   }
 
-  void changeProductStatus(List<Product> products, String status) {
+  void changeProductStatus(List<Product> products, ProductStatus status) {
     _orderBloc.add(LoadChangeProductStatus(products: products, status: status));
   }
 
@@ -216,5 +224,14 @@ class _AcceptedOrderTabedScreenState extends State<AcceptedOrderTabedScreen>
         },
       ),
     );
+  }
+
+  void toToProduct(Product product) {
+    AutoRouter.of(context).push(ProductRoute(product: product)).then((onValue) {
+      print('ObNacking ${onValue}');
+      // if (onValue == "refreshData") {
+      loadOrder();
+      // }
+    });
   }
 }

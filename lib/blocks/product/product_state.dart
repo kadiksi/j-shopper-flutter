@@ -25,13 +25,24 @@ class ProductSuccess extends ProductState {
 
 class ProductReplaceSuccess extends ProductState {
   ProductReplaceSuccess({
-    required this.productList,
+    required this.product,
   });
 
-  final String productList;
+  final String product;
 
   @override
-  List<Object?> get props => [productList];
+  List<Object?> get props => [product];
+}
+
+class ProductStatusSuccess extends ProductState {
+  ProductStatusSuccess({
+    required this.product,
+  });
+
+  final String product;
+
+  @override
+  List<Object?> get props => [product];
 }
 
 class ProductFailure extends ProductState {

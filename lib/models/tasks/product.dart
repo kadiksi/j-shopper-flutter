@@ -11,7 +11,7 @@ class Product extends Equatable {
   final String? productName;
   final String? imageUrl;
   final double? price;
-  final int? quantity;
+  int? quantity;
   final ProductStatus? status; // NEW, NOT_AVAILABLE, PROCESSED
   final int? companyShelf;
   final List<int>? categoryIds;

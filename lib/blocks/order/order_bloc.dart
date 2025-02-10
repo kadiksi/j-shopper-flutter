@@ -8,6 +8,7 @@ import 'package:j_courier/models/tasks/processed/processed_task.dart';
 import 'package:j_courier/models/tasks/product.dart';
 import 'package:j_courier/models/tasks/shelf/shelf.dart';
 import 'package:j_courier/models/tasks/task.dart';
+import 'package:j_courier/repositories/product/product_abstarct_repository.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 import '../../models/ApiResponse';
 import '../../repositories/list/order_abstarct_repository.dart';
@@ -16,7 +17,8 @@ part 'order_event.dart';
 part 'order_state.dart';
 
 class OrderBloc extends Bloc<OrderEvent, OrderState> {
-  OrderBloc(this.orderRepository) : super(OrderInitial()) {
+  OrderBloc(this.orderRepository, this.productRepository)
+      : super(OrderInitial()) {
     on<LoadAcceptedOrder>(_loadAcceptedOrder);
     on<LoadNewOrder>(_loadNewOrder);
     on<AcceptOrder>(_acceptNewOrder);
@@ -29,6 +31,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
   }
 
   final OrderAbstractRepository orderRepository;
+  final ProductAbstractRepository productRepository;
 
   Future<void> _loadAcceptedOrder(
     LoadAcceptedOrder event,
@@ -150,8 +153,8 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     if (state is! OrderSuccess) {
       // emit(OrderLoading());
     }
-    final response =
-        await orderRepository.changeProductStatus(event.products, event.status);
+    final response = await productRepository.changeProductStatus(
+        event.products, event.status.name);
 
     if (response is SuccessResponse<String>) {
       emit(OrderCollectProductSuccess(data: response.data));
@@ -167,8 +170,8 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     // if (state is! OrderSuccess) {
     //   emit(OrderLoading());
     // }
-    final response =
-        await orderRepository.addProduct(event.product, event.externalOrderId);
+    final response = await productRepository.addProduct(
+        event.product, event.externalOrderId);
 
     if (response is SuccessResponse<String>) {
       emit(AddProductSuccess(data: response.data));

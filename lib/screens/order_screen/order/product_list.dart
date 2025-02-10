@@ -1,21 +1,19 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:j_courier/models/tasks/product.dart';
 import 'package:j_courier/models/tasks/shelf/shelf.dart';
 import 'package:j_courier/models/tasks/shelf/shelf_with_product.dart';
 import 'package:j_courier/models/tasks/task.dart';
-import 'package:j_courier/router/router.dart';
 import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
 
 Widget buildMultipleExpandableProductLists(
-  Task task,
-  List<Shelf> shelfs,
-  ThemeData theme,
-  BuildContext context,
-  List<Product> selectedItems,
-  ProductStatus productStatus,
-  void Function(VoidCallback fn) setState,
-) {
+    Task task,
+    List<Shelf> shelfs,
+    ThemeData theme,
+    BuildContext context,
+    List<Product> selectedItems,
+    ProductStatus productStatus,
+    void Function(VoidCallback fn) setState,
+    void Function(Product product) goToProduct) {
   List<Widget> views = [];
   List<ShelfWithProduct> shelfWithProducts =
       getnerateShleProductList(shelfs, task.productList!, productStatus);
@@ -48,7 +46,7 @@ Widget buildMultipleExpandableProductLists(
                   }
                 });
               } else {
-                AutoRouter.of(context).push(ProductRoute(product: product));
+                goToProduct(product);
               }
             },
             child: ListTile(
