@@ -8,4 +8,5 @@ abstract class ProductAbstractRepository {
   Future<ApiResponse> changeProductStatus(
       List<Product> products, String status);
   Future<ApiResponse> addProduct(Product products, String externalOrderId);
+  Future<ApiResponse> returnInitialProduct(Product product);
 }

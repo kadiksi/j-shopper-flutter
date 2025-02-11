@@ -45,6 +45,17 @@ class ProductStatusSuccess extends ProductState {
   List<Object?> get props => [product];
 }
 
+class ProductReturnSuccess extends ProductState {
+  ProductReturnSuccess({
+    required this.product,
+  });
+
+  final String product;
+
+  @override
+  List<Object?> get props => [product];
+}
+
 class ProductFailure extends ProductState {
   ProductFailure({
     this.exception,

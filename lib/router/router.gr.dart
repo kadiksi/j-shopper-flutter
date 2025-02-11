@@ -122,7 +122,7 @@ class ActiveOrderRouteArgs {
 }
 
 /// generated route for
-/// [ActiveOrders]
+// /// [ActiveOrders]
 // class ActiveOrders extends PageRouteInfo<ActiveOrdersArgs> {
 //   ActiveOrders({
 //     Key? key,

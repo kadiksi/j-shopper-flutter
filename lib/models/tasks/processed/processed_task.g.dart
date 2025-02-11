@@ -6,7 +6,6 @@ part of 'processed_task.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-// ignore: unused_element
 ProcessedTask _$ProcessedTaskFromJson(Map<String, dynamic> json) =>
     ProcessedTask(
       shopperOrderId: (json['shopperOrderId'] as num?)?.toInt(),
@@ -26,7 +25,6 @@ ProcessedTask _$ProcessedTaskFromJson(Map<String, dynamic> json) =>
           : ProcessedProduct.fromJson(json['productList'] as String),
     );
 
-// ignore: unused_element
 Map<String, dynamic> _$ProcessedTaskToJson(ProcessedTask instance) =>
     <String, dynamic>{
       'shopperOrderId': instance.shopperOrderId,

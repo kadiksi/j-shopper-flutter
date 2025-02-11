@@ -58,5 +58,6 @@
   "face_id_enter": "Вход по Face ID",
   "app_language": "Язык приложения",
   "collect": "Собрать",
-  "absent": "Отсутствует"
+  "absent": "Отсутствует",
+  "return_initial_product": "Вернуть исходный товар"
 }

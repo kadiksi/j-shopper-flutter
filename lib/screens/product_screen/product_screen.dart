@@ -42,6 +42,8 @@ class _ProductDetailScreenState extends State<ProductScreen> {
     Product product = widget.product;
     priceController.text = '${product.price}';
 
+    List<Widget> items = getButtonsList(product, theme);
+
     if (quantity == 0) {
       quantity = product.quantity!;
     }
@@ -167,48 +169,51 @@ class _ProductDetailScreenState extends State<ProductScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             child: Column(
-              children: [
-                SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      style: theme.elevatedButtonTheme.style!.copyWith(
-                          backgroundColor: WidgetStateProperty.all(
-                              theme.colorScheme.secondaryContainer)),
-                      onPressed: () {
-                        product.quantity = quantity;
-                        _productBloc.add(ChangeProdactStatus(
-                            products: [product],
-                            status: ProductStatus.PROCESSED));
+              children: items,
+              // SizedBox(
+              //     width: double.infinity,
+              //     child: ElevatedButton(
+              //       style: theme.elevatedButtonTheme.style!.copyWith(
+              //           backgroundColor: WidgetStateProperty.all(
+              //               theme.colorScheme.secondaryContainer)),
+              //       onPressed: () {
+              //         product.quantity = quantity;
+              //         _productBloc.add(ChangeProdactStatus(
+              //             products: [product],
+              //             status: ProductStatus.PROCESSED));
 
-                        // Navigator.of(context).pop();
-                      },
-                      child: Text(S.of(context).collected,
-                          style: theme.textTheme.bodyLarge!
-                              .copyWith(color: theme.colorScheme.secondary)),
-                    )),
-                divider10,
-                // SizedBox(
-                //     width: double.infinity,
-                //     child: ElevatedButton(
-                //       onPressed: () {
-                //         Navigator.of(context).pop();
-                //       },
-                //       child: Text(S.of(context).accept_selected,
-                //           style: theme.textTheme.bodyLarge!
-                //               .copyWith(color: theme.colorScheme.surface)),
-                //     )),
-                SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        product.quantity = quantity;
-                        showModelReplaceProduct(context, product);
-                      },
-                      child: Text(S.of(context).replace_product,
-                          style: theme.textTheme.bodyLarge!
-                              .copyWith(color: theme.colorScheme.surface)),
-                    )),
-              ],
+              //         // Navigator.of(context).pop();
+              //       },
+              //       child: Text(S.of(context).collected,
+              //           style: theme.textTheme.bodyLarge!
+              //               .copyWith(color: theme.colorScheme.secondary)),
+              //     )),
+              // divider10,
+              // if (widget.product.productType == ProductType.REPLACED)
+              //   {
+              // SizedBox(
+              //     width: double.infinity,
+              //     child: ElevatedButton(
+              //       onPressed: () {
+              //         Navigator.of(context).pop();
+              //       },
+              //       child: Text(S.of(context).accept_selected,
+              //           style: theme.textTheme.bodyLarge!
+              //               .copyWith(color: theme.colorScheme.surface)),
+              //     )),
+              // },
+              // SizedBox(
+              //     width: double.infinity,
+              //     child: ElevatedButton(
+              //       onPressed: () {
+              //         product.quantity = quantity;
+              //         showModelReplaceProduct(context, product);
+              //       },
+              //       child: Text(S.of(context).replace_product,
+              //           style: theme.textTheme.bodyLarge!
+              //               .copyWith(color: theme.colorScheme.surface)),
+              //     )),
+              // ],
             ),
           )
         ],
@@ -233,6 +238,8 @@ class _ProductDetailScreenState extends State<ProductScreen> {
                     Navigator.of(context).pop('refreshData');
                   } else if (state is ProductStatusSuccess) {
                     Navigator.of(context).pop('refreshData');
+                  } else if (state is ProductReturnSuccess) {
+                    Navigator.of(context).pop('refreshData');
                   }
                 })));
   }
@@ -255,5 +262,52 @@ class _ProductDetailScreenState extends State<ProductScreen> {
     print('Replace product');
     _productBloc.add(
         ReplaceProdact(product: product, replacedProductId: replacedProductId));
+  }
+
+  List<Widget> getButtonsList(Product product, ThemeData theme) {
+    List<Widget> items = [];
+    items.add(SizedBox(
+        width: double.infinity,
+        child: ElevatedButton(
+          style: theme.elevatedButtonTheme.style!.copyWith(
+              backgroundColor: WidgetStateProperty.all(
+                  theme.colorScheme.secondaryContainer)),
+          onPressed: () {
+            product.quantity = quantity;
+            _productBloc.add(ChangeProdactStatus(
+                products: [product], status: ProductStatus.PROCESSED));
+
+            // Navigator.of(context).pop();
+          },
+          child: Text(S.of(context).collected,
+              style: theme.textTheme.bodyLarge!
+                  .copyWith(color: theme.colorScheme.secondary)),
+        )));
+    items.add(divider10);
+    if (product.productType == ProductType.REPLACED) {
+      items.add(SizedBox(
+          width: double.infinity,
+          child: ElevatedButton(
+            onPressed: () {
+              _productBloc.add(ReturnInitialProdact(product: product));
+            },
+            child: Text(S.of(context).return_initial_product,
+                style: theme.textTheme.bodyLarge!
+                    .copyWith(color: theme.colorScheme.surface)),
+          )));
+    } else {
+      items.add(SizedBox(
+          width: double.infinity,
+          child: ElevatedButton(
+            onPressed: () {
+              product.quantity = quantity;
+              showModelReplaceProduct(context, product);
+            },
+            child: Text(S.of(context).replace_product,
+                style: theme.textTheme.bodyLarge!
+                    .copyWith(color: theme.colorScheme.surface)),
+          )));
+    }
+    return items;
   }
 }

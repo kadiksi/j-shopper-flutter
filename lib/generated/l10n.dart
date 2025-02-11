@@ -620,6 +620,16 @@ class S {
     );
   }
 
+  /// `Вход по Face ID`
+  String get return_initial_product {
+    return Intl.message(
+      'Вернуть исходный товар',
+      name: 'return_initial_product',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Язык приложения`
   String get app_language {
     return Intl.message(

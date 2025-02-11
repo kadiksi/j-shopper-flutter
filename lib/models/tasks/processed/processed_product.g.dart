@@ -6,7 +6,6 @@ part of 'processed_product.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-// ignore: unused_element
 ProcessedProduct _$ProcessedProductFromJson(Map<String, dynamic> json) =>
     ProcessedProduct(
       added: (json['added'] as List<dynamic>?)
@@ -23,7 +22,6 @@ ProcessedProduct _$ProcessedProductFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-// ignore: unused_element
 Map<String, dynamic> _$ProcessedProductToJson(ProcessedProduct instance) =>
     <String, dynamic>{
       'added': instance.added,

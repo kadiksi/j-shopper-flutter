@@ -35,3 +35,12 @@ class ChangeProdactStatus extends ProductEvent {
   @override
   List<Object?> get props => [completer, products, status];
 }
+
+class ReturnInitialProdact extends ProductEvent {
+  ReturnInitialProdact({required this.product});
+
+  final Product product;
+
+  @override
+  List<Object?> get props => [product];
+}
