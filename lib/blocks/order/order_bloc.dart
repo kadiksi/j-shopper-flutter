@@ -28,6 +28,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     on<LoadCancelationReasons>(_loadCancelationReason);
     on<SetOrderStatus>(_changeStatus);
     on<AddProductToOrder>(_addProduct);
+    on<CallToClientEvent>(_callClinet);
   }
 
   final OrderAbstractRepository orderRepository;
@@ -177,6 +178,21 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
       emit(AddProductSuccess(data: response.data));
     } else if (response is ErrorResponse) {
       emit(AddProductFailure(exception: response.errorMessage));
+    }
+  }
+
+  Future<void> _callClinet(
+    CallToClientEvent event,
+    Emitter<OrderState> emit,
+  ) async {
+    emit(OrderLoading());
+    final response = await productRepository.callClient(
+        event.addressee, event.shopperOrderId);
+
+    if (response is SuccessResponse<String>) {
+      emit(CallSuccess(data: response.data));
+    } else if (response is ErrorResponse) {
+      emit(CallFailure(exception: response.errorMessage));
     }
   }
 

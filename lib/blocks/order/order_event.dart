@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'order_bloc.dart';
 
 abstract class OrderEvent extends Equatable {}
@@ -86,6 +87,17 @@ class AddProductToOrder extends OrderEvent {
 class LoadCancelationReasons extends OrderEvent {
   @override
   List<Object?> get props => [];
+}
+
+class CallToClientEvent extends OrderEvent {
+  final int shopperOrderId;
+  final String addressee;
+  CallToClientEvent({
+    required this.shopperOrderId,
+    required this.addressee,
+  });
+  @override
+  List<Object?> get props => [shopperOrderId, addressee];
 }
 
 class LoadChangeProductStatus extends OrderEvent {

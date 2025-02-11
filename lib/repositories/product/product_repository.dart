@@ -187,4 +187,33 @@ class ProductRepository implements ProductAbstractRepository {
       return ErrorResponse(e.toString());
     }
   }
+
+  @override
+  Future<ApiResponse> callClient(String addressee, int shopperOrderId) async {
+    try {
+      Map<String, dynamic> query = {
+        'addressee': addressee,
+        'shopperOrderId': shopperOrderId
+      };
+
+      final response = await dio.post(
+          'https://test5.jmart.kz/gw/jpost-shopper/api/v1/call',
+          queryParameters: query);
+
+      final data = response.data as dynamic;
+
+      SuccessResponse<String> su = SuccessResponse(data);
+      return su;
+    } catch (e) {
+      if (e is DioException) {
+        print("type: ${e.response?.data.runtimeType} ///${e.response?.data}");
+        if (e.response?.data['data'] == null) {
+          return ErrorResponse(e.response?.data['message']);
+        } else {
+          return ErrorResponse(e.response?.data['data']['message']);
+        }
+      }
+      return ErrorResponse(e.toString());
+    }
+  }
 }

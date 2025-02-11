@@ -9,4 +9,5 @@ abstract class ProductAbstractRepository {
       List<Product> products, String status);
   Future<ApiResponse> addProduct(Product products, String externalOrderId);
   Future<ApiResponse> returnInitialProduct(Product product);
+  Future<ApiResponse> callClient(String shopperOrderId, int addressee);
 }

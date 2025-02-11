@@ -5,15 +5,15 @@ import 'package:j_courier/models/tasks/task.dart';
 import 'package:j_courier/screens/order_screen/accepted/accepted_order/accepted_oder.dart';
 
 class AcceptedOrderScreen extends StatefulWidget {
-  const AcceptedOrderScreen({
-    super.key,
-    required this.task,
-    required this.productStatus,
-    required this.shelfs,
-    required this.changeProductStatus,
-    required this.sendToDelivery,
-    required this.goToProduct,
-  });
+  const AcceptedOrderScreen(
+      {super.key,
+      required this.task,
+      required this.productStatus,
+      required this.shelfs,
+      required this.changeProductStatus,
+      required this.sendToDelivery,
+      required this.goToProduct,
+      required this.callToClinet});
 
   final Task task;
   final List<Shelf> shelfs;
@@ -22,6 +22,7 @@ class AcceptedOrderScreen extends StatefulWidget {
       changeProductStatus;
   final void Function(Product product) goToProduct;
   final VoidCallback sendToDelivery;
+  final void Function() callToClinet;
 
   @override
   State<AcceptedOrderScreen> createState() => _AcceptedOrderScreenState();
@@ -43,7 +44,8 @@ class _AcceptedOrderScreenState extends State<AcceptedOrderScreen> {
           setState,
           widget.changeProductStatus,
           widget.sendToDelivery,
-          widget.goToProduct),
+          widget.goToProduct,
+          widget.callToClinet),
     );
   }
 }

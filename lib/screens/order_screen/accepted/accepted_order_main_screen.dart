@@ -74,21 +74,24 @@ class _AcceptedOrderTabedScreenState extends State<AcceptedOrderTabedScreen>
           shelfs: shelves,
           changeProductStatus: changeProductStatus,
           sendToDelivery: sendToDelivery,
-          goToProduct: toToProduct),
+          goToProduct: toToProduct,
+          callToClinet: callToClinet),
       AcceptedOrderScreen(
           task: widget.task,
           productStatus: ProductStatus.NOT_AVAILABLE,
           shelfs: shelves,
           changeProductStatus: changeProductStatus,
           sendToDelivery: sendToDelivery,
-          goToProduct: toToProduct),
+          goToProduct: toToProduct,
+          callToClinet: callToClinet),
       AcceptedOrderScreen(
           task: widget.task,
           productStatus: ProductStatus.PROCESSED,
           shelfs: shelves,
           changeProductStatus: changeProductStatus,
           sendToDelivery: sendToDelivery,
-          goToProduct: toToProduct),
+          goToProduct: toToProduct,
+          callToClinet: callToClinet),
     ];
     // }
   }
@@ -188,12 +191,10 @@ class _AcceptedOrderTabedScreenState extends State<AcceptedOrderTabedScreen>
           if (state is OrderCollectProductSuccess) {
             loadOrder();
             print("From OrderCollectProductSuccess Listener");
-          }
-          if (state is OrderStatusFailure) {
+          } else if (state is OrderStatusFailure) {
             showAlert(context, state.exception.toString(),
                 state.exception.toString());
-          }
-          if (state is OrderCancelReasonSuccess) {
+          } else if (state is OrderCancelReasonSuccess) {
             setState(() => reasons = state.cancelationReasons);
           } else if (state is AddProductSuccess) {
             loadOrder();
@@ -204,14 +205,16 @@ class _AcceptedOrderTabedScreenState extends State<AcceptedOrderTabedScreen>
             _handleBackWindow();
           } else if (state is AddProductFailure) {
             showAlert(context, ' ', state.exception.toString());
+          } else if (state is CallSuccess) {
+            print("From Call Success");
+            showAlert(context, ' ', 'Запрос на звонок отправлен');
           }
         },
         builder: (context, state) {
           if (state is OrderFailure) {
             return FailedRequest(
                 callback: () => _orderBloc.add(LoadCancelationReasons()));
-          }
-          if (state is OrderShelfSuccess) {
+          } else if (state is OrderShelfSuccess) {
             widget.task = state.task;
             shelves = state.shelfs;
           }
@@ -230,9 +233,12 @@ class _AcceptedOrderTabedScreenState extends State<AcceptedOrderTabedScreen>
   void toToProduct(Product product) {
     AutoRouter.of(context).push(ProductRoute(product: product)).then((onValue) {
       print('ObNacking ${onValue}');
-      // if (onValue == "refreshData") {
       loadOrder();
-      // }
     });
+  }
+
+  void callToClinet() {
+    _orderBloc.add(CallToClientEvent(
+        shopperOrderId: widget.task.shopperOrderId!, addressee: 'CUSTOMER'));
   }
 }

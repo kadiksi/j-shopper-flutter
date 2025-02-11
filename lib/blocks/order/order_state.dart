@@ -88,6 +88,26 @@ class AddProductSuccess extends OrderState {
   List<Object?> get props => [data];
 }
 
+class CallSuccess extends OrderState {
+  CallSuccess({required this.data});
+
+  final String data;
+
+  @override
+  List<Object?> get props => [data];
+}
+
+class CallFailure extends OrderState {
+  CallFailure({
+    this.exception,
+  });
+
+  final Object? exception;
+
+  @override
+  List<Object?> get props => [exception];
+}
+
 class AddProductFailure extends OrderState {
   AddProductFailure({
     this.exception,

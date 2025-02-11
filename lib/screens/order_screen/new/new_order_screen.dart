@@ -85,7 +85,8 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
                     widget.productStatus,
                     setState,
                     acceptOrder,
-                    toToProduct);
+                    toToProduct,
+                    callToClinet);
               }
               if (state is OrderFailure) {
                 return FailedRequest(callback: callback);
@@ -124,6 +125,10 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
         loadOrder();
       }
     });
+  }
+
+  void callToClinet() {
+    print("Call To client");
   }
 }
 

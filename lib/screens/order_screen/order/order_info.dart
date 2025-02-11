@@ -3,7 +3,8 @@ import 'package:j_courier/generated/l10n.dart';
 import 'package:j_courier/models/tasks/task.dart';
 import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
 
-Widget buildOrderInfo(BuildContext context, ThemeData theme, Task task) {
+Widget buildOrderInfo(BuildContext context, ThemeData theme, Task task,
+    void Function() callToClinet) {
   return Container(
     padding: const EdgeInsets.all(16),
     decoration: BoxDecoration(
@@ -41,7 +42,9 @@ Widget buildOrderInfo(BuildContext context, ThemeData theme, Task task) {
             style: TextStyle(color: Colors.grey[600])),
         divider8,
         GestureDetector(
-          onTap: () {},
+          onTap: () {
+            callToClinet();
+          },
           child: Text(
             S.of(context).call,
             style: theme.textTheme.bodySmall,

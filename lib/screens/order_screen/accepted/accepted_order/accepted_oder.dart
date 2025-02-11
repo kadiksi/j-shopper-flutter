@@ -8,23 +8,23 @@ import 'package:j_courier/screens/order_screen/order/product_list.dart';
 import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
 
 Widget acceptedOrderView(
-  Task task,
-  List<Shelf> shelfs,
-  ThemeData theme,
-  BuildContext context,
-  List<Product> selectedItems,
-  ProductStatus productStatus,
-  void Function(VoidCallback fn) setState,
-  void Function(List<Product> products, ProductStatus status)
-      changeProductStatus,
-  void Function() sendToDelivery,
-  void Function(Product product) goToProduct,
-) {
+    Task task,
+    List<Shelf> shelfs,
+    ThemeData theme,
+    BuildContext context,
+    List<Product> selectedItems,
+    ProductStatus productStatus,
+    void Function(VoidCallback fn) setState,
+    void Function(List<Product> products, ProductStatus status)
+        changeProductStatus,
+    void Function() sendToDelivery,
+    void Function(Product product) goToProduct,
+    void Function() callToClinet) {
   return Padding(
     padding: const EdgeInsets.all(16.0),
     child: Column(
       children: [
-        buildOrderInfo(context, theme, task),
+        buildOrderInfo(context, theme, task, callToClinet),
         divider16,
         Expanded(
             child: buildMultipleExpandableProductLists(task, shelfs, theme,
