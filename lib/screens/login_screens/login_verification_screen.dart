@@ -49,7 +49,7 @@ class _LoginVerificationScreenState extends State<LoginVerificationScreen> {
   }
 
   void openLogin(context) {
-    AutoRouter.of(context).replace(const TabsRoute());
+    AutoRouter.of(context).replaceAll([const TabsRoute()]);
   }
 
   Widget buildIconButton(String path, VoidCallback onPressed) {

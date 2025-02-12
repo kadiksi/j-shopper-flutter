@@ -4,14 +4,12 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:j_courier/blocks/notifications/notification_bloc.dart';
 import 'package:j_courier/models/tasks/task.dart';
+import 'package:j_courier/repositories/notifications/notification_abstarct_repository.dart';
 import 'package:j_courier/router/router.dart';
 import 'package:j_courier/screens/notifications_screens/notification_data_tile.dart';
-import 'package:j_courier/screens/widgets/bottom_sheet/confirm_order_dialog.dart';
 import 'package:j_courier/screens/widgets/errors/failed_request.dart';
-
-import '../../../blocks/list/list_bloc.dart';
-import '../../repositories/list/order_abstarct_repository.dart';
 
 class Notifications extends StatefulWidget {
   @override
@@ -19,14 +17,14 @@ class Notifications extends StatefulWidget {
 }
 
 class _NotificationsState extends State<Notifications> {
-  final _listBloc = ListBloc(
-    GetIt.I<OrderAbstractRepository>(),
+  final _notificationBloc = NotificationBloc(
+    GetIt.I<NotificationAbstractRepository>(),
   );
 
   List<int> selectedItems = [];
   @override
   void initState() {
-    _listBloc.add(LoadAcceptedList());
+    _notificationBloc.add(LoadNotificationList());
     super.initState();
   }
 
@@ -37,31 +35,31 @@ class _NotificationsState extends State<Notifications> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF3F4F5),
+      backgroundColor: const Color(0xFFF3F4F5),
       body: RefreshIndicator(
         onRefresh: () async {
           final completer = Completer();
-          _listBloc.add(LoadAcceptedList(completer: completer));
+          _notificationBloc.add(LoadNotificationList(completer: completer));
           return completer.future;
         },
-        child: BlocBuilder<ListBloc, ListState>(
-          bloc: _listBloc,
+        child: BlocBuilder<NotificationBloc, NotificationState>(
+          bloc: _notificationBloc,
           builder: (context, state) {
-            if (state is ListSuccess) {
+            if (state is NotificationListSuccess) {
               return ListView.separated(
                 reverse: true,
                 padding: const EdgeInsets.only(top: 16),
-                itemCount: state.tasks.length,
+                itemCount: state.notifications.length,
                 separatorBuilder: (context, index) => const Divider(
                   color: Colors.transparent,
                 ),
                 itemBuilder: (context, i) {
-                  final task = state.tasks[i];
-                  return NotificationDataTile(task: task);
+                  final task = state.notifications[i];
+                  return NotificationDataTile(notification: task);
                 },
               );
             }
-            if (state is ListFailure) {
+            if (state is NotificationListFailure) {
               return FailedRequest(callback: callback);
             }
             return const Center(child: CircularProgressIndicator());
@@ -72,20 +70,6 @@ class _NotificationsState extends State<Notifications> {
   }
 
   void callback() {
-    _listBloc.add(LoadAcceptedList());
-  }
-
-  void showModalSheet() {
-    showModalBottomSheet(
-      context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(25.0),
-        ),
-      ),
-      builder: (BuildContext context) {
-        return ConfirmOrderDialog();
-      },
-    );
+    _notificationBloc.add(LoadNotificationList());
   }
 }

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:j_courier/models/tasks/task.dart';
+import 'package:j_courier/models/notifications/user_notification.dart';
+
 import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
 
 class NotificationTile extends StatelessWidget {
-  const NotificationTile({super.key, required this.task});
+  const NotificationTile({super.key, required this.notification});
 
-  final Task task;
+  final UserNotification notification;
 
   @override
   Widget build(BuildContext context) {
@@ -49,12 +50,12 @@ class NotificationTile extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        '${task.customerName}',
+                        '${notification.userId}',
                         style: theme.textTheme.bodyMedium,
                       ),
                       divider4,
                       Text(
-                        "№${task.externalOrderId}",
+                        "№${notification.id}",
                         style: theme.textTheme.bodyMedium
                             ?.copyWith(fontWeight: FontWeight.bold),
                       ),
@@ -63,14 +64,14 @@ class NotificationTile extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Курьер: ${task.customerName} ",
+                            "Курьер: ${notification.title?.RU} ",
                             style: TextStyle(
                               fontSize: 14,
                               color: Colors.grey[600],
                             ),
                           ),
                           Text(
-                            (task.plannedDate!),
+                            (notification.createdDate!),
                             style: TextStyle(
                               fontSize: 14,
                               color: Colors.grey[600],

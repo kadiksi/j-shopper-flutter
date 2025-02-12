@@ -141,6 +141,7 @@ class _TabsScreenState extends State<TabsScreen> {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Align(
           alignment: Alignment.centerLeft,
           child: Text(_tabName, style: theme.textTheme.headlineLarge),

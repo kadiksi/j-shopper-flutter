@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:j_courier/repositories/dio_client.dart';
+import 'package:j_courier/repositories/notifications/notification_abstarct_repository.dart';
+import 'package:j_courier/repositories/notifications/notification_repository.dart';
 import 'package:j_courier/repositories/product/product_abstarct_repository.dart';
 import 'package:j_courier/repositories/product/product_repository.dart';
 import 'package:j_courier/repositories/profile/profile_abstarct_repository.dart';
@@ -88,6 +90,10 @@ void main() async {
 
   GetIt.I.registerLazySingleton<LoginAbstractRepository>(
     () => LoginRepository(dio: dio.dio),
+  );
+
+  GetIt.I.registerLazySingleton<NotificationAbstractRepository>(
+    () => NotificationRepository(dio: dio.dio),
   );
 
   GetIt.I.registerLazySingleton<OrderAbstractRepository>(

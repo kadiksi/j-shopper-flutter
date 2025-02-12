@@ -16,12 +16,18 @@ class LoginRepository implements LoginAbstractRepository {
   @override
   Future<ApiResponse> login(String login, String password) async {
     try {
+      if (login.isEmpty) {
+        login = '+7(707)217-69-64';
+      }
+      if (password.isEmpty) {
+        password = 'Adilet29187';
+      }
       // login: '+7(707)217-69-64',
       //       password: 'Adilet29187',
       final response = await dio.post('$test_url/user/v1/auth/sign-in',
-          data: const LoginModel(
-            login: '+7(345)678-90-10',
-            password: '9Kl8bHEe7',
+          data: LoginModel(
+            login: login,
+            password: password,
           ).toJson());
 
       final data = response.data as Map<String, dynamic>;

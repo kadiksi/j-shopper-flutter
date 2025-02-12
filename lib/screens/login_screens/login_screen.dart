@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:j_courier/generated/l10n.dart';
 import 'package:j_courier/repositories/login/login_abstarct_repository.dart';
+import 'package:j_courier/screens/widgets/alerts/alert.dart';
 import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
@@ -29,9 +30,8 @@ class _LoginState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final _usernameController = TextEditingController();
-    final _passwordController = TextEditingController();
+    final usernameController = TextEditingController();
+    final passwordController = TextEditingController();
     var maskFormatter = MaskTextInputFormatter(
         mask: '+7(###)###-##-##', filter: {"#": RegExp(r'[0-9]')});
 
@@ -40,13 +40,11 @@ class _LoginState extends State<LoginScreen> {
       appBar: AppBar(
         title: const Text('Login'),
       ),
-      body: BlocBuilder<LoginBloc, LoginState>(
+      body: BlocConsumer<LoginBloc, LoginState>(
         bloc: _loginBloc,
         builder: (context, state) {
           if (state is LoginSuccess) {
             openLogin(context);
-          } else if (state is LoginFailure) {
-            return Error(theme: theme, msg: state.exception as String);
           }
           return Form(
               child: Padding(
@@ -55,13 +53,13 @@ class _LoginState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 TextFormField(
-                  controller: _usernameController,
+                  controller: usernameController,
                   keyboardType: TextInputType.phone,
                   inputFormatters: [maskFormatter],
                 ),
                 divider16,
                 TextFormField(
-                  controller: _passwordController,
+                  controller: passwordController,
                   obscureText: true,
                 ),
                 divider24,
@@ -69,8 +67,8 @@ class _LoginState extends State<LoginScreen> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        final username = _usernameController.text;
-                        final password = _passwordController.text;
+                        final username = usernameController.text;
+                        final password = passwordController.text;
                         _loginBloc.add(
                             LoadLogin(login: username, password: password));
                       },
@@ -79,6 +77,11 @@ class _LoginState extends State<LoginScreen> {
               ],
             ),
           ));
+        },
+        listener: (context, state) {
+          if (state is LoginFailure) {
+            showAlert(context, ' ', state.exception as String);
+          }
         },
       ),
     );
