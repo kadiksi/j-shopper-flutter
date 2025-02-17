@@ -55,7 +55,8 @@ class _AcceptedOrdersState extends State<AcceptedOrders> {
             if (state is ListSuccess) {
               return Stack(children: [
                 ListView.separated(
-                  padding: const EdgeInsets.only(top: 16),
+                  padding:
+                      const EdgeInsets.only(top: 16, left: 16.0, right: 16.0),
                   itemCount: state.tasks.length,
                   separatorBuilder: (context, index) => const Divider(
                     color: Colors.transparent,

@@ -80,5 +80,5 @@ void setLocale(BuildContext context, Locale locale) {
 }
 
 void openLogin(context) {
-  AutoRouter.of(context).push(const LoginRoute());
+  AutoRouter.of(context).replaceAll([const LoginRoute()]);
 }

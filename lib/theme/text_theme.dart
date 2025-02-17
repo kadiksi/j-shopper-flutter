@@ -3,40 +3,40 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:j_courier/theme/colors.dart';
 
 final lightTextStyles = TextTheme(
-  headlineLarge: GoogleFonts.dmSans(
+  headlineLarge: GoogleFonts.notoSans(
       fontSize: 26,
       fontWeight: FontWeight.w600,
       color: lightColorScheme.outline),
-  headlineMedium: GoogleFonts.dmSans(
+  headlineMedium: GoogleFonts.notoSans(
       fontSize: 16,
       fontWeight: FontWeight.w600,
       color: lightColorScheme.outline),
-  headlineSmall: GoogleFonts.dmSans(
+  headlineSmall: GoogleFonts.notoSans(
       fontSize: 12,
       fontWeight: FontWeight.w600,
       color: lightColorScheme.outline),
-  labelMedium: GoogleFonts.dmSans(
+  labelMedium: GoogleFonts.notoSans(
       fontSize: 19,
       fontWeight: FontWeight.w600,
       height: 24 / 17,
       color: lightColorScheme.onTertiary),
-  labelSmall: GoogleFonts.dmSans(
+  labelSmall: GoogleFonts.notoSans(
       fontSize: 16,
       fontWeight: FontWeight.w600,
       color: lightColorScheme.onTertiary),
-  bodyLarge: GoogleFonts.dmSans(
+  bodyLarge: GoogleFonts.notoSans(
     fontSize: 17,
     fontWeight: FontWeight.w600,
     height: 24 / 17,
     letterSpacing: -0.408,
   ),
-  bodyMedium: GoogleFonts.dmSans(
+  bodyMedium: GoogleFonts.notoSans(
       fontSize: 15,
       fontWeight: FontWeight.w400,
       height: 20 / 15,
       letterSpacing: -0.408,
       color: lightColorScheme.outline),
-  bodySmall: GoogleFonts.dmSans(
+  bodySmall: GoogleFonts.notoSans(
     fontSize: 13,
     fontWeight: FontWeight.w400,
     height: 18 / 13,
@@ -54,5 +54,5 @@ final darkTextStyles = TextTheme(
     fontStyle: FontStyle.italic,
   ),
   bodyMedium: GoogleFonts.merriweather(),
-  displaySmall: GoogleFonts.dmSans(),
+  displaySmall: GoogleFonts.notoSans(),
 );

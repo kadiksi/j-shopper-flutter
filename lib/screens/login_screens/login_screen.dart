@@ -6,6 +6,7 @@ import 'package:j_courier/generated/l10n.dart';
 import 'package:j_courier/repositories/login/login_abstarct_repository.dart';
 import 'package:j_courier/screens/widgets/alerts/alert.dart';
 import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
+import 'package:j_courier/theme/text_theme.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 import '../../blocks/login/login_bloc.dart';
@@ -37,9 +38,6 @@ class _LoginState extends State<LoginScreen> {
 
     return Scaffold(
       key: _scaffoldKey,
-      appBar: AppBar(
-        title: const Text('Login'),
-      ),
       body: BlocConsumer<LoginBloc, LoginState>(
         bloc: _loginBloc,
         builder: (context, state) {
@@ -52,6 +50,9 @@ class _LoginState extends State<LoginScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+                Text(S.of(context).enter_valid_phone_number,
+                    style: lightTextStyles.headlineLarge),
+                divider16,
                 TextFormField(
                   controller: usernameController,
                   keyboardType: TextInputType.phone,

@@ -140,17 +140,7 @@ class Product extends Equatable {
   }
 }
 
-@JsonEnum(valueField: 'status')
-enum ProductStatus {
-  @JsonValue('NEW')
-  NEW,
-  @JsonValue('NOT_AVAILABLE')
-  NOT_AVAILABLE,
-  @JsonValue('PROCESSED')
-  PROCESSED
-}
-
-@JsonEnum(valueField: 'status')
+@JsonEnum(valueField: 'orderProductType')
 enum OrderProductType {
   @JsonValue('GOODS')
   GOODS,
@@ -161,11 +151,21 @@ enum OrderProductType {
 }
 
 @JsonEnum(valueField: 'status')
+enum ProductStatus {
+  @JsonValue('NEW') // A
+  NEW,
+  @JsonValue('NOT_AVAILABLE') //
+  NOT_AVAILABLE,
+  @JsonValue('PROCESSED') //вернуть в обработку
+  PROCESSED
+}
+
+@JsonEnum(valueField: 'productType')
 enum ProductType {
-  @JsonValue('ADDED')
+  @JsonValue('ADDED') // удалить('NOT_AVAILABLE'), собрано
   ADDED,
-  @JsonValue('ORIGINAL')
+  @JsonValue('ORIGINAL') //собрано, заменить
   ORIGINAL,
-  @JsonValue('REPLACED')
+  @JsonValue('REPLACED') // вернуть исходный товар, собрано
   REPLACED
 }

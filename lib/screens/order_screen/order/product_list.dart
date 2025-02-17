@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:j_courier/models/tasks/product.dart';
 import 'package:j_courier/models/tasks/shelf/shelf.dart';
 import 'package:j_courier/models/tasks/shelf/shelf_with_product.dart';
@@ -24,8 +25,9 @@ Widget buildMultipleExpandableProductLists(
       initiallyExpanded: false,
       title: Text('${element.shelf.shelf_name}',
           style: theme.textTheme.bodyMedium),
-      subtitle:
-          Text('Завершено 6 из 8 Subtitle', style: theme.textTheme.bodySmall),
+      subtitle: Text(
+          'Завершено ${shelfWithProducts.length} из ${task.productList!.length}',
+          style: theme.textTheme.bodySmall),
       children: element.products.map((product) {
         final isSelected = selectedItems.contains(product);
         return GestureDetector(
@@ -60,11 +62,12 @@ Widget buildMultipleExpandableProductLists(
                   children: [
                     Row(
                       children: [
-                        Column(
+                        Flexible(
+                            child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              ('${product.status}№ ${product.jmartProductId}'),
+                              ('${product.jmartProductId}'),
                               style: theme.textTheme.bodyLarge,
                             ),
                             Text(
@@ -77,12 +80,13 @@ Widget buildMultipleExpandableProductLists(
                               style: theme.textTheme.bodyMedium,
                             ),
                           ],
-                        )
+                        ))
                       ],
                     ),
                     Row(
                       children: [
-                        Text('${product.price}₸ x ${product.quantity} шт'),
+                        Text('${product.price}₸ x ${product.quantity} шт',
+                            style: GoogleFonts.notoSans()),
                       ],
                     ),
                   ],
@@ -102,13 +106,7 @@ Widget buildMultipleExpandableProductLists(
                     return Image.asset('assets/svg/tabs/clock.svg',
                         fit: BoxFit.cover);
                   },
-                )
-                // : Image.network(
-                //   '${product.imageUrl}',
-                //   width: 62,
-                //   height: 62,
-                // ),
-                ));
+                )));
       }).toList(),
     ));
   }
@@ -126,16 +124,12 @@ getnerateShleProductList(List<Shelf> shelfs, List<Product> productList,
     productList.forEach((product) {
       if (product.companyShelf == shelf.id &&
           product.status?.name == productStatus.name) {
-        print('${product.status?.name} / ${productStatus.name}');
         products.add(product);
       }
     });
     if (products.isNotEmpty) {
       shelfWithProducts.add(ShelfWithProduct(shelf: shelf, products: products));
     }
-  });
-  shelfWithProducts.forEach((s) {
-    print('${s.products}///////////////');
   });
   return shelfWithProducts;
 }

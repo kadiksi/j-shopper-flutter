@@ -9,13 +9,15 @@ Widget buildTabWithBadge(
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.max,
       children: [
-        Text(
+        Flexible(
+            child: Text(
           title,
+          overflow: TextOverflow.ellipsis,
           style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 16,
           ),
-        ),
+        )),
         divider8,
         getCount(isSelected, theme, count),
       ],

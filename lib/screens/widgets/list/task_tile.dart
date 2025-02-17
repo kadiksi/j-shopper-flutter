@@ -97,20 +97,21 @@ class TaskTile extends StatelessWidget {
                           ?.copyWith(color: theme.colorScheme.surfaceTint),
                     ),
                     divider8,
-                    Text(' 100 тг', style: theme.textTheme.headlineMedium),
+                    Text('${task.totalPrice}',
+                        style: theme.textTheme.headlineMedium),
                   ],
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      'location',
+                      '${task.orderSource}',
                       style: theme.textTheme.headlineMedium
                           ?.copyWith(color: theme.colorScheme.surfaceTint),
                     ),
                     divider8,
                     Text(S.of(context).createddate((task.plannedDate ?? ' ')),
-                        style: theme.textTheme.headlineMedium),
+                        style: theme.textTheme.headlineSmall),
                   ],
                 ),
               ],

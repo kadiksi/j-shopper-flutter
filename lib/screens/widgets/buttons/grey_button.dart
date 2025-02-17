@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class GreyButton extends StatelessWidget {
   final String label;
@@ -8,17 +9,11 @@ class GreyButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SizedBox(
-        width: double.infinity,
-        child: TextButton(
-          onPressed: onPressed,
-          child: Text(label),
-        ));
     return SizedBox(
         width: double.infinity,
         child: TextButton(
           onPressed: onPressed,
-          child: Text(label),
+          child: Text(label, style: GoogleFonts.notoSans()),
         ));
   }
 }
