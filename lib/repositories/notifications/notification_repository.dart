@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:j_courier/models/notifications/user_notification.dart';
 
@@ -16,7 +18,7 @@ class NotificationRepository implements NotificationAbstractRepository {
     try {
       Map<String, dynamic> item = {
         'page': 0,
-        'size': 15,
+        'size': 20,
         'sort': ['createdDate,DESC'],
       };
 
@@ -32,6 +34,30 @@ class NotificationRepository implements NotificationAbstractRepository {
       }).toList();
 
       SuccessResponse<List<UserNotification>> su = SuccessResponse(taskList);
+      return su;
+    } catch (e) {
+      if (e is DioException) {
+        print("type: ${e.response?.data.runtimeType} ///${e.response?.data}");
+        if (e.response?.data['data'] == null) {
+          return ErrorResponse(e.response?.data['message']);
+        } else {
+          return ErrorResponse(e.response?.data['data']['message']);
+        }
+      }
+      return ErrorResponse(e.toString());
+    }
+  }
+
+  @override
+  Future<ApiResponse> markAsRead(List<int> notificationIds) async {
+    try {
+      final response = await dio.put(
+          'https://test5.jmart.kz/gw/jpost-push/api/v1/push/mark/read',
+          data: jsonEncode(notificationIds));
+
+      final data = response.data as String;
+
+      SuccessResponse<String> su = SuccessResponse(data);
       return su;
     } catch (e) {
       if (e is DioException) {

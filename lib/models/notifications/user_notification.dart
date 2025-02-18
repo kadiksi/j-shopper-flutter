@@ -90,3 +90,11 @@ class UserNotification extends Equatable {
   @override
   bool get stringify => true;
 }
+
+List<int> getIds(List<UserNotification> notifications) {
+  List<int> list = [];
+  notifications.forEach((notification) {
+    list.add(notification.id!);
+  });
+  return list;
+}

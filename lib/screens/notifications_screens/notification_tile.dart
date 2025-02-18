@@ -86,7 +86,7 @@ class NotificationTile extends StatelessWidget {
                   ),
                 )
               ]),
-              if (notification.isRead!)
+              if (!notification.isRead!)
                 Positioned(
                   right: -4,
                   top: -4,

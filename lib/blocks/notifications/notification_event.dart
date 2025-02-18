@@ -10,3 +10,13 @@ class LoadNotificationList extends NotificationEvent {
   @override
   List<Object?> get props => [completer];
 }
+
+class MarkAsReadNotification extends NotificationEvent {
+  MarkAsReadNotification({this.completer, required this.notificationIds});
+
+  final Completer? completer;
+  final List<int> notificationIds;
+
+  @override
+  List<Object?> get props => [completer, notificationIds];
+}

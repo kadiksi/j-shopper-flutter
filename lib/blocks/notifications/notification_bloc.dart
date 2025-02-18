@@ -14,6 +14,7 @@ part 'notification_state.dart';
 class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
   NotificationBloc(this.notificationRepository) : super(NotificationInitial()) {
     on<LoadNotificationList>(_loadNotifications);
+    on<MarkAsReadNotification>(_markAsRead);
   }
 
   final NotificationAbstractRepository notificationRepository;
@@ -31,6 +32,23 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
       emit(NotificationListSuccess(notifications: response.data));
     } else if (response is ErrorResponse) {
       emit(NotificationListFailure(exception: response.errorMessage));
+    }
+  }
+
+  Future<void> _markAsRead(
+    MarkAsReadNotification event,
+    Emitter<NotificationState> emit,
+  ) async {
+    // if (state is! NotificationListSuccess) {
+    //   emit(NotificationListLoading());
+    // }
+    final response =
+        await notificationRepository.markAsRead(event.notificationIds);
+
+    if (response is SuccessResponse<String>) {
+      emit(NotificationMarkAsReadSuccess(data: response.data));
+    } else if (response is ErrorResponse) {
+      emit(NotificationMarkAsReadFailure(exception: response.errorMessage));
     }
   }
 

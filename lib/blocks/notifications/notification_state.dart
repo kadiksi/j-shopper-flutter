@@ -33,3 +33,25 @@ class NotificationListFailure extends NotificationState {
   @override
   List<Object?> get props => [exception];
 }
+
+class NotificationMarkAsReadSuccess extends NotificationState {
+  NotificationMarkAsReadSuccess({
+    required this.data,
+  });
+
+  final String data;
+
+  @override
+  List<Object?> get props => [data];
+}
+
+class NotificationMarkAsReadFailure extends NotificationState {
+  NotificationMarkAsReadFailure({
+    this.exception,
+  });
+
+  final Object? exception;
+
+  @override
+  List<Object?> get props => [exception];
+}
