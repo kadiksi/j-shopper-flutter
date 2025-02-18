@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:j_courier/models/notifications/user_notification.dart';
 
 import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
+import 'package:j_courier/utils/date_utils.dart';
 
 class NotificationTile extends StatelessWidget {
   const NotificationTile({super.key, required this.notification});
@@ -12,9 +13,10 @@ class NotificationTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Row(
+    return Expanded(
+        child: Row(
       crossAxisAlignment: CrossAxisAlignment.end,
-      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
           decoration: BoxDecoration(
@@ -71,7 +73,8 @@ class NotificationTile extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            (notification.createdDate!),
+                            (formatFromDateToddMMyyyy(
+                                DateTime.parse(notification.createdDate!))),
                             style: TextStyle(
                               fontSize: 14,
                               color: Colors.grey[600],
@@ -83,21 +86,22 @@ class NotificationTile extends StatelessWidget {
                   ),
                 )
               ]),
-              Positioned(
-                right: -4,
-                top: -4,
-                child: SizedBox(
-                  width: 20,
-                  height: 20,
-                  child: SvgPicture.asset(
-                    'assets/svg/notification_badg.svg',
+              if (notification.isRead!)
+                Positioned(
+                  right: -4,
+                  top: -4,
+                  child: SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: SvgPicture.asset(
+                      'assets/svg/notification_badg.svg',
+                    ),
                   ),
                 ),
-              ),
             ],
           ),
         )
       ],
-    );
+    ));
   }
 }
