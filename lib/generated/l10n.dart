@@ -660,6 +660,26 @@ class S {
     );
   }
 
+  /// `Вернуть в обработку`
+  String get return_to_processing {
+    return Intl.message(
+      'Вернуть в обработку',
+      name: 'return_to_processing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Удалить товар`
+  String get remove_product {
+    return Intl.message(
+      'Удалить товар',
+      name: 'remove_product',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Введите ваш номер телефона и пароль`
   String get enter_valid_phone_number {
     return Intl.message(

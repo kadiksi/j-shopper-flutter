@@ -154,47 +154,64 @@ class _ProductDetailScreenState extends State<ProductScreen> {
 
   List<Widget> getButtonsList(Product product, ThemeData theme) {
     List<Widget> items = [];
-    items.add(SizedBox(
-        width: double.infinity,
-        child: ElevatedButton(
-          style: theme.elevatedButtonTheme.style!.copyWith(
-              backgroundColor: WidgetStateProperty.all(
-                  theme.colorScheme.secondaryContainer)),
-          onPressed: () {
-            product.quantity = quantity;
-            _productBloc.add(ChangeProdactStatus(
-                products: [product], status: ProductStatus.PROCESSED));
+    if (product.status == ProductStatus.NOT_AVAILABLE) {
+      items.add(getLightOrangeButton(
+          S.of(context).return_to_processing, product, ProductStatus.NEW));
+    }
+    if (product.status == ProductStatus.PROCESSED) {
+      items.add(getLightOrangeButton(
+          S.of(context).return_to_processing, product, ProductStatus.NEW));
+    }
 
-            // Navigator.of(context).pop();
-          },
-          child: Text(S.of(context).collected,
-              style: theme.textTheme.bodyLarge!
-                  .copyWith(color: theme.colorScheme.secondary)),
-        )));
-    items.add(divider10);
-    if (product.productType == ProductType.REPLACED) {
-      items.add(SizedBox(
-          width: double.infinity,
-          child: ElevatedButton(
-            onPressed: () {
-              _productBloc.add(ReturnInitialProdact(product: product));
-            },
-            child: Text(S.of(context).return_initial_product,
-                style: theme.textTheme.bodyLarge!
-                    .copyWith(color: theme.colorScheme.surface)),
-          )));
-    } else {
-      items.add(SizedBox(
-          width: double.infinity,
-          child: ElevatedButton(
-            onPressed: () {
-              product.quantity = quantity;
-              showModelReplaceProduct(context, product);
-            },
-            child: Text(S.of(context).replace_product,
-                style: theme.textTheme.bodyLarge!
-                    .copyWith(color: theme.colorScheme.surface)),
-          )));
+    if (product.status == ProductStatus.NEW) {
+      if (product.productType == ProductType.ORIGINAL) {
+        items.add(SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              onPressed: () {
+                product.quantity = quantity;
+                showModelReplaceProduct(context, product);
+              },
+              child: Text(S.of(context).replace_product,
+                  style: theme.textTheme.bodyLarge!
+                      .copyWith(color: theme.colorScheme.surface)),
+            )));
+        items.add(divider10);
+        items.add(getLightOrangeButton(
+            S.of(context).collected, product, ProductStatus.PROCESSED));
+      }
+      if (product.productType == ProductType.REPLACED) {
+        items.add(SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              onPressed: () {
+                // setProducStatus(product, ProductStatus.NOT_AVAILABLE);
+                _productBloc.add(ReturnInitialProdact(product: product));
+              },
+              child: Text(S.of(context).remove_product,
+                  style: theme.textTheme.bodyLarge!
+                      .copyWith(color: theme.colorScheme.surface)),
+            )));
+        items.add(divider10);
+        items.add(getLightOrangeButton(
+            S.of(context).collected, product, ProductStatus.PROCESSED));
+      }
+      if (product.productType == ProductType.ADDED) {
+        items.add(SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              onPressed: () {
+                setProducStatus(product, ProductStatus.NOT_AVAILABLE);
+                // _productBloc.add(ReturnInitialProdact(product: product));
+              },
+              child: Text(S.of(context).remove_product,
+                  style: theme.textTheme.bodyLarge!
+                      .copyWith(color: theme.colorScheme.surface)),
+            )));
+        items.add(divider10);
+        items.add(getLightOrangeButton(
+            S.of(context).collected, product, ProductStatus.PROCESSED));
+      }
     }
     return items;
   }
@@ -219,51 +236,27 @@ class _ProductDetailScreenState extends State<ProductScreen> {
       ReplaceProdact(product: product, replacedProductId: replacedProductId),
     );
   }
+
+  void setProducStatus(Product product, ProductStatus status) {
+    product.quantity = quantity;
+    _productBloc.add(ChangeProdactStatus(products: [product], status: status));
+  }
+
+  Widget getLightOrangeButton(
+      String text, Product product, ProductStatus status) {
+    final theme = Theme.of(context);
+    return SizedBox(
+        width: double.infinity,
+        child: ElevatedButton(
+          style: theme.elevatedButtonTheme.style!.copyWith(
+              backgroundColor: WidgetStateProperty.all(
+                  theme.colorScheme.secondaryContainer)),
+          onPressed: () {
+            setProducStatus(product, status);
+          },
+          child: Text(text,
+              style: theme.textTheme.bodyLarge!
+                  .copyWith(color: theme.colorScheme.secondary)),
+        ));
+  }
 }
-
-// List<Widget> getButtonsList(Product product, ThemeData theme) {
-//   List<Widget> items = [];
-//   items.add(SizedBox(
-//       width: double.infinity,
-//       child: ElevatedButton(
-//         style: theme.elevatedButtonTheme.style!.copyWith(
-//             backgroundColor:
-//                 WidgetStateProperty.all(theme.colorScheme.secondaryContainer)),
-//         onPressed: () {
-//           product.quantity = quantity;
-//           _productBloc.add(ChangeProdactStatus(
-//               products: [product], status: ProductStatus.PROCESSED));
-
-//           // Navigator.of(context).pop();
-//         },
-//         child: Text(S.of(context).collected,
-//             style: theme.textTheme.bodyLarge!
-//                 .copyWith(color: theme.colorScheme.secondary)),
-//       )));
-//   items.add(divider10);
-//   if (product.productType == ProductType.REPLACED) {
-//     items.add(SizedBox(
-//         width: double.infinity,
-//         child: ElevatedButton(
-//           onPressed: () {
-//             _productBloc.add(ReturnInitialProdact(product: product));
-//           },
-//           child: Text(S.of(context).return_initial_product,
-//               style: theme.textTheme.bodyLarge!
-//                   .copyWith(color: theme.colorScheme.surface)),
-//         )));
-//   } else {
-//     items.add(SizedBox(
-//         width: double.infinity,
-//         child: ElevatedButton(
-//           onPressed: () {
-//             product.quantity = quantity;
-//             showModelReplaceProduct(context, product);
-//           },
-//           child: Text(S.of(context).replace_product,
-//               style: theme.textTheme.bodyLarge!
-//                   .copyWith(color: theme.colorScheme.surface)),
-//         )));
-//   }
-//   return items;
-// }

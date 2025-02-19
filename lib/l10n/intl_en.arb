@@ -60,5 +60,7 @@
   "collect": "Собрать",
   "absent": "Отсутствует",
   "return_initial_product": "Вернуть исходный товар",
-  "enter_valid_phone_number": "Введите ваш номер телефона и пароль"
+  "enter_valid_phone_number": "Введите ваш номер телефона и пароль",
+  "return_to_processing": "Вернуть в обработку",
+  "remove_product": "Удалить товар"
 }
