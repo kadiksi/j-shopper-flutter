@@ -70,7 +70,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     LoadProcessedOrder event,
     Emitter<OrderState> emit,
   ) async {
-    if (state is! OrderSuccess) {
+    if (state is! OrderProcessedSuccess) {
       emit(OrderLoading());
     }
     final response = await orderRepository.getProcessedOrder(event.id);
@@ -86,12 +86,12 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     AcceptOrder event,
     Emitter<OrderState> emit,
   ) async {
-    if (state is! OrderSuccess) {
+    if (state is! OrderAcceptSuccess) {
       emit(OrderLoading());
     }
     final response = await orderRepository.acceptNewOrder(event.ids);
 
-    if (response is SuccessResponse<Task>) {
+    if (response is SuccessResponse<List<dynamic>>) {
       emit(OrderAcceptSuccess());
     } else if (response is ErrorResponse) {
       emit(OrderFailure(exception: response.errorMessage));
@@ -111,7 +111,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
         event.cancellationReason,
         event.cancellationReasonOther);
 
-    if (response is SuccessResponse<Task>) {
+    if (response is SuccessResponse<String>) {
       emit(OrderStatusSuccess(task: response.data));
     } else if (response is ErrorResponse) {
       emit(OrderStatusFailure(exception: response.errorMessage));

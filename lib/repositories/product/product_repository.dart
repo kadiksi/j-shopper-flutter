@@ -92,7 +92,7 @@ class ProductRepository implements ProductAbstractRepository {
         Map<String, dynamic> item = {
           'productId': product.productId,
           // 'price': product.price,
-          // 'quantity': product.quantity,
+          'quantity': product.quantity,
           'status': status
         };
 

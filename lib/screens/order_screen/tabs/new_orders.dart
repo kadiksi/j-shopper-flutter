@@ -36,8 +36,10 @@ class _NewOrdersState extends State<NewOrders> {
     super.initState();
   }
 
-  void goTo(Task task) {
-    AutoRouter.of(context).push(NewOrderRoute(task: task));
+  void goToOrder(Task task) {
+    AutoRouter.of(context).push(NewOrderRoute(task: task)).then((onValue) {
+      _listBloc.add(LoadNewList());
+    });
   }
 
   @override
@@ -67,7 +69,7 @@ class _NewOrdersState extends State<NewOrders> {
                         task: task,
                         selectedItems: selectedItems,
                         setState: setState,
-                        goTo: goTo);
+                        goTo: goToOrder);
                   },
                 ),
                 Positioned(

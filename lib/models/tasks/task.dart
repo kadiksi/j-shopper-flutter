@@ -108,6 +108,12 @@ class Task extends Equatable {
   factory Task.fromJson(Map<String, dynamic> source) => Task.fromMap(source);
 }
 
-enum OrderStatus { PROCESSED, CANCELED, REJECTED }
+enum OrderStatus {
+  PROCESSED,
+  CANCELED,
+  REJECTED,
+  ACCEPTED,
+  WAITING_FOR_SURCHARGE
+}
 
 enum OrderType { SUPERMARKET, GOODS, N }

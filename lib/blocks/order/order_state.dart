@@ -46,7 +46,7 @@ class OrderStatusSuccess extends OrderState {
     required this.task,
   });
 
-  final Task task;
+  final String task;
 
   @override
   List<Object?> get props => [task];

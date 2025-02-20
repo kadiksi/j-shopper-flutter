@@ -5,16 +5,19 @@ import 'package:j_courier/models/tasks/product.dart';
 import 'package:j_courier/screens/widgets/bottom_sheet/option_button.dart';
 
 void showAcceptedOrderOptions(
-    BuildContext context,
-    void Function(BuildContext, Function(Product product) addProduct)
-        showModelAddProduct,
-    void Function(BuildContext context, List<CancelationReasons> reasons,
-            Function(String reason) action)
-        showModelCancelProduct,
-    List<CancelationReasons> reasons,
-    void Function(BuildContext context) showModelReturnOrder,
-    final Function(String reason) cancelOrder,
-    void Function(Product product) addProduct) {
+  BuildContext context,
+  void Function(BuildContext, Function(Product product) addProduct)
+      showModelAddProduct,
+  void Function(BuildContext context, List<CancelationReasons> reasons,
+          Function(String reason) action)
+      showModelCancelProduct,
+  List<CancelationReasons> reasons,
+  void Function(BuildContext context, Function() returnOrder)
+      showModelReturnOrder,
+  final Function(String reason) cancelOrder,
+  void Function(Product product) addProduct,
+  final Function() returnOrder,
+) {
   final theme = Theme.of(context);
   showModalBottomSheet(
     context: context,
@@ -54,7 +57,7 @@ void showAcceptedOrderOptions(
                       context,
                       icon: 'assets/svg/return_order.svg',
                       text: S.of(context).return_order,
-                      onTap: () => showModelReturnOrder(context),
+                      onTap: () => showModelReturnOrder(context, returnOrder),
                     ),
                   ],
                 )),

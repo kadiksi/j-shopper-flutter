@@ -74,7 +74,7 @@ class _AcceptedOrderTabedScreenState extends State<AcceptedOrderTabedScreen>
           shelfs: shelves,
           changeProductStatus: changeProductStatus,
           sendToDelivery: sendToDelivery,
-          goToProduct: toToProduct,
+          goToProduct: goToProduct,
           callToClinet: callToClinet),
       AcceptedOrderScreen(
           task: widget.task,
@@ -82,7 +82,7 @@ class _AcceptedOrderTabedScreenState extends State<AcceptedOrderTabedScreen>
           shelfs: shelves,
           changeProductStatus: changeProductStatus,
           sendToDelivery: sendToDelivery,
-          goToProduct: toToProduct,
+          goToProduct: goToProduct,
           callToClinet: callToClinet),
       AcceptedOrderScreen(
           task: widget.task,
@@ -90,7 +90,7 @@ class _AcceptedOrderTabedScreenState extends State<AcceptedOrderTabedScreen>
           shelfs: shelves,
           changeProductStatus: changeProductStatus,
           sendToDelivery: sendToDelivery,
-          goToProduct: toToProduct,
+          goToProduct: goToProduct,
           callToClinet: callToClinet),
     ];
     // }
@@ -104,6 +104,12 @@ class _AcceptedOrderTabedScreenState extends State<AcceptedOrderTabedScreen>
     _orderBloc.add(SetOrderStatus(
         externalOrderId: widget.task.externalOrderId!,
         status: OrderStatus.PROCESSED));
+  }
+
+  void _returnOrder() {
+    _orderBloc.add(SetOrderStatus(
+        externalOrderId: widget.task.externalOrderId!,
+        status: OrderStatus.REJECTED));
   }
 
   void _handleBackWindow() {
@@ -173,14 +179,14 @@ class _AcceptedOrderTabedScreenState extends State<AcceptedOrderTabedScreen>
             icon: const Icon(Icons.more_vert),
             onPressed: () {
               showAcceptedOrderOptions(
-                context,
-                showModelAddProduct,
-                showModelCancelOrder,
-                reasons,
-                showModelReturnOrder,
-                _cancelOrder,
-                _addProduct,
-              );
+                  context,
+                  showModelAddProduct,
+                  showModelCancelOrder,
+                  reasons,
+                  showModelReturnOrder,
+                  _cancelOrder,
+                  _addProduct,
+                  _returnOrder);
             },
           ),
         ],
@@ -201,7 +207,7 @@ class _AcceptedOrderTabedScreenState extends State<AcceptedOrderTabedScreen>
             _handleBackWindow();
             _tabController.animateTo(_tabController.index);
           } else if (state is OrderStatusSuccess) {
-            loadOrder();
+            // loadOrder();
             _handleBackWindow();
           } else if (state is AddProductFailure) {
             showAlert(context, ' ', state.exception.toString());
@@ -230,9 +236,8 @@ class _AcceptedOrderTabedScreenState extends State<AcceptedOrderTabedScreen>
     );
   }
 
-  void toToProduct(Product product) {
+  void goToProduct(Product product) {
     AutoRouter.of(context).push(ProductRoute(product: product)).then((onValue) {
-      print('ObNacking ${onValue}');
       loadOrder();
     });
   }

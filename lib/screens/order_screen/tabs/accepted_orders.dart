@@ -36,8 +36,12 @@ class _AcceptedOrdersState extends State<AcceptedOrders> {
     super.initState();
   }
 
-  void goTo(Task task) {
-    AutoRouter.of(context).push(AcceptedOrderTabedRoute(task: task));
+  void goToOrder(Task task) {
+    AutoRouter.of(context)
+        .push(AcceptedOrderTabedRoute(task: task))
+        .then((onValue) {
+      _listBloc.add(LoadAcceptedList());
+    });
   }
 
   @override
@@ -67,7 +71,7 @@ class _AcceptedOrdersState extends State<AcceptedOrders> {
                         task: task,
                         selectedItems: selectedItems,
                         setState: setState,
-                        goTo: goTo);
+                        goTo: goToOrder);
                   },
                 ),
                 Positioned(

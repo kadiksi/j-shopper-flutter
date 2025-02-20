@@ -85,7 +85,7 @@ class ListRepository implements OrderAbstractRepository {
       final data = response.data['data'] as dynamic;
       // final details = Task.fromJson(data);
 
-      SuccessResponse<dynamic> su = SuccessResponse(data);
+      SuccessResponse<List<dynamic>> su = SuccessResponse(data);
       return su;
     } catch (e) {
       if (e is DioException) {
