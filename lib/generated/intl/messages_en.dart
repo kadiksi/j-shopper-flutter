@@ -26,7 +26,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m2(orderSource) => "${orderSource} позиции";
 
-  static String m3(id) => "Товар №\$${id}";
+  static String m3(id) => "Товар ${id}";
 
   static String m4(name) => "Здравствуйте, ${name}";
 

@@ -4,6 +4,7 @@ import 'package:j_courier/models/tasks/product.dart';
 import 'package:j_courier/models/tasks/shelf/shelf.dart';
 import 'package:j_courier/models/tasks/shelf/shelf_with_product.dart';
 import 'package:j_courier/models/tasks/task.dart';
+import 'package:j_courier/screens/widgets/bottom_sheet/product_labels.dart';
 import 'package:j_courier/screens/widgets/box_decorations/dividers.dart';
 
 Widget buildMultipleExpandableProductLists(
@@ -58,7 +59,8 @@ Widget buildMultipleExpandableProductLists(
                   color: isSelected ? Colors.lightGreenAccent : null,
                 ),
                 title: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
                       children: [
@@ -66,10 +68,16 @@ Widget buildMultipleExpandableProductLists(
                             child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              ('${product.jmartProductId}'),
-                              style: theme.textTheme.bodyLarge,
-                            ),
+                            Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    ('${product.jmartProductId}'),
+                                    style: theme.textTheme.bodyLarge,
+                                  ),
+                                  getProductLabel(product),
+                                ]),
                             Text(
                               '${product.productName}',
                               style: theme.textTheme.bodyMedium,

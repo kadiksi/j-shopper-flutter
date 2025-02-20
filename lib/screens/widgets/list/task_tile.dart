@@ -75,7 +75,7 @@ class TaskTile extends StatelessWidget {
                     ),
                     divider4,
                     Text(
-                      '${task.plannedDate}',
+                      '${task.plannedDateInterval}',
                       style: theme.textTheme.bodySmall,
                     ),
                   ],
@@ -92,7 +92,7 @@ class TaskTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      S.of(context).positions(task.orderSource as String),
+                      S.of(context).positions('${task.totalProductAmount}'),
                       style: theme.textTheme.headlineMedium
                           ?.copyWith(color: theme.colorScheme.surfaceTint),
                     ),
@@ -105,7 +105,7 @@ class TaskTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      '${task.orderSource}',
+                      '${task.customerCityName}',
                       style: theme.textTheme.headlineMedium
                           ?.copyWith(color: theme.colorScheme.surfaceTint),
                     ),

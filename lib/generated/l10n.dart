@@ -340,10 +340,10 @@ class S {
     );
   }
 
-  /// `Товар №${id}`
+  /// `Товар {id}`
   String product_id(Object id) {
     return Intl.message(
-      'Товар №\$$id',
+      'Товар  $id',
       name: 'product_id',
       desc: '',
       args: [id],
