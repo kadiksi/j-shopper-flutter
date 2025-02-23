@@ -26,7 +26,7 @@ Widget buildTabWithBadge(
 }
 
 Widget getCount(bool isSelected, ThemeData theme, int count) {
-  if (count > 0) {
+  if (count >= 0) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(

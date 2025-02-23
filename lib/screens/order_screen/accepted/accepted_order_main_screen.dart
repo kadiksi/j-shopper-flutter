@@ -37,10 +37,21 @@ class _AcceptedOrderTabedScreenState extends State<AcceptedOrderTabedScreen>
     GetIt.I<OrderAbstractRepository>(),
     GetIt.I<ProductAbstractRepository>(),
   );
+  int toCollectCount = 0;
+  int notCollectedCount = 0;
+  int collectedCount = 0;
 
   List<Shelf> shelves = [];
   List<CancelationReasons> reasons = [];
   List<AcceptedOrderScreen> tabList = [];
+
+  void setCount(toCollectCount, int absentCount, int collectedCount) {
+    setState(() {
+      toCollectCount = toCollectCount;
+      absentCount = absentCount;
+      collectedCount = collectedCount;
+    });
+  }
 
   @override
   void initState() {
@@ -147,12 +158,12 @@ class _AcceptedOrderTabedScreenState extends State<AcceptedOrderTabedScreen>
         labelColor: Colors.black,
         unselectedLabelColor: Colors.grey,
         tabs: [
-          buildTabWithBadge(
-              context, S.of(context).collect, 12, _tabController.index == 0),
-          buildTabWithBadge(
-              context, S.of(context).absent, 12, _tabController.index == 1),
-          buildTabWithBadge(
-              context, S.of(context).collected, 24, _tabController.index == 2),
+          buildTabWithBadge(context, S.of(context).collect, toCollectCount,
+              _tabController.index == 0),
+          buildTabWithBadge(context, S.of(context).absent, notCollectedCount,
+              _tabController.index == 1),
+          buildTabWithBadge(context, S.of(context).collected, collectedCount,
+              _tabController.index == 2),
         ],
       ),
     );
@@ -223,6 +234,12 @@ class _AcceptedOrderTabedScreenState extends State<AcceptedOrderTabedScreen>
           } else if (state is OrderShelfSuccess) {
             widget.task = state.task;
             shelves = state.shelfs;
+            toCollectCount =
+                state.task.getProductStatusCount(ProductStatus.NEW);
+            notCollectedCount =
+                state.task.getProductStatusCount(ProductStatus.NOT_AVAILABLE);
+            collectedCount =
+                state.task.getProductStatusCount(ProductStatus.PROCESSED);
           }
 
           return Column(

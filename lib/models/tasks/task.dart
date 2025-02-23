@@ -106,6 +106,16 @@ class Task extends Equatable {
   String toJson() => json.encode(toMap());
 
   factory Task.fromJson(Map<String, dynamic> source) => Task.fromMap(source);
+
+  int getProductStatusCount(ProductStatus status) {
+    int counter = 0;
+    productList?.forEach((product) {
+      if (product.status == status) {
+        counter++;
+      }
+    });
+    return counter;
+  }
 }
 
 enum OrderStatus {
